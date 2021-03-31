@@ -42,7 +42,7 @@ class MenuItem(models.Model):
             ProhibitNullCharactersValidator()
         ]
     )
-    is_vegan = models.BooleanField(null=False, default=False)
+    vegan = models.BooleanField(null=False, default=False)
     price = models.DecimalField(
         max_digits=9, 
         decimal_places=2, 
