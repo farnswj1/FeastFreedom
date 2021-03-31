@@ -86,6 +86,6 @@ class Kitchen(models.Model):
         ]
     )
     workdays = MultiSelectField(choices=DAYS, max_choices=7)
-    time_in = models.TimeField(null=False, default=time(hour=8))
-    time_out = models.TimeField(null=False, default=time(hour=16))
+    start_time = models.TimeField(null=False, default=time(hour=8))
+    end_time = models.TimeField(null=False, default=time(hour=16))
     menu = models.ArrayField(model_container=MenuItem)
