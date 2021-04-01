@@ -6,6 +6,7 @@
       "email": "kitchen1@gmail.com",
       "working_days": [1, 2, 3, 4, 5, 6, 7],
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Frbldi.com%2Fwp-content%2Fuploads%2F2016%2F11%2Fioc-cape_restaurant-04.jpg&f=1&nofb=1",
+      "featured": true,
       "menu": [
         {
           "id": 1,
@@ -26,7 +27,8 @@
       "name": "Kitchen 2",
       "email": "kitchen1@gmail.com",
       "working_days": [1, 2, 3, 4, 5, 6, 7],
-      "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcache.marriott.com%2Fmarriottassets%2Fmarriott%2FMOWLC%2Fmowlc-beluga-restaurant-6102-hor-clsc.jpg&f=1&nofb=1",
+      "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Frbldi.com%2Fwp-content%2Fuploads%2F2016%2F11%2Fioc-cape_restaurant-04.jpg&f=1&nofb=1",
+      "featured": false,
       "menu": [
         {
           "id": 1,
@@ -47,7 +49,8 @@
       "name": "Kitchen 3",
       "email": "kitchen1@gmail.com",
       "working_days": [1, 2, 3, 4, 5, 6, 7],
-      "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcache.marriott.com%2Fmarriottassets%2Fmarriott%2FBKKXR%2Fbkkxr-restaurant-0562-hor-clsc.jpg&f=1&nofb=1",
+      "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Frbldi.com%2Fwp-content%2Fuploads%2F2016%2F11%2Fioc-cape_restaurant-04.jpg&f=1&nofb=1",
+      "featured": true,
       "menu": [
         {
           "id": 1,
@@ -59,6 +62,116 @@
           "id": 2,
           "name": "Plate 2",
           "description": "Description",
+          "price": 10
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Kitchen 4",
+      "email": "kitchen1@gmail.com",
+      "working_days": [1, 2, 3, 4, 5, 6, 7],
+      "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Frbldi.com%2Fwp-content%2Fuploads%2F2016%2F11%2Fioc-cape_restaurant-04.jpg&f=1&nofb=1",
+      "featured": false,
+      "menu": [
+        {
+          "id": 1,
+          "name": "Plate 1",
+          "vegan": true,
+          "price": 10
+        },
+        {
+          "id": 2,
+          "name": "Plate 2",
+          "vegan": false,
+          "price": 10
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Kitchen 5",
+      "email": "kitchen1@gmail.com",
+      "working_days": [1, 2, 3, 4, 5, 6, 7],
+      "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Frbldi.com%2Fwp-content%2Fuploads%2F2016%2F11%2Fioc-cape_restaurant-04.jpg&f=1&nofb=1",
+      "featured": false,
+      "menu": [
+        {
+          "id": 1,
+          "name": "Plate 1",
+          "vegan": true,
+          "price": 10
+        },
+        {
+          "id": 2,
+          "name": "Plate 2",
+          "vegan": false,
+          "price": 10
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Kitchen 6",
+      "email": "kitchen1@gmail.com",
+      "working_days": [1, 2, 3, 4, 5, 6, 7],
+      "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Frbldi.com%2Fwp-content%2Fuploads%2F2016%2F11%2Fioc-cape_restaurant-04.jpg&f=1&nofb=1",
+      "featured": false,
+      "menu": [
+        {
+          "id": 1,
+          "name": "Plate 1",
+          "vegan": true,
+          "price": 10
+        },
+        {
+          "id": 2,
+          "name": "Plate 2",
+          "vegan": false,
+          "price": 10
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Kitchen 7",
+      "email": "kitchen1@gmail.com",
+      "working_days": [1, 2, 3, 4, 5, 6, 7],
+      "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Frbldi.com%2Fwp-content%2Fuploads%2F2016%2F11%2Fioc-cape_restaurant-04.jpg&f=1&nofb=1",
+      "featured": true,
+      "menu": [
+        {
+          "id": 1,
+          "name": "Plate 1",
+          "vegan": true,
+          "price": 10
+        },
+        {
+          "id": 2,
+          "name": "Plate 2",
+          "vegan": false,
+          "price": 10
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Kitchen 8",
+      "email": "kitchen1@gmail.com",
+      "working_days": [1, 2, 3, 4, 5, 6, 7],
+      "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Frbldi.com%2Fwp-content%2Fuploads%2F2016%2F11%2Fioc-cape_restaurant-04.jpg&f=1&nofb=1",
+      "featured": true,
+      "menu": [
+        {
+          "id": 1,
+          "name": "Plate 1",
+          "vegan": true,
+          "price": 10
+        },
+        {
+          "id": 2,
+          "name": "Plate 2",
+          "vegan": false,
           "price": 10
         }
       ]
