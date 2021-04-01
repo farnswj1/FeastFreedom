@@ -10,9 +10,11 @@ import { AppComponent } from './app.component';
 // Modules
 import { UserModule } from './user/user.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RegularUserListComponent } from './users/components/regular-user-list/regular-user-list.component';
+import { DisplayUserListComponent } from './users/components/display-user-list/display-user-list.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, RegularUserListComponent, DisplayUserListComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
