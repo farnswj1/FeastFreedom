@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { KitchensService } from 'src/app/DIservices/kitchens.service';
-
-import { Kitchen } from '../../interfaces/kitchen';
+import { Kitchen } from '../../DIservices/kitchen';
 
 @Component({
   selector: 'app-dashboard',

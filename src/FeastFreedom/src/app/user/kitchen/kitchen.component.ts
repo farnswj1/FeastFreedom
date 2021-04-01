@@ -1,5 +1,5 @@
 import { Component, Injector, Input, OnInit } from '@angular/core';
-import { Kitchen } from 'src/app/interfaces/kitchen';
+import { Kitchen } from 'src/app/DIservices/kitchen';
 
 @Component({
   selector: 'app-kitchen',

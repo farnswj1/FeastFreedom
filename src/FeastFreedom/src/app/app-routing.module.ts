@@ -8,6 +8,7 @@ const routes: Routes = [
     redirectTo: 'home',
   },
   { path: 'home', loadChildren: './user/user.module#UserModule' },
+  { path: 'interface', loadChildren: './service/service.module#ServiceModule' },
 ];
 
 @NgModule({
