@@ -10,6 +10,7 @@ from django.core.validators import (
 from multiselectfield import MultiSelectField
 from django.conf import settings
 from datetime  import time
+from PIL import Image
 
 DAYS = (
     ("Monday", "Monday"),
@@ -68,7 +69,7 @@ class Kitchen(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(
         null=False,
-        max_length=2,
+        max_length=50,
         validators=[
             MinLengthValidator(
                 limit_value=2, 
@@ -85,7 +86,19 @@ class Kitchen(models.Model):
             ProhibitNullCharactersValidator()
         ]
     )
+    featured = models.BooleanField(null=False, default=False)
     workdays = MultiSelectField(choices=DAYS, max_choices=7)
     start_time = models.TimeField(null=False, default=time(hour=8))
     end_time = models.TimeField(null=False, default=time(hour=16))
     menu = models.ArrayField(model_container=MenuItem)
+    image = models.ImageField(default="default.jpg", upload_to="kitchen_imgs")
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        img = Image.open(self.image.path)
+
+        if img.width != 300 or img.height != 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size)
+            img.save(self.image.path)

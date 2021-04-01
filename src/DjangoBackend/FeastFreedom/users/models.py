@@ -6,6 +6,8 @@ from django.core.validators import (
     RegexValidator, 
     ProhibitNullCharactersValidator
 )
+from .managers import UserManager
+
 
 US_STATES = (
     ('AL', 'Alabama'),
@@ -198,4 +200,4 @@ class User(AbstractUser):
             ProhibitNullCharactersValidator()
         ]
     )
-
+    objects = UserManager()
