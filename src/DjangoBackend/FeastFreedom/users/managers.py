@@ -1,6 +1,6 @@
-from django.db.models import Manager
+from django.contrib.auth.models import UserManager
 
-class UserManager(Manager):
+class KitchenUserManager(UserManager):
     def get_kitchen_users(self):
         return self.get_queryset().filter(is_staff=True)
     

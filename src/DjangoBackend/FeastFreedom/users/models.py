@@ -6,7 +6,7 @@ from django.core.validators import (
     RegexValidator, 
     ProhibitNullCharactersValidator
 )
-from .managers import UserManager
+from .managers import KitchenUserManager
 
 
 US_STATES = (
@@ -200,4 +200,4 @@ class User(AbstractUser):
             ProhibitNullCharactersValidator()
         ]
     )
-    objects = UserManager()
+    objects = KitchenUserManager()

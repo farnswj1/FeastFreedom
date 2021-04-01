@@ -8,6 +8,7 @@ from rest_framework.generics import (
 from .serializers import UserSerializer
 from .models import User
 
+
 # Create your views here.
 class UserListAPI(ListAPIView):
     queryset = User.objects.get_regular_users()
