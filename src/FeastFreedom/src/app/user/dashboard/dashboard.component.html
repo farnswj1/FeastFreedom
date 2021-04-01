@@ -1,12 +1,14 @@
 <ngb-carousel *ngIf="kitchens">
   <ng-template ngbSlide *ngFor="let kitchen of getFeatured()">
-    <div class="picsum-img-wrapper">
-      <img [src]="kitchen.image" alt="Kitchen image" />
-    </div>
-    <div class="carousel-caption">
-      <h3>{{ kitchen.name }}</h3>
-      <p></p>
-    </div>
+    <a [routerLink]="['/detail', kitchen.id]">
+      <div class="picsum-img-wrapper">
+        <img [src]="kitchen.image" alt="Kitchen image" />
+      </div>
+      <div class="carousel-caption">
+        <h3>{{ kitchen.name }}</h3>
+        <p></p>
+      </div>
+    </a>
   </ng-template>
 </ngb-carousel>
 
@@ -14,7 +16,7 @@
   <div class="dashboard-container">
     <app-kitchen
       *ngFor="let kitchen of kitchens"
-      [kitchen]="kitchen"
+      [props]="[kitchen, 'dashboard']"
     ></app-kitchen>
   </div>
 </ng-container>

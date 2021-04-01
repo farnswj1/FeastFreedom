@@ -7,16 +7,17 @@ import { Kitchen } from 'src/app/DIservices/kitchen';
   styleUrls: ['./kitchen.component.css'],
 })
 export class KitchenComponent implements OnInit {
-  // @Input() props: { kitchen: Kitchen; parent: string } | undefined;
-  // public kitchen: Kitchen | undefined;
-  @Input() kitchen: Kitchen | undefined;
+  @Input() props: [kitchen: Kitchen, parent: string] | undefined;
+  public kitchen: Kitchen | undefined;
+  // @Input() kitchen: Kitchen | undefined;
   public parent: string | undefined;
 
   constructor() {}
 
   ngOnInit(): void {
-    // this.kitchen = this.props?.kitchen;
-    // this.parent = this.props?.parent;
-    // console.log(this.props);
+    if (this.props) {
+      this.kitchen = this.props[0];
+      this.parent = this.props[1];
+    }
   }
 }
