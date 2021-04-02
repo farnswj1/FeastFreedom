@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, Provider } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { KitchenUser } from './providers';
+import { IKitchenUser } from './providers';
 import { Kitchen } from './kitchen';
 // import { Plate } from './plate';
 import { catchError } from 'rxjs/operators';
@@ -27,21 +27,27 @@ export class ProvidersService {
       : this.http.get<Kitchen[]>(this.url).pipe(catchError(this.errorHandler));
   }
 
+  // getKitchen(): Observable<KitchenUser[]> {
+  //   return this.http
+  //     .get<KitchenUser[]>(this._url1)
+  //     .pipe(catchError(this.errorHandler));
+  // }
+
   postKitchen(KitchenData: any): Observable<Kitchen[]> {
     return this.http
       .post<Kitchen[]>(this._url, KitchenData)
       .pipe(catchError(this.errorHandler));
   }
 
-  getKitchenUser(): Observable<KitchenUser[]> {
+  getKitchenUser(): Observable<IKitchenUser[]> {
     return this.http
-      .get<KitchenUser[]>(this._url)
+      .get<IKitchenUser[]>(this._url)
       .pipe(catchError(this.errorHandler));
   }
 
-  postKitchenUser(CredentialData: any): Observable<KitchenUser[]> {
+  postKitchenUser(CredentialData: any): Observable<IKitchenUser[]> {
     return this.http
-      .post<KitchenUser[]>(this._url2, CredentialData)
+      .post<IKitchenUser[]>(this._url2, CredentialData)
       .pipe(catchError(this.errorHandler));
   }
   errorHandler(error: HttpErrorResponse) {

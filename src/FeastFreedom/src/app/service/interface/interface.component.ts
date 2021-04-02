@@ -4,6 +4,8 @@ import { FormArray, Validators } from '@angular/forms';
 import { ProvidersService } from '../../DIservices/providers.service'
 
 import { Router } from '@angular/router';
+import { Kitchen } from 'src/app/DIservices/kitchen';
+import { IKitchenUser } from 'src/app/DIservices/providers';
 
 @Component({
   selector: 'app-interface',
@@ -13,48 +15,60 @@ import { Router } from '@angular/router';
 export class InterfaceComponent implements OnInit {
 
   public providersForm: any;
-  kitchenUser: any;
+  public kitchen: any;
   errorMsg: any;
 
-  constructor(private fb: FormBuilder, private proService: ProvidersService, private router: Router) { 
+
+
+  constructor(private fb: FormBuilder, private proService: ProvidersService, private router: Router) {
 
   }
 
   ngOnInit(): void {
     this.providersForm = this.fb.group({
-     name: ['', [Validators.required, Validators.minLength(3)]], //testing validations NOT FINAL YET
-     email: ['', [Validators.required, Validators.minLength(3)]],
-     password: ['', [Validators.required, Validators.pattern('^[0-9]+$')]]
-   });
- }
+      name: [null, [Validators.required, Validators.minLength(3)]], //testing validations NOT FINAL YET
+      email: [null, [Validators.required, Validators.email]],
+      
+      //* PASSWORD REQUIREMENT AND VALIDATION */
+      //To check a password between 8 to 15 characters which contain 
+      // at least one lowercase letter, 
+      // one uppercase letter, 
+      // one numeric digit, 
+      // and one special character
 
- onSubmit(providersForm:any){
-   console.log(this.providersForm.value);
-   this.proService.postKitchenUser(this.providersForm.value).subscribe(
-     (data) => {
-       this.kitchenUser = data; 
-       console.log(this.kitchenUser);
-       this.proService.getKitchenUser().subscribe(
-         (data) => this.kitchenUser = data,
-         (error) => this.errorMsg = error
-       )
-     },
-     (error) => this.errorMsg = error
-   )
-   this.router.navigate(['']); //edit here child (next) click
-   this.providersForm.reset();
- }
+      password: [null, [Validators.required, Validators.pattern('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$')]], 
+      passwordConfirm: [null, [Validators.required, Validators.pattern('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$')]]
+    });
+  }
 
- get name() {
-   return this.providersForm.get('name');
- }
+  next() {
 
- get email() {
-   return this.providersForm.get('email');
- }
+    this.router.navigate(['/register/']); //edit here child (next) click
+    this.providersForm.reset();
 
- get password() {
-   return this.providersForm.get('password');
- }
+  }
+  cancel() {
+    this.router.navigate(['/home/']);
+  }
+  getUserById(id:any){
+    id = 1;
+    return id
+  }
+
+  get name() {
+    return this.providersForm.get('name');
+  }
+
+  get email() {
+    return this.providersForm.get('email');
+  }
+
+  get password() {
+    return this.providersForm.get('password');
+  }
+
+  get passwordConfirm() {
+    return this.providersForm.get('passwordCornfirm');
+  }
 
 }
