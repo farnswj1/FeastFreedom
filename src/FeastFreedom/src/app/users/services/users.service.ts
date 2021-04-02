@@ -20,7 +20,7 @@ export class UsersService {
   }
 
   getRegularUser(id: number): Observable<IUser[]> {
-    return this.http.get<IUser[]>(this._url + id)
+    return this.http.get<IUser[]>(this._url + id + "/")
     .pipe(catchError(this.errorHandler));
   }
 
@@ -39,12 +39,12 @@ export class UsersService {
   }
   
   getKitchenUsers(): Observable<IUser[]> {
-    return this.http.get<IUser[]>(this._url)
+    return this.http.get<IUser[]>(`${this._url}kitchens/`)
     .pipe(catchError(this.errorHandler));
   }
 
   getKitchenUser(id: number): Observable<IUser[]> {
-    return this.http.get<IUser[]>(this._url + id)
+    return this.http.get<IUser[]>(`${this._url}kitchens/${id}/`)
     .pipe(catchError(this.errorHandler));
   }
 
