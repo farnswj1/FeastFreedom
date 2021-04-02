@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { InterfaceComponent } from './interface/interface.component';
 import { routing } from './services.routing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './interface/register/register.component';
 
 
 
