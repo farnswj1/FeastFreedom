@@ -19,7 +19,7 @@ import { RegisterComponent } from './service/interface/register/register.compone
 
 
 @NgModule({
-  declarations: [AppComponent, RegularUserListComponent, DisplayUserListComponent, InterfaceComponent , RegisterComponent],
+  declarations: [AppComponent, RegularUserListComponent, DisplayUserListComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
