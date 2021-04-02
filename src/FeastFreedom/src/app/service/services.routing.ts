@@ -5,7 +5,7 @@ import { DashboardComponent} from '../user/dashboard/dashboard.component'
 
 export const routes: Routes = 
 [ { path: '/interface', component: InterfaceComponent},
-  { path: '/register', component: InterfaceComponent },
+  { path: '/register/:id', component: InterfaceComponent },
   { path: '/home', component: DashboardComponent}
 ];
 
