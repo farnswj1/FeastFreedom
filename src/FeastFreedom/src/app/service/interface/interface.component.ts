@@ -50,8 +50,9 @@ export class InterfaceComponent implements OnInit {
   cancel() {
     this.router.navigate(['/home/']);
   }
-  getUserByID(id:any){
-
+  getUserById(id:any){
+    id = 1;
+    return id
   }
 
   get name() {
@@ -66,7 +67,7 @@ export class InterfaceComponent implements OnInit {
     return this.providersForm.get('password');
   }
 
-  get PasswordConfirm() {
+  get passwordConfirm() {
     return this.providersForm.get('passwordCornfirm');
   }
 

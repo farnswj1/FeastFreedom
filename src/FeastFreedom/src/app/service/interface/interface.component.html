@@ -55,39 +55,40 @@
                         <label for="passwordConfirm">passwordConfirm</label>
                         <input type="password" [ngClass]="{'form-control': true,
                   'is-invalid': !passwordConfirm.valid && passwordConfirm.touched,
-                  'is-valid': passwordConfirm.valid}" formControlname="passwordConfirm" id="passwordConfirm" placeholder="passwordConfirm">
-                        <small id="passwordConfirmHelp" *ngIf="passwordConfirm.errors?.required && passwordConfirm.touched"
+                  'is-valid': passwordConfirm.valid}" formControlname="passwordConfirm" id="passwordConfirm"
+                            placeholder="passwordConfirm">
+                        <small id="passwordConfirmHelp"
+                            *ngIf="passwordConfirm.errors?.required && passwordConfirm.touched"
                             class="form-text custom-invalid-feedback">Field is required</small>
                     </div>
                 </div>
+            </div>
+
+
+            <!-- seperator -->
+            <div class="row">
+                <div class="col">
+                    <hr>
                 </div>
+            </div>
 
 
-                <!-- seperator -->
-                <div class="row">
-                    <div class="col">
-                        <hr>
-                    </div>
+
+            <!-- final action buttons -->
+            <div class="row justify-content-center">
+                <div class="col-2">
+                    <button type="button" [disabled]="!providersForm.valid" (click)="next()"
+                        class="btn btn-primary">Next</button>
                 </div>
-
-
-
-                <!-- final action buttons -->
-                <div class="row justify-content-center">
-                    <div class="col-2">
-                        <button type="button" [disabled]="!providersForm.valid" (click)="next()"
-                            class="btn btn-primary">Next</button>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-2">
-                        <button type="button" [disabled]="!providersForm.valid" (click)="cancel()"
-                            class="btn btn-primary">cancel</button>
-                    </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-2">
+                    <button type="button" [disabled]="!providersForm.valid" (click)="cancel()"
+                        class="btn btn-primary">cancel</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
 <!-- have to get user by id here -->
-<app-register [name]= name() [user]=getUserById() ></app-register> 
+<app-register [name]=name() [user]=getUserById(1)></app-register>
