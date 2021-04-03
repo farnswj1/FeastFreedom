@@ -1,9 +1,8 @@
 <h2>Add Provider's Service</h2>
 
-<form [formGroup]="kitchenForm" (ngSubmit)="save(kitchenForm)">
+<form [formGroup]="kitchenForm" (ngSubmit)="Save(kitchenForm)">
 
-    <!-- KITCHEN IDENTIFIER -->
-
+    <!-- Kitchen Indentifier -->
     <label>Name</label>
     <input type="text" [class.is-invalid]="name.invalid && name.touched" formControlName="name" class="form-control">
     <div *ngIf="name.errors && name.touched">
@@ -12,9 +11,15 @@
         </div>
     </div>
 
+    <!-- <label>User</label>
+    <input type="text" [class.is-invalid]="user.invalid && user.touched" formControlName="user" class="form-control">
+    <div *ngIf="user.errors && user.touched">
+        <div class="alert alert-danger" *ngIf="user.errors?.required">Name is required</div>
+        <div class="alert alert-danger" *ngIf="user.errors?.minlength">Name must be at least 3 characters
+        </div>
+    </div> -->
 
     <!-- WORKDAYS NEED TO BE EDITED (CHECK BOX WILL BE IMPLEMENTED) -->
-
     <div class="form-group">
         <label for="workdays">Work Days</label>
         <select id="inputworkdays" formControlName="workdays" [ngClass]="{'form-control': true,
@@ -52,7 +57,7 @@
     </div>
 
     <!-- MENU ARRAY STARTS HERE -->
-    
+
     <div class="row" formArrayName="menu">
         <div class="col-12" *ngFor="let group of menuArray.controls; let i = index;" [formGroupName]="i">
             <div class="row">
@@ -97,8 +102,9 @@
         </div>
     </div>
     <br>
+
     <!-- IMAGE GOES HERE -->
-    
+
     <button class="btn btn-primary" [disabled]="!kitchenForm.valid" type="submit">Submit form</button>
 
 
