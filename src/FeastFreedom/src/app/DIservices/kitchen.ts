@@ -10,7 +10,7 @@ export interface Kitchen {
   time_in: any;
   time_out: any;
   image: any;
-  menu: Plate[];
+  menu: any;
   featured: boolean;
 }
 
@@ -18,10 +18,14 @@ export class kitchen {
   id: number = 0
   user = new User();
   name: string = '';
-  working_days= [""];
+  working_days = [""];
   time_in: any;
   time_out: any;
   image: any;
-  menu = new plate();
+  menu = [{
+    name: " ",
+    vegan: false,
+    price: 0
+  }];
   featured: boolean = false;
 }

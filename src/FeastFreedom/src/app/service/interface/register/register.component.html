@@ -1,1 +1,111 @@
-<p>register works!</p>
+<h2>Add Provider's Service</h2>
+
+<form [formGroup]="kitchenForm" (ngSubmit)="onSubmit(employeeForm)">
+
+    <!-- Kitchen Indentifier -->
+    <label>Name</label>
+    <input type="text" [class.is-invalid]="name.invalid && name.touched" formControlName="name" class="form-control">
+    <div *ngIf="name.errors && name.touched">
+        <div class="alert alert-danger" *ngIf="name.errors?.required">Name is required</div>
+        <div class="alert alert-danger" *ngIf="name.errors?.minlength">Name must be at least 3 characters
+        </div>
+    </div>
+
+    <label>User</label>
+    <input type="text" [class.is-invalid]="user.invalid && user.touched" formControlName="user" class="form-control">
+    <div *ngIf="user.errors && user.touched">
+        <div class="alert alert-danger" *ngIf="user.errors?.required">Name is required</div>
+        <div class="alert alert-danger" *ngIf="user.errors?.minlength">Name must be at least 3 characters
+        </div>
+    </div>
+
+<!-- WORKDAYS NEED TO BE EDITED (CHECK BOX WILL BE IMPLEMENTED) -->
+    <div class="form-group">
+        <label for="workdays">Work Days</label>
+        <select id="inputworkdays" formControlName="workdays" [ngClass]="{'form-control': true,
+        'is-invalid': workdays.invalid && workdays.touched,
+        'is-valid': workdays.valid}">
+            <option selected [ngValue]="null">Choose...</option>
+            <option *ngFor="let item of days" [value]="item">{{item}}</option>
+        </select>
+        <small *ngIf="workdays.invalid && workdays.touched" class="form-text custom-invalid-feedback">Field is
+            required</small>
+    </div>
+
+    <div class="form-group">
+        <label for="start_time">start_time</label>
+        <select id="end_time" formControlName="start_time" [ngClass]="{'form-control': true,
+        'is-invalid': start_time.invalid && start_time.touched,
+        'is-valid': start_time.valid}">
+            <option selected [ngValue]="null">Choose...</option>
+            <option *ngFor="let item1 of time_in" [value]="item1">{{item1}}</option>
+        </select>
+        <small *ngIf="start_time.invalid && start_time.touched" class="form-text custom-invalid-feedback">Field is
+            required</small>
+    </div>
+
+    <div class="form-group">
+        <label for="end_time">end_time</label>
+        <select id="end_time" formControlName="end_time" [ngClass]="{'form-control': true,
+        'is-invalid': end_time.invalid && end_time.touched,
+        'is-valid': end_time.valid}">
+            <option selected [ngValue]="null">Choose...</option>
+            <option *ngFor="let item2 of time_out" [value]="item2">{{item2}}</option>
+        </select>
+        <small *ngIf="end_time.invalid && end_time.touched" class="form-text custom-invalid-feedback">Field is
+            required</small>
+    </div>
+
+    <!-- MENU ARRAY STARTS HERE -->
+    
+    <div class="row" formArrayName="menu">
+        <div class="col-12" *ngFor="let group of menuArray.controls; let i = index;" [formGroupName]="i">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-8">
+                            <h4>menu {{i+1}}</h4>
+                        </div>
+
+                    </div>
+                    <hr>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="addText">Item Name</label>
+                        <input type="text" formControlName="itemName" [ngClass]="{'form-control': true,
+                        'is-invalid': group.controls.itemName.invalid && group.controls.itemName.touched,
+                        'is-valid': group.controls.itemName.valid}" id="addText" placeholder="Enter Item Name">
+                        <small *ngIf="group.controls.itemName.invalid && group.controls.itemName.touched"
+                            class="form-text custom-invalid-feedback">Field is required</small>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col">
+                            <input type="radio" formControlName="vegan" value="true"> True<br>
+                            <input type="radio" formControlName="vegan" value="false"> False<br>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label>price</label>
+                                <input type="text" formControlName="price" [ngClass]="{'form-control': true,
+                                'is-invalid': group.controls.price.invalid && group.controls.price.touched,
+                                'is-valid': group.controls.price.valid}" id="addText" placeholder="Enter Price ">
+                                <small *ngIf="group.controls.price.invalid && group.controls.price.touched"
+                                    class="form-text custom-invalid-feedback">Field is required</small>
+                            </div><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <!-- IMAGE GOES HERE -->
+    
+    <button class="btn btn-primary" [disabled]="!kitchenForm.valid" type="submit">Submit form</button>
+
+
+</form>

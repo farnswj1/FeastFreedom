@@ -5,9 +5,9 @@ export interface Plate {
   price: number;
 }
 
-export class plate{
-  id:number =0;
-  name: string =''
+export class plate {
+  id: number = 0;
+  name: string = ''
   vegan: boolean = false;
-  price: number =0
+  price: number = 0
 }

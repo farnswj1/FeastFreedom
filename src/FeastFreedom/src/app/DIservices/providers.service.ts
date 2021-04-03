@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, Provider } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { IKitchenUser } from './providers';
-import { Kitchen } from './kitchen';
+import { kitchen, Kitchen } from './kitchen';
 // import { Plate } from './plate';
 import { catchError } from 'rxjs/operators';
 
@@ -10,32 +10,31 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class ProvidersService {
-  private _url: string = 'http://localhost:8000/kitchens/new/';
-  private _url1: string = 'http://localhost:8000/kitchens/';
-  private _url2: string = 'http://localhost:8000/new/';
+  private _url: string = 'http://localhost:8000/kitchens/';
+  private _url1: string = 'http://localhost:8000/users'
 
   // json-server url
   private url = 'http://localhost:3000/kitchens/';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getKitchen(id?: number): Observable<{}> {
     return id
       ? this.http
-          .get<Kitchen>(this.url + id)
-          .pipe(catchError(this.errorHandler))
+        .get<Kitchen>(this.url + id)
+        .pipe(catchError(this.errorHandler))
       : this.http.get<Kitchen[]>(this.url).pipe(catchError(this.errorHandler));
   }
 
-  // getKitchen(): Observable<KitchenUser[]> {
-  //   return this.http
-  //     .get<KitchenUser[]>(this._url1)
-  //     .pipe(catchError(this.errorHandler));
-  // }
-
-  postKitchen(KitchenData: any): Observable<Kitchen[]> {
+  getKitchen1(): Observable<Kitchen[]> {
     return this.http
-      .post<Kitchen[]>(this._url, KitchenData)
+      .get<Kitchen[]>(this._url)
+      .pipe(catchError(this.errorHandler));
+  }
+
+  postKitchen(KitchenData: any): Observable<kitchen> {
+    return this.http
+      .post<kitchen>(this._url + "create/", KitchenData)
       .pipe(catchError(this.errorHandler));
   }
 
@@ -45,11 +44,12 @@ export class ProvidersService {
       .pipe(catchError(this.errorHandler));
   }
 
-  postKitchenUser(CredentialData: any): Observable<IKitchenUser[]> {
+  getKitchenUserById(id: any): Observable<IKitchenUser[]> {
     return this.http
-      .post<IKitchenUser[]>(this._url2, CredentialData)
+      .get<IKitchenUser[]>(this._url + "/kitchens/" + id + "/")
       .pipe(catchError(this.errorHandler));
   }
+
   errorHandler(error: HttpErrorResponse) {
     return throwError(error.message || 'Server Error');
   }
