@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UsersService } from '../../services/users.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class RegularUserListComponent implements OnInit {
   public regularUsers: any;
   public errorMsg: any;
 
-  constructor(private usersService: UsersService) { }
+  constructor(private usersService: UsersService, private router: Router) { }
 
   ngOnInit(): void {
     this.usersService.getRegularUsers().subscribe(
@@ -18,5 +19,13 @@ export class RegularUserListComponent implements OnInit {
       (error) => this.errorMsg = error,
       () => console.log("Complete!")
     );
+  }
+
+  regularUserCreate() {
+    this.router.navigate(['users/register'])
+  }
+
+  regularUserDetail(regularUser: any) {
+    this.router.navigate(['/users/', regularUser.id])
   }
 }

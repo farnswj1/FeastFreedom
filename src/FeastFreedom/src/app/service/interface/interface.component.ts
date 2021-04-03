@@ -17,6 +17,9 @@ export class InterfaceComponent implements OnInit {
   public providersForm: any;
   public kitchen: any;
   errorMsg: any;
+  kitchenname: string = 'Default';
+  id_: number = 0;
+  user: any;
 
 
 
@@ -26,9 +29,10 @@ export class InterfaceComponent implements OnInit {
 
   ngOnInit(): void {
     this.providersForm = this.fb.group({
-      name: [null, [Validators.required, Validators.minLength(3)]], //testing validations NOT FINAL YET
+      name: [this.kitchenname, [Validators.required, Validators.minLength(3)]], //testing validations NOT FINAL YET
       email: [null, [Validators.required, Validators.email]],
-      
+      id: [this.id_, [Validators.required, Validators.pattern('^[0-9]+$')]],
+
       //* PASSWORD REQUIREMENT AND VALIDATION */
       //To check a password between 8 to 15 characters which contain 
       // at least one lowercase letter, 
@@ -36,12 +40,12 @@ export class InterfaceComponent implements OnInit {
       // one numeric digit, 
       // and one special character
 
-      password: [null, [Validators.required, Validators.pattern('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$')]], 
+      password: [null, [Validators.required, Validators.pattern('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$')]],
       passwordConfirm: [null, [Validators.required, Validators.pattern('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$')]]
     });
   }
 
-  next() {
+  next(email: any) {
 
     this.router.navigate(['/register/']); //edit here child (next) click
     this.providersForm.reset();
@@ -50,9 +54,13 @@ export class InterfaceComponent implements OnInit {
   cancel() {
     this.router.navigate(['/home/']);
   }
-  getUserById(id:any){
-    id = 1;
-    return id
+
+  getUserById(identifier: any) {
+    identifier = this.id_;
+    this.user = this.proService.getKitchenUserById(identifier).subscribe(
+      (data) => this.user = data,
+      (error) => this.errorMsg = error
+    )
   }
 
   get name() {
@@ -69,6 +77,10 @@ export class InterfaceComponent implements OnInit {
 
   get passwordConfirm() {
     return this.providersForm.get('passwordCornfirm');
+  }
+
+  get id() {
+    return this.providersForm.get('id')
   }
 
 }
