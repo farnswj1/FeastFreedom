@@ -28,4 +28,19 @@ export class RegularUserListComponent implements OnInit {
   regularUserDetail(regularUser: any) {
     this.router.navigate(['/users/', regularUser.id])
   }
+
+  regularUserUpdate(regularUser: any){
+    this.router.navigate(['/users/', regularUser.id, 'update'])
+  }
+
+  regularUserDelete(regularUser: any){
+    if (confirm(`Are you sure you want to delete ${regularUser.username}?`)) {
+      this.usersService.deleteRegularUser(regularUser.id).subscribe(() => {
+        this.usersService.getRegularUsers().subscribe(
+          (data) => this.regularUsers = data,
+          (error) => this.errorMsg = error
+        )
+      })
+    }
+  }
 }

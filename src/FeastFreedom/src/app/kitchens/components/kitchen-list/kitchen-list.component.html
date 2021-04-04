@@ -1,0 +1,22 @@
+<h2>List of Kitchens</h2>
+<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+<div *ngIf="kitchens">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <td><b>Name</b></td>
+                <td><b>Work Days</b></td>
+                <td><b>Hours</b></td>
+                <td><b>Options</b></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let kitchen of kitchens">
+                <td>{{kitchen.name}}</td>
+                <td>{{kitchen.workdays}}</td>
+                <td>{{kitchen.start_time}} - {{kitchen.end_time}}</td>
+                <td><button class="btn btn-primary" (click)="kitchenDetail(kitchen)">View</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
