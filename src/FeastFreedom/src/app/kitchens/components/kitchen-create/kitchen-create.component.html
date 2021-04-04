@@ -1,0 +1,40 @@
+<h2>Register Kitchen</h2>
+<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+<form enctype="multipart/form-data" *ngIf="kitchenForm" [formGroup]="kitchenForm" (ngSubmit)="onSubmit(kitchenForm)">
+
+    <label>Name</label>
+    <input class="form-control" type="text" formControlName="name" [class.is-invalid]="name.invalid && name.touched">
+    <div *ngIf="name.errors && name.touched">
+        <div class="alert alert-danger" *ngIf="name.errors?.required">Name is required.</div>
+        <div class="alert alert-danger" *ngIf="name.errors?.minlength">Name must be at least 2 characters.</div>
+        <div class="alert alert-danger" *ngIf="name.errors?.maxlength">Name must be at most 50 characters.</div>
+        <div class="alert alert-danger" *ngIf="name.errors?.pattern">Name may contain only letters, numbers, and/or :,'&@-</div>
+    </div>
+
+    <label>Work Days</label>
+    <input class="form-control" type="text" formControlName="workdays" [class.is-invalid]="workdays.invalid && workdays.touched">
+    <div *ngIf="workdays.errors && workdays.touched">
+        <div class="alert alert-danger" *ngIf="workdays.errors?.required">Work days are required.</div>
+    </div>
+
+    <label>Start Time</label>
+    <input class="form-control" type="text" formControlName="start_time" [class.is-invalid]="start_time.invalid && start_time.touched">
+    <div *ngIf="start_time.errors && start_time.touched">
+        <div class="alert alert-danger" *ngIf="start_time.errors?.required">Start Time is required.</div>
+        <div class="alert alert-danger" *ngIf="start_time.errors?.minlength || start_time.errors?.maxlength || start_time.errors?.pattern">Start Time must be in the format XX:XX:XX</div>
+    </div>
+
+    <label>End Time</label>
+    <input class="form-control" type="text" formControlName="end_time" [class.is-invalid]="end_time.invalid && end_time.touched">
+    <div *ngIf="end_time.errors && end_time.touched">
+        <div class="alert alert-danger" *ngIf="end_time.errors?.required">End Time is required.</div>
+        <div class="alert alert-danger" *ngIf="end_time.errors?.minlength || end_time.errors?.maxlength || end_time.errors?.pattern">End Time must be in the format XX:XX:XX</div>
+    </div>
+
+    <label>Image</label>
+    <input class="form-control" type="file" formControlName="image" [class.is-invalid]="image.invalid && image.touched" #fileInput>
+    
+    <br>
+
+    <button class="btn btn-primary" [disabled]="kitchenForm.invalid" type="submit">Submit</button>
+</form>

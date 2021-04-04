@@ -28,4 +28,19 @@ export class KitchenUserListComponent implements OnInit {
   kitchenUserDetail(kitchenUser: any) {
     this.router.navigate(['/users/kitchens/', kitchenUser.id])
   }
+
+  kitchenUserUpdate(kitchenUser: any){
+    this.router.navigate(['/users/kitchens/', kitchenUser.id, 'update'])
+  }
+
+  kitchenUserDelete(kitchenUser: any){
+    if (confirm(`Are you sure you want to delete ${kitchenUser.username}?`)) {
+      this.usersService.deleteKitchenUser(kitchenUser.id).subscribe(() => {
+        this.usersService.getKitchenUsers().subscribe(
+          (data) => this.kitchenUsers = data,
+          (error) => this.errorMsg = error
+        )
+      })
+    }
+  }
 }

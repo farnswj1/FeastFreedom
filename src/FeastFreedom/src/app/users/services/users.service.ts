@@ -9,7 +9,6 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UsersService {
-
   private _url: string = "http://127.0.0.1:8000/users/"
   
   constructor(private http: HttpClient) { }

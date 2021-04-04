@@ -1,4 +1,4 @@
-import { Plate, plate } from './plate';
+import { IPlate, Plate } from './plate';
 import { IKitchenUser } from './providers';
 import { User } from '../users/models/user';
 

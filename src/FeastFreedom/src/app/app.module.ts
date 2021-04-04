@@ -18,6 +18,11 @@ import { RegularUserDetailComponent } from './users/components/regular-user-deta
 import { KitchenUserDetailComponent } from './users/components/kitchen-user-detail/kitchen-user-detail.component';
 import { RegularUserCreateComponent } from './users/components/regular-user-create/regular-user-create.component';
 import { KitchenUserCreateComponent } from './users/components/kitchen-user-create/kitchen-user-create.component';
+import { RegularUserUpdateComponent } from './users/components/regular-user-update/regular-user-update.component';
+import { KitchenUserUpdateComponent } from './users/components/kitchen-user-update/kitchen-user-update.component';
+import { KitchenListComponent } from './kitchens/components/kitchen-list/kitchen-list.component';
+import { KitchenDetailComponent } from './kitchens/components/kitchen-detail/kitchen-detail.component';
+import { KitchenCreateComponent } from './kitchens/components/kitchen-create/kitchen-create.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +33,11 @@ import { KitchenUserCreateComponent } from './users/components/kitchen-user-crea
     KitchenUserDetailComponent,
     RegularUserCreateComponent,
     KitchenUserCreateComponent,
+    RegularUserUpdateComponent,
+    KitchenUserUpdateComponent,
+    KitchenListComponent,
+    KitchenDetailComponent,
+    KitchenCreateComponent,
   ],
   imports: [
     BrowserModule,

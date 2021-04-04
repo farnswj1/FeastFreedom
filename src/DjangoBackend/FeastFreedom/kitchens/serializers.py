@@ -1,8 +1,9 @@
 from .models import Kitchen
-from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer, ListField, DictField
 
-
-class KitchenSerializer(serializers.ModelSerializer):
+class KitchenSerializer(ModelSerializer):
+    menu = ListField(child=DictField())
+    
     class Meta:
         model = Kitchen
         fields = "__all__"

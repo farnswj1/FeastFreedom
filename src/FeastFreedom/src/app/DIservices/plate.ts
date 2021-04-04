@@ -1,4 +1,4 @@
-export interface Plate {
+export interface IPlate {
   id: number;
   name: string;
   vegan: boolean;
@@ -6,7 +6,7 @@ export interface Plate {
   count?: number;
 }
 
-export class plate {
+export class Plate {
   id: number = 0;
   name: string = '';
   vegan: boolean = false;

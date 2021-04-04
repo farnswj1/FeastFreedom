@@ -40,7 +40,7 @@ export class KitchenUserCreateComponent implements OnInit {
         Validators.required, 
         Validators.minLength(8), 
         Validators.maxLength(150),
-        Validators.pattern("^[A-Za-z0-9!@#\\$%\\^&\\*\\(\\)]+$")
+        Validators.pattern("^.{8,150}$")
       ]], 
       email: ["", [
         Validators.required, 
@@ -57,7 +57,7 @@ export class KitchenUserCreateComponent implements OnInit {
       is_superuser: [false, [
         Validators.required, 
       ]],
-      date_joined: ["2021-01-01T00:00:00.000000Z", [
+      date_joined: [new Date(), [
         Validators.required, 
       ]],
       last_login: [null, []],
@@ -131,7 +131,7 @@ export class KitchenUserCreateComponent implements OnInit {
       },
       (error) => this.errorMsg = error
     )
-    this.router.navigate(['/users']);
+    this.router.navigate(['/kitchens/register']);
     this.kitchenUserForm.reset();
   }
 

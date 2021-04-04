@@ -20,8 +20,8 @@
                 <td>{{user.email}}</td>
                 <td>
                     <button class="btn btn-primary" (click)="kitchenUserDetail(user)">View</button>
-                    <button class="btn btn-primary">Update</button>
-                    <button class="btn btn-danger">Delete</button>
+                    <button class="btn btn-primary" (click)="kitchenUserUpdate(user)">Update</button>
+                    <button class="btn btn-danger" (click)="kitchenUserDelete(user)">Delete</button>
                 </td>
             </tr>
         </tbody>

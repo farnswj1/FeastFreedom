@@ -90,7 +90,7 @@
                             <div class="form-group">
                                 <label>price</label>
                                 <input type="text" formControlName="price" [ngClass]="{'form-control': true,
-                                'is-invalid': group.controls.price.invalid && group.controls.price.touched,
+                                'is-invalid': group.controls.price.invalid && group.controls?.price.touched,
                                 'is-valid': group.controls.price.valid}" id="addText" placeholder="Enter Price ">
                                 <small *ngIf="group.controls.price.invalid && group.controls.price.touched"
                                     class="form-text custom-invalid-feedback">Field is required</small>

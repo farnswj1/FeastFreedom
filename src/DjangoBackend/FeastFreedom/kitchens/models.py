@@ -81,7 +81,7 @@ class Kitchen(models.Model):
             ),
             RegexValidator(
                 regex="^[A-Za-z0-9: ,'&@-]{2,50}$",
-                message="Please insert a valid security question."
+                message="Please insert a valid name."
             ),
             ProhibitNullCharactersValidator()
         ]
