@@ -3,11 +3,12 @@ export interface Plate {
   name: string;
   vegan: boolean;
   price: number;
+  count?: number;
 }
 
 export class plate {
   id: number = 0;
-  name: string = ''
+  name: string = '';
   vegan: boolean = false;
-  price: number = 0
+  price: number = 0;
 }

@@ -33,5 +33,6 @@ app-detail {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  height: 70vh;
+  margin-top: 5rem;
+  /* height: 70vh; */
 }

@@ -11,18 +11,20 @@ import { catchError } from 'rxjs/operators';
 })
 export class ProvidersService {
   private _url: string = 'http://localhost:8000/kitchens/';
-  private _url1: string = 'http://localhost:8000/users'
+  private _url1: string = 'http://localhost:8000/users';
 
   // json-server url
   private url = 'http://localhost:3000/kitchens/';
 
-  constructor(private http: HttpClient) { }
+  public order: [] | undefined;
+
+  constructor(private http: HttpClient) {}
 
   getKitchen(id?: number): Observable<{}> {
     return id
       ? this.http
-        .get<Kitchen>(this.url + id)
-        .pipe(catchError(this.errorHandler))
+          .get<Kitchen>(this.url + id)
+          .pipe(catchError(this.errorHandler))
       : this.http.get<Kitchen[]>(this.url).pipe(catchError(this.errorHandler));
   }
 
@@ -34,7 +36,7 @@ export class ProvidersService {
 
   postKitchen(KitchenData: any): Observable<kitchen> {
     return this.http
-      .post<kitchen>(this._url + "create/", KitchenData)
+      .post<kitchen>(this._url + 'create/', KitchenData)
       .pipe(catchError(this.errorHandler));
   }
 
@@ -46,8 +48,18 @@ export class ProvidersService {
 
   getKitchenUserById(id: any): Observable<IKitchenUser[]> {
     return this.http
-      .get<IKitchenUser[]>(this._url + "/kitchens/" + id + "/")
+      .get<IKitchenUser[]>(this._url + '/kitchens/' + id + '/')
       .pipe(catchError(this.errorHandler));
+  }
+
+  postOrder(order: any, id: number): Observable<{}> {
+    return this.http
+      .patch(this.url + id, { ...order })
+      .pipe(catchError(this.errorHandler));
+  }
+
+  getOrder(): any {
+    return this.order;
   }
 
   errorHandler(error: HttpErrorResponse) {
