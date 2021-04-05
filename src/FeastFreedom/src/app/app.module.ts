@@ -24,6 +24,7 @@ import { KitchenListComponent } from './kitchens/components/kitchen-list/kitchen
 import { KitchenDetailComponent } from './kitchens/components/kitchen-detail/kitchen-detail.component';
 import { KitchenCreateComponent } from './kitchens/components/kitchen-create/kitchen-create.component';
 import { JwtModule } from '@auth0/angular-jwt';
+import { LoginComponent } from './users/components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { JwtModule } from '@auth0/angular-jwt';
     KitchenListComponent,
     KitchenDetailComponent,
     KitchenCreateComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

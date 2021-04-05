@@ -7,6 +7,7 @@ import { KitchenUserCreateComponent } from './users/components/kitchen-user-crea
 import { KitchenUserDetailComponent } from './users/components/kitchen-user-detail/kitchen-user-detail.component';
 import { KitchenUserListComponent } from './users/components/kitchen-user-list/kitchen-user-list.component';
 import { KitchenUserUpdateComponent } from './users/components/kitchen-user-update/kitchen-user-update.component';
+import { LoginComponent } from './users/components/login/login.component';
 import { RegularUserCreateComponent } from './users/components/regular-user-create/regular-user-create.component';
 import { RegularUserDetailComponent } from './users/components/regular-user-detail/regular-user-detail.component';
 import { RegularUserListComponent } from './users/components/regular-user-list/regular-user-list.component';
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'kitchens', component: KitchenListComponent },
   { path: 'kitchens/register', component: KitchenCreateComponent },
   { path: 'kitchens/:id', component: KitchenDetailComponent },
+  { path: 'login', component: LoginComponent },
 ];
 
 @NgModule({

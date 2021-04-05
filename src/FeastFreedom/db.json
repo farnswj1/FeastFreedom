@@ -264,6 +264,21 @@
           "count": 1
         }
       ]
+    },
+    {
+      "id": 1617637756842,
+      "kitchen_id": 1,
+      "user_id": 2,
+      "order": [
+        {
+          "plate_id": 1,
+          "count": 3
+        },
+        {
+          "plate_id": 2,
+          "count": 3
+        }
+      ]
     }
   ]
 }

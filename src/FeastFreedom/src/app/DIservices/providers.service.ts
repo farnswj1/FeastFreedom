@@ -18,10 +18,20 @@ export class ProvidersService {
 
   // json-server url
   private url = 'http://localhost:3000/';
+  private djangoUrl = 'http://127.0.0.1:8000/';
 
   public order: [] | undefined;
 
   constructor(private http: HttpClient, private jwt: JwtHelperService) {}
+
+  login(username: string, password: string): Observable<{}> {
+    return this.http
+      .post(this.djangoUrl + 'token/', {
+        username,
+        password,
+      })
+      .pipe(catchError(this.errorHandler));
+  }
 
   getUser(): any {
     return this.jwt.decodeToken(

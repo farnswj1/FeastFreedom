@@ -65,6 +65,7 @@ export class DetailComponent implements OnInit {
         plate.count = plate.plate_id === id ? plate.count + 1 : plate.count;
         return plate;
       });
+      localStorage.setItem('cart', JSON.stringify(this.order));
     }
   }
   removePlate(id: number): void {
@@ -76,6 +77,7 @@ export class DetailComponent implements OnInit {
             : plate.count;
         return plate;
       });
+      localStorage.setItem('cart', JSON.stringify(this.order));
     }
   }
   placeOrder(): void {
