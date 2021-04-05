@@ -22,8 +22,8 @@
           >
             -
           </button>
-          <span>
-            {{ order | getCount: plate.id }}
+          <span *ngIf="order.order">
+            {{ order.order | getCount: plate.id }}
           </span>
           <button
             (click)="addPlate(plate.id)"

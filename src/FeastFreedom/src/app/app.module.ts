@@ -24,6 +24,8 @@ import { KitchenListComponent } from './kitchens/components/kitchen-list/kitchen
 import { KitchenDetailComponent } from './kitchens/components/kitchen-detail/kitchen-detail.component';
 import { KitchenCreateComponent } from './kitchens/components/kitchen-create/kitchen-create.component';
 import { UserLoginComponent } from './users/components/user-login/user-login.component';
+import { JwtModule } from '@auth0/angular-jwt';
+import { LoginComponent } from './users/components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ import { UserLoginComponent } from './users/components/user-login/user-login.com
     KitchenListComponent,
     KitchenDetailComponent,
     KitchenCreateComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +51,11 @@ import { UserLoginComponent } from './users/components/user-login/user-login.com
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => localStorage.getItem('access_token'),
+      },
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],
