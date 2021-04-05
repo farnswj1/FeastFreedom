@@ -5,16 +5,14 @@
         <thead>
             <tr>
                 <td><b>Name</b></td>
-                <td><b>Work Days</b></td>
-                <td><b>Hours</b></td>
+                <td><b>Featured</b></td>
                 <td><b>Options</b></td>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let kitchen of kitchens">
                 <td>{{kitchen.name}}</td>
-                <td>{{kitchen.workdays}}</td>
-                <td>{{kitchen.start_time}} - {{kitchen.end_time}}</td>
+                <td>{{kitchen.featured ? "Yes" : "No"}}</td>
                 <td><button class="btn btn-primary" (click)="kitchenDetail(kitchen)">View</button></td>
             </tr>
         </tbody>

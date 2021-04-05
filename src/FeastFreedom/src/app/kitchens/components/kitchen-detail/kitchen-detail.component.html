@@ -5,8 +5,13 @@
     
     <ul class="py-3">
         <li><b>Featured:</b> {{kitchen.featured ? "Yes" : "No"}}</li>
-        <li><b>Work Days</b> {{kitchen.workdays}}</li>
-        <li><b>Hours</b> {{kitchen.start_time}} - {{kitchen.end_time}}</li>
+    </ul>
+
+    <h3>Hours</h3>
+    <ul>
+        <li *ngFor="let workday of kitchen.workdays;">
+            <b>{{workday.day}}:</b> {{workday.start_time}} - {{workday.end_time}}
+        </li>
     </ul>
 
     <h3>Menu</h3>
