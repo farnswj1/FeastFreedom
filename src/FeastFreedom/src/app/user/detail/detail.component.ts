@@ -9,6 +9,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 // Service
 import { ProvidersService } from 'src/app/DIservices/providers.service';
+import { Order } from 'src/app/DIservices/order';
 
 @Component({
   selector: 'app-detail',
@@ -19,25 +20,38 @@ export class DetailComponent implements OnInit {
   public id: number;
   public kitchen: any;
   public error: any;
-  public order: any[] = [];
-  closeResult = '';
+  public order: Order = {
+    id: 0,
+    kitchen_id: 0,
+    user_id: 0,
+  };
 
   constructor(
     private route: ActivatedRoute,
     private providersService: ProvidersService,
     private modalService: NgbModal
   ) {
+    // Gets kitchen id
     this.id = this.route.snapshot.params.id;
+    // Gets kitchen
     this.providersService.getKitchen(this.id).subscribe(
+      // Defines kitchen
       (data) => (this.kitchen = data),
+      // Defines error
       (error) => (this.error = error),
       () => {
-        this.order = this.kitchen.menu.map((plate: Plate) => {
-          return {
-            id: plate.id,
-            count: 0,
-          };
+        // Defines plates and initialices count to 0
+        const orderBody = this.kitchen.menu.map((plate: Plate) => {
+          return { plate_id: plate.id, count: 0 };
         });
+
+        // Defines order
+        this.order = {
+          id: Date.now(),
+          kitchen_id: this.kitchen.id,
+          user_id: this.providersService.getUser(),
+          order: orderBody,
+        };
       }
     );
   }
@@ -46,21 +60,26 @@ export class DetailComponent implements OnInit {
 
   // Order
   addPlate(id: number): void {
-    this.order = this.order.map((plate: any) => {
-      plate.count = plate.id === id ? plate.count + 1 : plate.count;
-      return plate;
-    });
+    if (this.order.order) {
+      this.order.order = this.order.order.map((plate: any) => {
+        plate.count = plate.plate_id === id ? plate.count + 1 : plate.count;
+        return plate;
+      });
+    }
   }
   removePlate(id: number): void {
-    this.order = this.order.map((plate: any) => {
-      plate.count =
-        plate.id === id && plate.count - 1 >= 0 ? plate.count - 1 : plate.count;
-      return plate;
-    });
+    if (this.order.order) {
+      this.order.order = this.order.order.map((plate: any) => {
+        plate.count =
+          plate.plate_id === id && plate.count - 1 >= 0
+            ? plate.count - 1
+            : plate.count;
+        return plate;
+      });
+    }
   }
   placeOrder(): void {
-    this.kitchen.orders.push(this.order);
-    this.providersService.postOrder(this.kitchen, this.kitchen.id).subscribe(
+    this.providersService.postOrder(this.order).subscribe(
       (data) => console.log(data),
       (error) => console.log(error),
       () => console.log('Posted')
@@ -82,6 +101,6 @@ export class GetCountPipe implements PipeTransform {
   public constructor() {}
 
   transform(value: Array<any>, id: number): any {
-    return value.filter((plate: any) => plate.id === id)[0].count;
+    return value.filter((plate: any) => plate.plate_id === id)[0].count;
   }
 }

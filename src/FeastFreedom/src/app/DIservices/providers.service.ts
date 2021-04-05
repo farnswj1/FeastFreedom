@@ -3,8 +3,11 @@ import { Injectable, Provider } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { IKitchenUser } from './providers';
 import { kitchen, Kitchen } from './kitchen';
-// import { Plate } from './plate';
 import { catchError } from 'rxjs/operators';
+
+// Angular-jwt
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { Order } from './order';
 
 @Injectable({
   providedIn: 'root',
@@ -14,18 +17,26 @@ export class ProvidersService {
   private _url1: string = 'http://localhost:8000/users';
 
   // json-server url
-  private url = 'http://localhost:3000/kitchens/';
+  private url = 'http://localhost:3000/';
 
   public order: [] | undefined;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private jwt: JwtHelperService) {}
+
+  getUser(): any {
+    return this.jwt.decodeToken(
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE3NjMyNzM5LCJqdGkiOiJmNDA3M2NhODFmYjI0Njg2YWQyOTA3YWJlZThlNjFlNCIsInVzZXJfaWQiOjJ9.K61b274YGmU1x1mW-qr_g_WocdZEPiNOfWiRLycyD9I'
+    ).user_id;
+  }
 
   getKitchen(id?: number): Observable<{}> {
     return id
       ? this.http
-          .get<Kitchen>(this.url + id)
+          .get<Kitchen>(this.url + 'kitchens/' + id)
           .pipe(catchError(this.errorHandler))
-      : this.http.get<Kitchen[]>(this.url).pipe(catchError(this.errorHandler));
+      : this.http
+          .get<Kitchen[]>(this.url + 'kitchens/')
+          .pipe(catchError(this.errorHandler));
   }
 
   getKitchen1(): Observable<Kitchen[]> {
@@ -52,14 +63,10 @@ export class ProvidersService {
       .pipe(catchError(this.errorHandler));
   }
 
-  postOrder(order: any, id: number): Observable<{}> {
+  postOrder(order: Order): Observable<{}> {
     return this.http
-      .patch(this.url + id, { ...order })
+      .post(this.url + 'orders/', order)
       .pipe(catchError(this.errorHandler));
-  }
-
-  getOrder(): any {
-    return this.order;
   }
 
   errorHandler(error: HttpErrorResponse) {
