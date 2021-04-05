@@ -3,11 +3,12 @@ export interface IPlate {
   name: string;
   vegan: boolean;
   price: number;
+  count?: number;
 }
 
 export class Plate {
   id: number = 0;
-  name: string = ''
+  name: string = '';
   vegan: boolean = false;
-  price: number = 0
+  price: number = 0;
 }
