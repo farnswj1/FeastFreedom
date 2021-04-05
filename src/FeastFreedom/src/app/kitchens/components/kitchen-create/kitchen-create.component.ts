@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { KitchensService } from 'src/app/kitchens/services/kitchens.service';
@@ -13,7 +13,7 @@ export class KitchenCreateComponent implements OnInit {
   public kitchens: any;
   public errorMsg: any;
 
-  constructor(private fb: FormBuilder, private kitchensService: KitchensService, private router: Router) { }
+  constructor(private fb: FormBuilder, private kitchensService: KitchensService, private router: Router, private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.kitchenForm = this.fb.group({
@@ -33,23 +33,32 @@ export class KitchenCreateComponent implements OnInit {
       workdays: [[], [
         Validators.required, 
       ]], 
-      start_time: ["08:00:00", [
+      start_time: ["8:00 AM", [
         Validators.required, 
         Validators.minLength(7),
         Validators.maxLength(8),
-        Validators.pattern("\\d{2}:\\d{2}:\\d{2}")
+        Validators.pattern("^(1[012]|[1-9]):[0-5]\\d [AP]M$")
       ]],
-      end_time: ["20:00:00", [
+      end_time: ["10:00 PM", [
         Validators.required, 
         Validators.minLength(7),
         Validators.maxLength(8),
-        Validators.pattern("\\d{2}:\\d{2}:\\d{2}")
+        Validators.pattern("^(1[012]|[1-9]):[0-5]\\d [AP]M$")
       ]],
-      image: [null, []],
+      image: ['', []],
       menu: [[], [
 
       ]]
     });
+  }
+
+  onFileChange(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.kitchenForm.setValue({
+        image: file
+      });
+    }
   }
 
   onSubmit(kitchenForm: any){
