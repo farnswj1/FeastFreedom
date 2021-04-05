@@ -4,7 +4,15 @@
       "id": 1,
       "name": "Kitchen 1",
       "email": "kitchen1@gmail.com",
-      "working_days": [1, 2, 3, 4, 5, 6, 7],
+      "working_days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Frbldi.com%2Fwp-content%2Fuploads%2F2016%2F11%2Fioc-cape_restaurant-04.jpg&f=1&nofb=1",
       "featured": true,
       "menu": [
@@ -27,7 +35,15 @@
       "id": 2,
       "name": "Kitchen 2",
       "email": "kitchen1@gmail.com",
-      "working_days": [1, 2, 3, 4, 5, 6, 7],
+      "working_days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Frbldi.com%2Fwp-content%2Fuploads%2F2016%2F11%2Fioc-cape_restaurant-04.jpg&f=1&nofb=1",
       "featured": false,
       "menu": [
@@ -50,7 +66,15 @@
       "id": 3,
       "name": "Kitchen 3",
       "email": "kitchen1@gmail.com",
-      "working_days": [1, 2, 3, 4, 5, 6, 7],
+      "working_days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Frbldi.com%2Fwp-content%2Fuploads%2F2016%2F11%2Fioc-cape_restaurant-04.jpg&f=1&nofb=1",
       "featured": true,
       "menu": [
@@ -73,7 +97,15 @@
       "id": 4,
       "name": "Kitchen 4",
       "email": "kitchen1@gmail.com",
-      "working_days": [1, 2, 3, 4, 5, 6, 7],
+      "working_days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Frbldi.com%2Fwp-content%2Fuploads%2F2016%2F11%2Fioc-cape_restaurant-04.jpg&f=1&nofb=1",
       "featured": false,
       "menu": [
@@ -96,7 +128,15 @@
       "id": 5,
       "name": "Kitchen 5",
       "email": "kitchen1@gmail.com",
-      "working_days": [1, 2, 3, 4, 5, 6, 7],
+      "working_days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Frbldi.com%2Fwp-content%2Fuploads%2F2016%2F11%2Fioc-cape_restaurant-04.jpg&f=1&nofb=1",
       "featured": false,
       "menu": [
@@ -119,7 +159,15 @@
       "id": 6,
       "name": "Kitchen 6",
       "email": "kitchen1@gmail.com",
-      "working_days": [1, 2, 3, 4, 5, 6, 7],
+      "working_days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Frbldi.com%2Fwp-content%2Fuploads%2F2016%2F11%2Fioc-cape_restaurant-04.jpg&f=1&nofb=1",
       "featured": false,
       "menu": [
@@ -142,7 +190,15 @@
       "id": 7,
       "name": "Kitchen 7",
       "email": "kitchen1@gmail.com",
-      "working_days": [1, 2, 3, 4, 5, 6, 7],
+      "working_days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Frbldi.com%2Fwp-content%2Fuploads%2F2016%2F11%2Fioc-cape_restaurant-04.jpg&f=1&nofb=1",
       "featured": true,
       "menu": [
@@ -165,7 +221,15 @@
       "id": 8,
       "name": "Kitchen 8",
       "email": "kitchen1@gmail.com",
-      "working_days": [1, 2, 3, 4, 5, 6, 7],
+      "working_days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Frbldi.com%2Fwp-content%2Fuploads%2F2016%2F11%2Fioc-cape_restaurant-04.jpg&f=1&nofb=1",
       "featured": true,
       "menu": [
@@ -183,6 +247,38 @@
         }
       ],
       "orders": []
+    }
+  ],
+  "orders": [
+    {
+      "id": 1617637442254,
+      "kitchen_id": 1,
+      "user_id": 2,
+      "order": [
+        {
+          "plate_id": 1,
+          "count": 1
+        },
+        {
+          "plate_id": 2,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": 1617637756842,
+      "kitchen_id": 1,
+      "user_id": 2,
+      "order": [
+        {
+          "plate_id": 1,
+          "count": 3
+        },
+        {
+          "plate_id": 2,
+          "count": 3
+        }
+      ]
     }
   ]
 }
