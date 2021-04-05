@@ -1,0 +1,68 @@
+<h2>Add Provider's Service</h2>
+
+<form [formGroup]="kitchenForm" (ngSubmit)="Save(kitchenForm)">
+
+    <!-- Kitchen Indentifier -->
+
+    <label for="addText">Name </label><br>
+    <input type="text" formControlName="name">
+    <br>
+
+    <!-- WORKDAYS NEED TO BE EDITED (CHECK BOX WILL BE IMPLEMENTED) -->
+    <div formArrayName="workdays"></div>
+    <label for="workdays">Work Days </label><br>
+    <!-- <select formControlName="workdays">
+        <option selected [ngValue]="null">Choose...</option>
+        <option *ngFor="let item of days;" [value]="item">{{item}}</option>
+    </select> -->
+    <div *ngFor = "let control of kitchenForm.controls.workdays['controls']; let i = index">
+        <input [formControl] = "control" type = "checkbox" id = "inlineCheckbox{{i}}" value = "option1">
+        <label for="inlineCheckbox{{i}}">{{days[i]}}</label>
+
+
+    </div>
+    <br>
+
+    <label for="start_time">start </label><br>
+    <select id="end_time" formControlName="start_time">
+        <option selected [ngValue]="null">Choose...</option>
+        <option *ngFor="let item1 of timein">{{item1}}</option>
+    </select>
+    <br>
+
+    <label for="end_time">End </label><br>
+    <select id="end_time" formControlName="end_time">
+        <option selected [ngValue]="null">Choose...</option>
+        <option *ngFor="let item of timeout" [value]="item">{{item}}</option>
+    </select>
+    <br>
+    <!-- MENU ARRAY STARTS HERE -->
+
+    <div formArrayName="menu">
+        <div *ngFor="let item of kitchenForm.controls.menu['controls']; let i = index" [formGroupName]="i">
+            <h4>
+                Menu {{i+1}}
+            </h4>
+            <!-- <label>Item Id</label><input class="form-control" type="text" formControlName="id" id="task{{i}}"> -->
+            <label>Item Name</label><input class="form-control" type="text" formControlName="itemName" id="task{{i}}">
+            <label>Vegan</label><br>
+            <input type="radio" formControlName="vegan" value="True">True<br>
+            <input type="radio" formControlName="vegan" value="False">False<br>
+            <label>Price</label><input class="form-control" type="text" formControlName="price" id="task{{i}}">
+        </div>
+
+        <button (click)="addNewItem();">Add New Menu +</button>
+        <br>
+        <br>
+    </div>
+
+    <!-- IMAGE GOES HERE -->
+
+    <label>Image</label>
+    <input class="form-control" type="file" formControlName="image" [class.is-invalid]="image.invalid && image.touched"
+        #fileInput>
+
+    <button class="btn btn-primary" [disabled]="!kitchenForm.valid" type="submit">Submit form</button>
+
+
+</form>

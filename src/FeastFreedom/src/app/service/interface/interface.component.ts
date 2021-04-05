@@ -45,7 +45,7 @@ export class InterfaceComponent implements OnInit {
     });
   }
 
-  next(email: any) {
+  next() {
 
     this.router.navigate(['/register/']); //edit here child (next) click
     this.providersForm.reset();

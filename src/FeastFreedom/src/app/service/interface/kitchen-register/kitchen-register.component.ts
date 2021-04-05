@@ -4,12 +4,13 @@ import { Router } from '@angular/router';
 import { ProvidersService } from 'src/app/DIservices/providers.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: 'app-kitchen-register',
+  templateUrl: './kitchen-register.component.html',
+  styleUrls: ['./kitchen-register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class KitchenRegisterComponent implements OnInit {
 
+  public ProductHeader = [{ name: 'Hp' }, { name: 'Dell' }, { name: 'Lenovo' }];
   public kitchenForm: any;
   kitchen: any;
   errorMsg: any;
@@ -17,33 +18,34 @@ export class RegisterComponent implements OnInit {
   @Input() user: any;
   @Input() name: any;
 
-  days: Array<string> = [
-
+  days: Array<String> = [
     'Monday',
     'Tuesday',
     'Wednesday',
     'Thursday',
     'Friday',
     'Saturday',
-    'Sunday'];
+    'Sunday']
 
-  time_in: Array<string> = [
-    '11:00:00',
-    '12:00:00',
-    '13:00:00',
-    '14:00:00',
-    '15:00:00',
-    '16:00:00',
+  timein: any = [
+    '07:00 AM',
+    '08:00 AM',
+    '09:00 AM',
+    '10:00 AM',
+    '11:00 AM',
+    '01:00 PM',
+    '02:00 PM',
+    '03:00 PM',
   ]
 
-  time_out: Array<string> = [
+  timeout: Array<String> = [
 
-    '17:00:00',
-    '18:00:00',
-    '19:00:00',
-    '20:00:00',
-    '21:00:00',
-    '22:00:00',]
+    '07:00 PM',
+    '08:00 PM',
+    '09:00 PM',
+    '10:00 PM',
+    '11:00 PM',
+    '12:00 AM',]
 
   constructor(private fb: FormBuilder, private proService: ProvidersService, private router: Router) {
 
@@ -54,28 +56,51 @@ export class RegisterComponent implements OnInit {
     this.kitchenForm = this.fb.group({
       name: [this.name],
       user: [this.user],
-      workdays: ['', [Validators.required]], //testing validations NOT FINAL YET
+      workdays: this.addDaysControls(), //testing validations NOT FINAL YET
       start_time: ['', [Validators.required]],
       end_time: ['', [Validators.required]],
 
-      menu: this.fb.array([this.addMenuGroup()]),
+      menu: this.fb.array([
+        this.fb.group({
+          id: [1],
+          itemName: [''],
+          vegan: [''],
+          price: ['']
+
+        })
+      ]),
 
       image: [''],
 
     });
   }
 
-  addMenuGroup() {
-    return this.fb.group({
-      itemName: ['', [Validators.required, Validators.minLength(3)]],
-      vegan: ['', [Validators.required]],
-      price: ['', [Validators.required, Validators.pattern('^[0-9]+$')]]
-
-    });
-  }
-
   get menuArray() {
     return <FormArray>this.kitchenForm.get('menu');
+  }
+
+  get daysArray(){
+    return <FormArray>this.kitchenForm.get('workdays');
+  }
+
+  addDaysControls() {
+    const arr = this.days.map(element => {
+      return this.fb.control(false);
+    });
+
+    return this.fb.array(arr);
+  }
+
+  addNewItem() {
+    const itemLength = this.menuArray.length;
+    const newitem = this.fb.group({
+      id: [itemLength+1],
+      itemName: [''],
+      vegan: [''],
+      price: ['']
+    });
+   
+    this.menuArray.push(newitem);
   }
 
   Save(kitchenForm: any) {
@@ -92,8 +117,8 @@ export class RegisterComponent implements OnInit {
       },
       (error) => this.errorMsg = error
     )
-    this.router.navigate(['home']);
-    this.kitchenForm.reset();
+    // this.router.navigate(['home']);
+    // this.kitchenForm.reset();
 
   }
 
@@ -107,6 +132,11 @@ export class RegisterComponent implements OnInit {
 
   get end_time() {
     return this.kitchenForm.get('end_time');
+  }
+
+  get id() {
+    let item = <FormGroup>this.kitchenForm.controls.menu;
+    return item.controls.id;
   }
 
   get itemName() {
@@ -127,6 +157,9 @@ export class RegisterComponent implements OnInit {
   get image() {
     return this.kitchenForm.get('image');
   }
+
+
+
 
 
 }
