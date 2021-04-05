@@ -12,7 +12,15 @@
     </div>
 
     <label>Work Days</label>
-    <input class="form-control" type="text" formControlName="workdays" [class.is-invalid]="workdays.invalid && workdays.touched">
+    <select class="form-control" formControlName="workdays" [class.is-invalid]="workdays.invalid && workdays.touched">
+        <option value="Monday">Monday</option>
+        <option value="Tuesday">Tuesday</option>
+        <option value="Wednesday">Wednesday</option>
+        <option value="Thurday">Thursday</option>
+        <option value="Friday">Friday</option>
+        <option value="Saturday">Saturday</option>
+        <option value="Sunday">Sunday</option>
+    </select>
     <div *ngIf="workdays.errors && workdays.touched">
         <div class="alert alert-danger" *ngIf="workdays.errors?.required">Work days are required.</div>
     </div>
@@ -21,18 +29,18 @@
     <input class="form-control" type="text" formControlName="start_time" [class.is-invalid]="start_time.invalid && start_time.touched">
     <div *ngIf="start_time.errors && start_time.touched">
         <div class="alert alert-danger" *ngIf="start_time.errors?.required">Start Time is required.</div>
-        <div class="alert alert-danger" *ngIf="start_time.errors?.minlength || start_time.errors?.maxlength || start_time.errors?.pattern">Start Time must be in the format XX:XX:XX</div>
+        <div class="alert alert-danger" *ngIf="start_time.errors?.minlength || start_time.errors?.maxlength || start_time.errors?.pattern">Start Time must be in the format XX:XX AM/PM (ex: 9:00 AM, 10:00 PM)</div>
     </div>
 
     <label>End Time</label>
     <input class="form-control" type="text" formControlName="end_time" [class.is-invalid]="end_time.invalid && end_time.touched">
     <div *ngIf="end_time.errors && end_time.touched">
         <div class="alert alert-danger" *ngIf="end_time.errors?.required">End Time is required.</div>
-        <div class="alert alert-danger" *ngIf="end_time.errors?.minlength || end_time.errors?.maxlength || end_time.errors?.pattern">End Time must be in the format XX:XX:XX</div>
+        <div class="alert alert-danger" *ngIf="end_time.errors?.minlength || end_time.errors?.maxlength || end_time.errors?.pattern">End Time must be in the format XX:XX AM/PM (ex: 9:00 AM, 10:00 PM)</div>
     </div>
 
     <label>Image</label>
-    <input class="form-control" type="file" formControlName="image" [class.is-invalid]="image.invalid && image.touched" #fileInput>
+    <input class="form-control" type="file" formControlName="image" [class.is-invalid]="image.invalid && image.touched" (change)="onFileChange($event)">
     
     <br>
 

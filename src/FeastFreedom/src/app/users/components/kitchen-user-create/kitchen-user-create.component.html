@@ -93,7 +93,17 @@
     </div>
 
     <label>Security Question #1</label>
-    <input class="form-control" type="text" formControlName="question_one" [class.is-invalid]="question_one.invalid && question_one.touched">
+    <select class="form-control" formControlName="question_one" [class.is-invalid]="question_one.invalid && question_one.touched">
+        <option value="What was your childhood nickname?">What was your childhood nickname?</option>
+        <option value="What town/city did you live in as a child?">What town/city did you live in as a child?</option>
+        <option value="What primary school did you attend?">What primary school did you attend?</option>
+        <option value="What high school did you graduate from?">What high school did you graduate from?</option>
+        <option value="What is your favorite movie?">What is your favorite movie?</option>
+        <option value="What is your favorite song?">What is your favorite song?</option>
+        <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+        <option value="What is the name of your first pet?">What is the name of your first pet?</option>
+        <option value="What is your oldest sibling's name, excluding yourself?">What is your oldest sibling's name, excluding yourself?</option>
+    </select>
     <div *ngIf="question_one.errors && question_one.touched">
         <div class="alert alert-danger" *ngIf="question_one.errors?.required">Question 1 is required.</div>
         <div class="alert alert-danger" *ngIf="question_one.errors?.minlength">Question 1 must be at least 20 characters.</div>
@@ -111,7 +121,17 @@
     </div>
 
     <label>Security Question #2</label>
-    <input class="form-control" type="text" formControlName="question_two" [class.is-invalid]="question_two.invalid && question_two.touched">
+    <select class="form-control" formControlName="question_two" [class.is-invalid]="question_two.invalid && question_two.touched">
+        <option value="What was your childhood nickname?">What was your childhood nickname?</option>
+        <option value="What town/city did you live in as a child?">What town/city did you live in as a child?</option>
+        <option value="What primary school did you attend?">What primary school did you attend?</option>
+        <option value="What high school did you graduate from?">What high school did you graduate from?</option>
+        <option value="What is your favorite movie?">What is your favorite movie?</option>
+        <option value="What is your favorite song?">What is your favorite song?</option>
+        <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+        <option value="What is the name of your first pet?">What is the name of your first pet?</option>
+        <option value="What is your oldest sibling's name, excluding yourself?">What is your oldest sibling's name, excluding yourself?</option>
+    </select>
     <div *ngIf="question_two.errors && question_two.touched">
         <div class="alert alert-danger" *ngIf="question_two.errors?.required">Question 2 is required.</div>
         <div class="alert alert-danger" *ngIf="question_two.errors?.minlength">Question 2 must be at least 20 characters.</div>

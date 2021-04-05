@@ -5,6 +5,7 @@ from rest_framework.generics import (
     UpdateAPIView,
     DestroyAPIView
 )
+from rest_framework.parsers import FileUploadParser
 from .serializers import KitchenSerializer
 from .models import Kitchen
 
@@ -16,6 +17,7 @@ class KitchenListAPI(ListAPIView):
 
 
 class KitchenCreateAPI(CreateAPIView):
+    parser_class = (FileUploadParser,)
     queryset = Kitchen.objects.all()
     serializer_class = KitchenSerializer
 
@@ -26,6 +28,7 @@ class KitchenDetailAPI(RetrieveAPIView):
 
 
 class KitchenUpdateAPI(UpdateAPIView):
+    parser_class = (FileUploadParser,)
     queryset = Kitchen.objects.all()
     serializer_class = KitchenSerializer
 

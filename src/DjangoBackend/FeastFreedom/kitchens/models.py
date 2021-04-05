@@ -73,11 +73,11 @@ class Kitchen(models.Model):
         validators=[
             MinLengthValidator(
                 limit_value=2, 
-                message="Security question must be at least 2 characters long."
+                message="Name must be at least 2 characters long."
             ),
             MaxLengthValidator(
                 limit_value=50,
-                message="Security question must be at most 50 characters long."
+                message="Name must be at most 50 characters long."
             ),
             RegexValidator(
                 regex="^[A-Za-z0-9: ,'&@-]{2,50}$",
@@ -88,8 +88,44 @@ class Kitchen(models.Model):
     )
     featured = models.BooleanField(null=False, default=False)
     workdays = MultiSelectField(choices=DAYS, max_choices=7)
-    start_time = models.TimeField(null=False, default=time(hour=8))
-    end_time = models.TimeField(null=False, default=time(hour=16))
+    start_time = models.CharField(
+        null=False,
+        max_length=8,
+        validators=[
+            MinLengthValidator(
+                limit_value=7, 
+                message="Start time must be at least 7 characters long."
+            ),
+            MaxLengthValidator(
+                limit_value=8,
+                message="Start time must be at most 8 characters long."
+            ),
+            RegexValidator(
+                regex="^(1[012]|[1-9]):[0-5]\d [AP]M$",
+                message="Please insert a valid start time."
+            ),
+            ProhibitNullCharactersValidator()
+        ]
+    )
+    end_time = models.CharField(
+        null=False,
+        max_length=8,
+        validators=[
+            MinLengthValidator(
+                limit_value=7, 
+                message="End time must be at least 7 characters long."
+            ),
+            MaxLengthValidator(
+                limit_value=8,
+                message="End time must be at most 8 characters long."
+            ),
+            RegexValidator(
+                regex="^(1[012]|[1-9]):[0-5]\d [AP]M$",
+                message="Please insert a valid end time."
+            ),
+            ProhibitNullCharactersValidator()
+        ]
+    )
     menu = models.ArrayField(model_container=MenuItem)
     image = models.ImageField(default="default.jpg", upload_to="kitchen_imgs")
 
