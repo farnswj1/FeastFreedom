@@ -125,14 +125,16 @@ export class RegularUserCreateComponent implements OnInit {
       (data) => {
         this.regularUsers = data;
         this.usersService.getRegularUsers().subscribe(
-          (data) => this.regularUsers = data,
+          (data) => {
+            this.regularUsers = data;
+            this.router.navigate(['/users']);
+            this.regularUserForm.reset();
+          },
           (error) => this.errorMsg = error
         )
       },
       (error) => this.errorMsg = error
     )
-    this.router.navigate(['/users']);
-    this.regularUserForm.reset();
   }
 
   get username() {

@@ -131,11 +131,13 @@ export class KitchenUserUpdateComponent implements OnInit {
 
   onSubmit(kitchenUserForm: any){
     this.usersService.updateKitchenUser(this.id, this.kitchenUserForm.value).subscribe(
-      (data) => this.kitchenUser = data,
+      (data) => {
+        this.kitchenUser = data;
+        this.router.navigate(['/users/kitchens', this.kitchenUser.id]);
+        this.kitchenUserForm.reset();
+      },
       (error) => this.errorMsg = error
     );
-    this.router.navigate(['/users/kitchens', this.kitchenUser.id]);
-    this.kitchenUserForm.reset();
   }
 
   get username() {
