@@ -14,7 +14,7 @@
         [attr.aria-expanded]="!isCollapsed"
         aria-controls="collapseExample"
       >
-        {{ user.first_name }}
+        Hello {{ user.first_name }}!
       </a>
     </li>
   </ul>
@@ -22,11 +22,25 @@
 
 <div class="dropdown" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
   <ul>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/" (click)="logout()">Logout</a>
+    <li class="nav-item" *ngIf="user">
+      <button
+        type="button"
+        class="btn btn-link"
+        routerLink="kitchens"
+        (click)="collapse.toggle()"
+      >
+        kitchens
+      </button>
     </li>
-    <li class="nav-item" *ngIf="user.is_staff">
-      <a class="nav-link" routerLink="/" (click)="logout()">kitchen</a>
+    <li class="nav-item" *ngIf="user">
+      <button
+        type="button"
+        class="btn btn-link"
+        (click)="logout()"
+        (click)="collapse.toggle()"
+      >
+        Logout
+      </button>
     </li>
   </ul>
 </div>
