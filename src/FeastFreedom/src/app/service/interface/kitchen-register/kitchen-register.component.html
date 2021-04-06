@@ -24,7 +24,7 @@
     <br>
 
     <label for="start_time">start </label><br>
-    <select id="end_time" formControlName="start_time">
+    <select id="start_time" formControlName="start_time">
         <option selected [ngValue]="null">Choose...</option>
         <option *ngFor="let item1 of timein">{{item1}}</option>
     </select>
@@ -46,9 +46,9 @@
             <!-- <label>Item Id</label><input class="form-control" type="text" formControlName="id" id="task{{i}}"> -->
             <label>Item Name</label><input class="form-control" type="text" formControlName="itemName" id="task{{i}}">
             <label>Vegan</label><br>
-            <input type="radio" formControlName="vegan" value="True">True<br>
-            <input type="radio" formControlName="vegan" value="False">False<br>
-            <label>Price</label><input class="form-control" type="text" formControlName="price" id="task{{i}}">
+            <input type="radio" formControlName="vegan" [value]=true>True<br>
+            <input type="radio" formControlName="vegan" [value]=false>False<br>
+            <label>Price</label><input class="form-control" type="number" formControlName="price" id="task{{i}}">
         </div>
 
         <button (click)="addNewItem();">Add New Menu +</button>

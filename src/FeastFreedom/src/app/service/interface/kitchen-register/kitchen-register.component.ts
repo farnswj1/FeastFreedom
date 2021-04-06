@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router , ParamMap} from '@angular/router';
 import { ProvidersService } from 'src/app/DIservices/providers.service';
+import { InterfaceComponent } from '../interface.component'
+
+
 
 @Component({
   selector: 'app-kitchen-register',
@@ -14,9 +17,9 @@ export class KitchenRegisterComponent implements OnInit {
   public kitchenForm: any;
   kitchen: any;
   errorMsg: any;
-
-  @Input() user: any;
-  @Input() name: any;
+  userId:any;
+  name: any;
+  
 
   days: Array<String> = [
     'Monday',
@@ -47,31 +50,34 @@ export class KitchenRegisterComponent implements OnInit {
     '11:00 PM',
     '12:00 AM',]
 
-  constructor(private fb: FormBuilder, private proService: ProvidersService, private router: Router) {
+  constructor(private actRoute: ActivatedRoute, private fb: FormBuilder, private proService: ProvidersService, private router: Router) {
 
   }
 
   ngOnInit(): void {
-
+    
     this.kitchenForm = this.fb.group({
-      name: [this.name],
-      user: [this.user],
+      name: [this.proService.getName()],
+      user: [this.userId],
       workdays: this.addDaysControls(), //testing validations NOT FINAL YET
       start_time: ['', [Validators.required]],
       end_time: ['', [Validators.required]],
 
       menu: this.fb.array([
         this.fb.group({
-          id: [1],
           itemName: [''],
-          vegan: [''],
-          price: ['']
+          vegan: [null],
+          price: [null]
 
         })
       ]),
 
       image: [''],
 
+    });
+    this.actRoute.paramMap.subscribe((params: ParamMap) => {
+      let id = params.get('id');
+      this.userId = id;
     });
   }
 
@@ -94,7 +100,6 @@ export class KitchenRegisterComponent implements OnInit {
   addNewItem() {
     const itemLength = this.menuArray.length;
     const newitem = this.fb.group({
-      id: [itemLength+1],
       itemName: [''],
       vegan: [''],
       price: ['']
@@ -106,6 +111,32 @@ export class KitchenRegisterComponent implements OnInit {
   Save(kitchenForm: any) {
 
     console.log(this.kitchenForm.value);
+   let item =  {
+      "menu": [{
+          "name" : this.kitchenForm.value.menu[0].itemName,
+          "vegan" : false,
+          "price": 34
+      },
+      {
+        "name" : "test2",
+          "vegan" : true,
+          "price": 344  
+      }],
+      "name": 
+          "Talha"
+      ,
+      "workdays": 
+          "Monday"
+      ,
+      "start_time": 
+          "8:00 AM"
+      ,
+      "end_time": 
+          "10:00 PM"
+      ,
+      "user": 3
+      
+  }
     this.proService.postKitchen(this.kitchenForm.value).subscribe(
       (data) => {
         this.kitchen = data;
@@ -132,11 +163,6 @@ export class KitchenRegisterComponent implements OnInit {
 
   get end_time() {
     return this.kitchenForm.get('end_time');
-  }
-
-  get id() {
-    let item = <FormGroup>this.kitchenForm.controls.menu;
-    return item.controls.id;
   }
 
   get itemName() {
