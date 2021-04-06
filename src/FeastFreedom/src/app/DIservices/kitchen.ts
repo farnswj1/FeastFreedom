@@ -2,6 +2,7 @@ import { IKitchenUser } from './providers';
 import { User } from '../users/models/user';
 
 export interface Kitchen {
+  id: number;
   user: IKitchenUser;
   name: string;
   working_days: any[];

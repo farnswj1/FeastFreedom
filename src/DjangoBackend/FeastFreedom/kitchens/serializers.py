@@ -17,3 +17,12 @@ class KitchenSerializer(ModelSerializer):
     class Meta:
         model = Kitchen
         fields = "__all__"
+
+
+class KitchenCreateSerializer(ModelSerializer):
+    workdays = ListField(child=DictField())
+    menu = ListField(child=DictField())
+
+    class Meta:
+        model = Kitchen
+        fields = "__all__"
