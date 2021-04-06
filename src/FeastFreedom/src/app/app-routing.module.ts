@@ -17,7 +17,6 @@ import { RegularUserUpdateComponent } from './users/components/regular-user-upda
 
 const routes: Routes = [
   { path: '', loadChildren: './user/user.module#UserModule' },
-  { path: 'interface', loadChildren: './service/service.module#ServiceModule' },
   // { path: '', redirectTo: 'users', pathMatch: 'full' },
   { path: 'users/kitchens', component: KitchenUserListComponent },
   { path: 'users/kitchens/register', component: KitchenUserCreateComponent },
