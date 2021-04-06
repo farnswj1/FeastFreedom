@@ -18,7 +18,7 @@ class KitchenListAPI(ListAPIView):
 
 
 class KitchenCreateAPI(CreateAPIView):
-    #permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     parser_class = (FileUploadParser,)
     queryset = Kitchen.objects.all()
     serializer_class = KitchenSerializer

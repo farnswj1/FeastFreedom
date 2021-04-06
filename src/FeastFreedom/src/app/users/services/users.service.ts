@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { IUser } from '../interfaces/user';
 import { User } from '../models/user';
 import { Observable, throwError } from 'rxjs';
@@ -29,12 +29,18 @@ export class UsersService {
   }
 
   updateRegularUser(id: number, User: any): Observable<IUser[]> {
-    return this.http.put<IUser[]>(this._url + id + "/update/", User)
+    let headers = new HttpHeaders({
+      "Authorization": `Bearer ${localStorage.getItem("access")}`
+    });
+    return this.http.put<IUser[]>(this._url + id + "/update/", User, {headers: headers})
     .pipe(catchError(this.errorHandler));
   }
 
   deleteRegularUser(id: number): any {
-    return this.http.delete(this._url + id + "/delete/");
+    let headers = new HttpHeaders({
+      "Authorization": `Bearer ${localStorage.getItem("access")}`
+    });
+    return this.http.delete(this._url + id + "/delete/", {headers: headers});
   }
   
   getKitchenUsers(): Observable<IUser[]> {
@@ -53,12 +59,18 @@ export class UsersService {
   }
 
   updateKitchenUser(id: number, User: any): Observable<IUser[]> {
-    return this.http.put<IUser[]>(`${this._url}kitchens/${id}/update/`, User)
+    let headers = new HttpHeaders({
+      "Authorization": `Bearer ${localStorage.getItem("access")}`
+    });
+    return this.http.put<IUser[]>(`${this._url}kitchens/${id}/update/`, User, {headers: headers})
     .pipe(catchError(this.errorHandler));
   }
 
   deleteKitchenUser(id: number): any {
-    return this.http.delete(`${this._url}kitchens/${id}/delete/`);
+    let headers = new HttpHeaders({
+      "Authorization": `Bearer ${localStorage.getItem("access")}`
+    });
+    return this.http.delete(`${this._url}kitchens/${id}/delete/`, {headers: headers});
   }
 
   errorHandler(error: HttpErrorResponse){
