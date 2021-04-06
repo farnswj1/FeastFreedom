@@ -7,7 +7,6 @@ from django.core.validators import (
     MinValueValidator,
     MaxValueValidator
 )
-from multiselectfield import MultiSelectField
 from django.conf import settings
 from datetime  import time
 from PIL import Image
@@ -65,29 +64,27 @@ class MenuItem(models.Model):
         abstract = True
 
 
-class Kitchen(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    name = models.CharField(
+class WorkDay(models.Model):
+    day = models.CharField(
         null=False,
-        max_length=50,
+        max_length=9,
+        choices=DAYS,
         validators=[
             MinLengthValidator(
-                limit_value=2, 
-                message="Name must be at least 2 characters long."
+                limit_value=6, 
+                message="Day must be at least 6 characters long."
             ),
             MaxLengthValidator(
-                limit_value=50,
-                message="Name must be at most 50 characters long."
+                limit_value=9,
+                message="Day must be at most 9 characters long."
             ),
             RegexValidator(
-                regex="^[A-Za-z0-9: ,'&@-]{2,50}$",
+                regex="^(Mon|Tues|Wednes|Thurs|Fri|Satur)day$",
                 message="Please insert a valid name."
             ),
             ProhibitNullCharactersValidator()
         ]
     )
-    featured = models.BooleanField(null=False, default=False)
-    workdays = MultiSelectField(choices=DAYS, max_choices=7)
     start_time = models.CharField(
         null=False,
         max_length=8,
@@ -126,6 +123,34 @@ class Kitchen(models.Model):
             ProhibitNullCharactersValidator()
         ]
     )
+
+    class Meta:
+        abstract = True
+
+
+class Kitchen(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    name = models.CharField(
+        null=False,
+        max_length=50,
+        validators=[
+            MinLengthValidator(
+                limit_value=2, 
+                message="Name must be at least 2 characters long."
+            ),
+            MaxLengthValidator(
+                limit_value=50,
+                message="Name must be at most 50 characters long."
+            ),
+            RegexValidator(
+                regex="^[A-Za-z0-9: ,'&@-]{2,50}$",
+                message="Please insert a valid name."
+            ),
+            ProhibitNullCharactersValidator()
+        ]
+    )
+    featured = models.BooleanField(null=False, default=False)
+    workdays = models.ArrayField(model_container=WorkDay)
     menu = models.ArrayField(model_container=MenuItem)
     image = models.ImageField(default="default.jpg", upload_to="kitchen_imgs")
 
