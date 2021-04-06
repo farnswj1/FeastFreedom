@@ -11,38 +11,43 @@
         <div class="alert alert-danger" *ngIf="name.errors?.pattern">Name may contain only letters, numbers, and/or :,'&@-</div>
     </div>
 
-    <label>Work Days</label>
-    <select class="form-control" formControlName="workdays" [class.is-invalid]="workdays.invalid && workdays.touched">
-        <option value="Monday">Monday</option>
-        <option value="Tuesday">Tuesday</option>
-        <option value="Wednesday">Wednesday</option>
-        <option value="Thurday">Thursday</option>
-        <option value="Friday">Friday</option>
-        <option value="Saturday">Saturday</option>
-        <option value="Sunday">Sunday</option>
-    </select>
-    <div *ngIf="workdays.errors && workdays.touched">
-        <div class="alert alert-danger" *ngIf="workdays.errors?.required">Work days are required.</div>
-    </div>
+    <button class="btn btn-primary mt-4" (click)="addWorkDay()">Add Work Day</button>
+    <ng-container class="mb-4" formArrayName="workdays">
+        <div class="mb-4" *ngFor="let workday of workdays.controls; index as index">
+            <ng-container [formGroupName]="index">
+                <label>Day</label>
+                <input class="form-control" type="text" formControlName="day">
 
-    <label>Start Time</label>
-    <input class="form-control" type="text" formControlName="start_time" [class.is-invalid]="start_time.invalid && start_time.touched">
-    <div *ngIf="start_time.errors && start_time.touched">
-        <div class="alert alert-danger" *ngIf="start_time.errors?.required">Start Time is required.</div>
-        <div class="alert alert-danger" *ngIf="start_time.errors?.minlength || start_time.errors?.maxlength || start_time.errors?.pattern">Start Time must be in the format XX:XX AM/PM (ex: 9:00 AM, 10:00 PM)</div>
-    </div>
+                <label>Start Time</label>
+                <input class="form-control" type="text" formControlName="start_time">
 
-    <label>End Time</label>
-    <input class="form-control" type="text" formControlName="end_time" [class.is-invalid]="end_time.invalid && end_time.touched">
-    <div *ngIf="end_time.errors && end_time.touched">
-        <div class="alert alert-danger" *ngIf="end_time.errors?.required">End Time is required.</div>
-        <div class="alert alert-danger" *ngIf="end_time.errors?.minlength || end_time.errors?.maxlength || end_time.errors?.pattern">End Time must be in the format XX:XX AM/PM (ex: 9:00 AM, 10:00 PM)</div>
-    </div>
+                <label>End Time</label>
+                <input class="form-control" type="text" formControlName="end_time">
+            </ng-container>
+            <button class="btn btn-danger mt-4" (click)="removeWorkDay(index)">Remove Work Day</button>
+        </div>
+        <br>
+    </ng-container>
 
-    <label>Image</label>
-    <input class="form-control" type="file" formControlName="image" [class.is-invalid]="image.invalid && image.touched" (change)="onFileChange($event)">
+    <button class="btn btn-primary mt-4" (click)="addMenuItem()">Add Menu Item</button>
+    <ng-container class="mb-4" formArrayName="menu">
+        <div class="mb-4" *ngFor="let item of menu.controls; index as index">
+            <ng-container [formGroupName]="index">
+                <label>Name</label>
+                <input class="form-control" type="text" formControlName="name">
+
+                <label>Vegan</label>
+                <input class="form-control" type="checkbox" formControlName="vegan">
+
+                <label>Price</label>
+                <input class="form-control" type="number" formControlName="price">
+            </ng-container>
+            <button class="btn btn-danger mt-4" (click)="removeMenuItem(index)">Remove Menu Item</button>
+        </div>
+    </ng-container>
     
-    <br>
+    <label>Image</label>
+    <input class="form-control mb-5" type="file" formControlName="image" [class.is-invalid]="image.invalid && image.touched" (change)="onFileChange($event)">
 
     <button class="btn btn-primary" [disabled]="kitchenForm.invalid" type="submit">Submit</button>
 </form>

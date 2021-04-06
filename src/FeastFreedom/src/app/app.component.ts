@@ -23,25 +23,18 @@ export class AppComponent {
     private router: Router,
     private providersService: ProvidersService
   ) {
-    this.router.events.subscribe((event: NavigationEvent) => {
-      if (event instanceof NavigationStart) {
-        this.token = localStorage.getItem('access')
-          ? localStorage.getItem('access')
-          : null;
-
-        this.user = this.token ? this.providersService.getUser() : null;
-      }
+    this.providersService.isLoggedIn().subscribe((data) => {
+      this.isLoggedIn = data;
+      this.isLoggedIn
+        ? this.providersService.getUser().subscribe(
+            (user: any) => (this.user = user[0]),
+            (error) => console.log(error)
+          )
+        : (this.user = null);
     });
-
-    localStorage.getItem('access')
-      ? (this.isLoggedIn = true)
-      : this.providersService
-          .isLoggedIn()
-          .subscribe((data) => (this.isLoggedIn = data));
   }
   logout(): void {
     this.providersService.logOut();
     this.isCollapsed = true;
-    this.router.navigate(['/']);
   }
 }

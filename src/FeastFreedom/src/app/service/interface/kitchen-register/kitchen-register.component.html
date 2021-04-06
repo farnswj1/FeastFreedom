@@ -8,34 +8,50 @@
     <input type="text" formControlName="name">
     <br>
 
-    <!-- WORKDAYS NEED TO BE EDITED (CHECK BOX WILL BE IMPLEMENTED) -->
-    <div formArrayName="workdays"></div>
-    <label for="workdays">Work Days </label><br>
-    <!-- <select formControlName="workdays">
-        <option selected [ngValue]="null">Choose...</option>
-        <option *ngFor="let item of days;" [value]="item">{{item}}</option>
-    </select> -->
-    <div *ngFor = "let control of kitchenForm.controls.workdays['controls']; let i = index">
-        <input [formControl] = "control" type = "checkbox" id = "inlineCheckbox{{i}}" value = "option1">
-        <label for="inlineCheckbox{{i}}">{{days[i]}}</label>
+    <!--WORK DAYS CHECK BOX (PREVIOUS IMPLEMENTATION)-->
 
+    <!-- <div formArrayName="workdays"></div>
+    <label for="workdays">Work Days </label><br> -->
+    <!-- <div *ngFor = "let control of kitchenForm.controls.workdays['controls']; let i = index">
+        <input [formControl] = "control" type = "checkbox" id = "inlineCheckbox{{i}}" value = "option1">
+        <label for="inlineCheckbox{{i}}">{{days[i]}}</label> -->
+
+    <!-- WORKDAYS ARRAY -->
+    <div formArrayName="workdays">
+        <div *ngFor="let item of kitchenForm.controls.workdays['controls']; let i = index" [formGroupName]="i">
+
+
+            <br>
+            <label for="day">day</label><br>
+            <select id="day" formControlName="day">
+                <option selected [ngValue]="null">Choose...</option>
+                <option *ngFor="let item1 of days">{{item1}}</option>
+            </select>
+            <br>
+
+
+            <br>
+            <label for="start_time">start </label><br>
+            <select id="start_time" formControlName="start_time">
+                <option selected [ngValue]="null">Choose...</option>
+                <option *ngFor="let item1 of timein">{{item1}}</option>
+            </select>
+            <br>
+
+
+            <br>
+            <label for="end_time">End </label><br>
+            <select id="end_time" formControlName="end_time">
+                <option selected [ngValue]="null">Choose...</option>
+                <option *ngFor="let item of timeout" [value]="item">{{item}}</option>
+            </select>
+            <br>
+        </div>
+        <br>
+        <button (click)="addNewDay();">Add New Day +</button>
+        <br>
 
     </div>
-    <br>
-
-    <label for="start_time">start </label><br>
-    <select id="end_time" formControlName="start_time">
-        <option selected [ngValue]="null">Choose...</option>
-        <option *ngFor="let item1 of timein">{{item1}}</option>
-    </select>
-    <br>
-
-    <label for="end_time">End </label><br>
-    <select id="end_time" formControlName="end_time">
-        <option selected [ngValue]="null">Choose...</option>
-        <option *ngFor="let item of timeout" [value]="item">{{item}}</option>
-    </select>
-    <br>
     <!-- MENU ARRAY STARTS HERE -->
 
     <div formArrayName="menu">
@@ -46,8 +62,8 @@
             <!-- <label>Item Id</label><input class="form-control" type="text" formControlName="id" id="task{{i}}"> -->
             <label>Item Name</label><input class="form-control" type="text" formControlName="itemName" id="task{{i}}">
             <label>Vegan</label><br>
-            <input type="radio" formControlName="vegan" value="True">True<br>
-            <input type="radio" formControlName="vegan" value="False">False<br>
+            <input type="radio" formControlName="vegan" value=True>True<br>
+            <input type="radio" formControlName="vegan" value=False>False<br>
             <label>Price</label><input class="form-control" type="text" formControlName="price" id="task{{i}}">
         </div>
 

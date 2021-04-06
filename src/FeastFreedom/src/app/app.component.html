@@ -63,8 +63,9 @@
         (click)="collapse.toggle()"
         [attr.aria-expanded]="!isCollapsed"
         aria-controls="collapseExample"
+        *ngIf="user"
       >
-        {{ user }}
+        {{ user.first_name }}
       </a>
     </li>
   </ul>
@@ -74,9 +75,7 @@
 <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
   <ul>
     <li class="nav-item">
-      <a class="nav-link" routerLink="/" *ngIf="token" (click)="logout()"
-        >Logout</a
-      >
+      <a class="nav-link" routerLink="/" (click)="logout()">Logout</a>
     </li>
   </ul>
 </div>

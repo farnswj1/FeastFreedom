@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { KitchensService } from 'src/app/kitchens/services/kitchens.service';
 
@@ -17,39 +17,109 @@ export class KitchenCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.kitchenForm = this.fb.group({
-      user: [0, [
+      user: new FormControl(0, [
         Validators.required, 
         Validators.min(0), 
-      ]],
-      name: ["", [
+      ]),
+      name: new FormControl("", [
         Validators.required, 
         Validators.minLength(2), 
         Validators.maxLength(50),
         Validators.pattern("^[A-Za-z0-9: ,'&@-]{2,50}$")
-      ]],
-      featured: [false, [
+      ]),
+      featured: new FormControl(false, [
         Validators.required, 
-      ]],
-      workdays: [[], [
-        Validators.required, 
-      ]], 
-      start_time: ["8:00 AM", [
-        Validators.required, 
-        Validators.minLength(7),
-        Validators.maxLength(8),
-        Validators.pattern("^(1[012]|[1-9]):[0-5]\\d [AP]M$")
-      ]],
-      end_time: ["10:00 PM", [
-        Validators.required, 
-        Validators.minLength(7),
-        Validators.maxLength(8),
-        Validators.pattern("^(1[012]|[1-9]):[0-5]\\d [AP]M$")
-      ]],
-      image: ['', []],
-      menu: [[], [
-
-      ]]
+      ]),
+      workdays: new FormArray([
+        new FormGroup({
+          day: new FormControl("", [
+            Validators.required,
+            Validators.min(6),
+            Validators.max(9),
+            Validators.pattern("^(Mon|Tues|Wednes|Thurs|Fri|Satur)day$")
+          ]),
+          start_time: new FormControl("", [
+            Validators.required,
+            Validators.min(7),
+            Validators.max(8),
+            Validators.pattern("^(1[012]|[1-9]):[0-5]\d [AP]M$")
+          ]),
+          end_time: new FormControl("", [
+            Validators.required,
+            Validators.min(7),
+            Validators.max(8),
+            Validators.pattern("^(1[012]|[1-9]):[0-5]\d [AP]M$")
+          ])
+        })
+      ]),
+      menu: new FormArray([
+        new FormGroup({
+          name: new FormControl("", [
+            Validators.required,
+            Validators.min(3),
+            Validators.max(50),
+            Validators.pattern("^[A-Za-z0-9 //,'-]{3,50}$")
+          ]),
+          vegan: new FormControl(false, Validators.required),
+          price: new FormControl(0, [
+            Validators.required,
+            Validators.min(0),
+            Validators.max(1000000)
+          ])
+        })
+      ]),
+      image: new FormControl(""),
     });
+  }
+
+  addWorkDay() {
+    const control = new FormGroup({
+      day: new FormControl("", [
+        Validators.required,
+        Validators.min(6),
+        Validators.max(9),
+        Validators.pattern("^(Mon|Tues|Wednes|Thurs|Fri|Satur)day$")
+      ]),
+      start_time: new FormControl("", [
+        Validators.required,
+        Validators.min(7),
+        Validators.max(8),
+        Validators.pattern("^(1[012]|[1-9]):[0-5]\d [AP]M$")
+      ]),
+      end_time: new FormControl("", [
+        Validators.required,
+        Validators.min(7),
+        Validators.max(8),
+        Validators.pattern("^(1[012]|[1-9]):[0-5]\d [AP]M$")
+      ])
+    });
+    this.workdays.push(control);
+  }
+
+  removeWorkDay(index: number) {
+    this.workdays.removeAt(index);
+  }
+
+  addMenuItem() {
+    const control = new FormGroup({
+      name: new FormControl("", [
+        Validators.required,
+        Validators.min(3),
+        Validators.max(50),
+        Validators.pattern("^[A-Za-z0-9 //,'-]{3,50}$")
+      ]),
+      vegan: new FormControl(false, Validators.required),
+      price: new FormControl(0, [
+        Validators.required,
+        Validators.min(0),
+        Validators.max(1000000)
+      ])
+    });
+    this.menu.push(control);
+  }
+
+  removeMenuItem(index: number) {
+    this.menu.removeAt(index);
   }
 
   onFileChange(event: any) {
@@ -66,30 +136,28 @@ export class KitchenCreateComponent implements OnInit {
       (data) => {
         this.kitchens = data;
         this.kitchensService.getKitchens().subscribe(
-          (data) => this.kitchens = data,
+          (data) => {
+            this.kitchens = data;
+            this.router.navigate(['/kitchens']);
+            this.kitchenForm.reset();
+          },
           (error) => this.errorMsg = error
         )
       },
       (error) => this.errorMsg = error
     )
-    this.router.navigate(['/kitchens']);
-    this.kitchenForm.reset();
   }
-
+  
   get name() {
     return this.kitchenForm.get('name');
   }
 
   get workdays() {
-    return this.kitchenForm.get('workdays');
+    return this.kitchenForm.get('workdays') as FormArray;
   }
 
-  get start_time() {
-    return this.kitchenForm.get('start_time');
-  }
-
-  get end_time() {
-    return this.kitchenForm.get('end_time');
+  get menu() {
+    return this.kitchenForm.get('menu') as FormArray;
   }
 
   get image() {
