@@ -27,7 +27,7 @@ export class ProvidersService {
 
   login(username: string, password: string): Observable<{}> {
     return this.http
-      .post(this.djangoUrl + 'token/', {
+      .post(this.djangoUrl + 'login/', {
         username,
         password,
       })
