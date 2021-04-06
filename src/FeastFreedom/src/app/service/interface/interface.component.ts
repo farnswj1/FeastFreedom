@@ -29,7 +29,7 @@ export class InterfaceComponent implements OnInit {
     this.providersForm = this.fb.group({
       name: [''], //testing validations NOT FINAL YET
       email: [''],
-      id:[null],
+      id:[],
       //* PASSWORD REQUIREMENT AND VALIDATION */
       //To check a password between 8 to 15 characters which contain 
       // at least one lowercase letter, 
