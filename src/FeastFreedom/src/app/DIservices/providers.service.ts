@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, Provider } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable, Subject, throwError } from 'rxjs';
 import { IKitchenUser } from './providers';
 import { kitchen, Kitchen } from './kitchen';
 import { catchError } from 'rxjs/operators';
@@ -22,21 +22,48 @@ export class ProvidersService {
 
   public order: [] | undefined;
 
+  private logger = new Subject<boolean>();
+
+  private loggedIn = false;
+
   constructor(private http: HttpClient, private jwt: JwtHelperService) {}
 
-  login(username: string, password: string): Observable<{}> {
-    return this.http
-      .post(this.djangoUrl + 'token/', {
-        username,
-        password,
-      })
-      .pipe(catchError(this.errorHandler));
+  isLoggedIn(): Observable<boolean> {
+    return this.logger.asObservable();
   }
 
-  getUser(): any {
-    return this.jwt.decodeToken(
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE3NjMyNzM5LCJqdGkiOiJmNDA3M2NhODFmYjI0Njg2YWQyOTA3YWJlZThlNjFlNCIsInVzZXJfaWQiOjJ9.K61b274YGmU1x1mW-qr_g_WocdZEPiNOfWiRLycyD9I'
-    ).user_id;
+  logIn(username: string, password: string): void {
+    this.http.post(this.djangoUrl + 'login/', { username, password }).subscribe(
+      (data: any) => {
+        console.log(data);
+        localStorage.setItem('access', data.access);
+        localStorage.setItem('refresh', data.refresh);
+      },
+      (error) => console.log(error),
+      () => {
+        console.log('logged in');
+        this.loggedIn = true;
+        this.logger.next(this.loggedIn);
+      }
+    );
+  }
+
+  logOut(): void {
+    localStorage.removeItem('access');
+    localStorage.removeItem('refresh');
+    this.loggedIn = false;
+    this.logger.next(this.loggedIn);
+  }
+
+  getUser(): Observable<{}> {
+    const id = this.jwt.decodeToken(localStorage.getItem('access') || '')
+      .user_id;
+    return this.http.get(this.url + 'users/' + '');
+  }
+
+  getUserId(): number {
+    const token = localStorage.getItem('access');
+    return this.jwt.decodeToken(token || '').user_id;
   }
 
   getKitchen(id?: number): Observable<{}> {

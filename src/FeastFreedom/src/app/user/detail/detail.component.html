@@ -22,8 +22,8 @@
           >
             -
           </button>
-          <span *ngIf="order.order">
-            {{ order.order | getCount: plate.id }}
+          <span *ngIf="order.items">
+            {{ order.items | getCount: plate.id }}
           </span>
           <button
             (click)="addPlate(plate.id)"
@@ -34,6 +34,10 @@
           </button>
         </span>
       </span>
+    </li>
+    <li class="total">
+      <span>Total</span>
+      <span>{{ order.total | currency }}</span>
     </li>
   </ul>
   <span class="buttons" *ngIf="kitchen">
