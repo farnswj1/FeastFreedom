@@ -11,7 +11,7 @@ import { UsersService } from '../../services/users.service';
 })
 export class KitchenUserCreateComponent implements OnInit {
   public kitchenUserForm: any;
-  public kitchenUsers: any;
+  public kitchenUser: any;
   public errorMsg: any;
 
   constructor(private fb: FormBuilder, private usersService: UsersService, private router: Router) { }
@@ -123,16 +123,12 @@ export class KitchenUserCreateComponent implements OnInit {
   onSubmit(kitchenUserForm: any){
     this.usersService.createKitchenUser(this.kitchenUserForm.value).subscribe(
       (data) => {
-        this.kitchenUsers = data;
-        this.usersService.getKitchenUsers().subscribe(
-          (data) => this.kitchenUsers = data,
-          (error) => this.errorMsg = error
-        )
+        this.kitchenUser = data;
+        this.router.navigate(['/kitchens/register']);
+        this.kitchenUserForm.reset();
       },
       (error) => this.errorMsg = error
     )
-    this.router.navigate(['/kitchens/register']);
-    this.kitchenUserForm.reset();
   }
 
   get username() {

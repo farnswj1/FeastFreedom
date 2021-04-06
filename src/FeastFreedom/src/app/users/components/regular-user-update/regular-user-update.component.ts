@@ -131,11 +131,13 @@ export class RegularUserUpdateComponent implements OnInit {
 
   onSubmit(regularUserForm: any){
     this.usersService.updateRegularUser(this.id, this.regularUserForm.value).subscribe(
-      (data) => this.regularUser = data,
+      (data) => {
+        this.regularUser = data;
+        this.router.navigate(['/users', this.regularUser.id]);
+        this.regularUserForm.reset();
+      },
       (error) => this.errorMsg = error
     );
-    this.router.navigate(['/users', this.regularUser.id]);
-    this.regularUserForm.reset();
   }
 
   get username() {
