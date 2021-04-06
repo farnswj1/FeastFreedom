@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class QueryService {
-  private kitchenQuery;
+  //private kitchenQuery;
 
   constructor() {}
 }

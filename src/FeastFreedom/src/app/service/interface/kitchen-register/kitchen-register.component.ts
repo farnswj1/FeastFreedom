@@ -55,10 +55,10 @@ export class KitchenRegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
     this.actRoute.paramMap.subscribe((params: ParamMap) => {
       let id = params.get('id');
-      this.userId= Number(id);
+      this.userId = Number(id);
     });
 
     this.kitchenForm = this.fb.group({
@@ -83,6 +83,8 @@ export class KitchenRegisterComponent implements OnInit {
 
         })
       ]),
+
+      featured: [null],
 
       image: [''],
 
@@ -128,32 +130,24 @@ export class KitchenRegisterComponent implements OnInit {
 
     console.log(this.kitchenForm.value);
     let item = {
-      "menu": [{
-        "name": this.kitchenForm.value.menu[0].itemName,
-        "vegan": false,
-        "price": 34
-      },
-      {
-        "name": "test2",
-        "vegan": true,
-        "price": 344
-      }],
+      "menu":
+        this.kitchenForm.value.menu
+      ,
       "name":
-        "Talha"
+        this.kitchenForm.name
       ,
       "workdays":
-        "Monday"
+        this.kitchenForm.value.workdays
       ,
-      "start_time":
-        "8:00 AM"
+      "user":
+        this.kitchenForm.value.user
       ,
-      "end_time":
-        "10:00 PM"
-      ,
-      "user": 3
+      "featured":
+        this.kitchenForm.value.featured
 
     }
-    this.proService.postKitchen(this.kitchenForm.value).subscribe( //change this.kitchenForm.value to item and send to back end.. 
+
+    this.proService.postKitchen(item).subscribe( //change this.kitchenForm.value to item and send to back end.. 
       (data) => {
         this.kitchen = data;
         console.log(this.kitchen);
@@ -201,6 +195,10 @@ export class KitchenRegisterComponent implements OnInit {
 
   get image() {
     return this.kitchenForm.get('image');
+  }
+
+  get featured() {
+    return this.kitchenForm.get('featured');
   }
 
   get menuArray() {
