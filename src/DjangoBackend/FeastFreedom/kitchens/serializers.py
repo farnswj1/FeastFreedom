@@ -1,5 +1,11 @@
 from .models import Kitchen
-from rest_framework.serializers import ModelSerializer, ListField, DictField, ImageField
+from users.serializers import UserSerializer
+from rest_framework.serializers import (
+    ModelSerializer, 
+    ListField, 
+    DictField, 
+    ImageField
+)
 
 class Base64ImageField(ImageField):
     """
@@ -52,6 +58,7 @@ class Base64ImageField(ImageField):
 
 class KitchenSerializer(ModelSerializer):
     image = Base64ImageField()
+    user = UserSerializer(many=False, read_only=True)
     workdays = ListField(child=DictField())
     menu = ListField(child=DictField())
     

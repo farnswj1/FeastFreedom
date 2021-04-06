@@ -4,7 +4,11 @@
     <img class="img-fluid img-thumbnail" src={{kitchen.image}}>
     
     <ul class="py-3">
-        <li><b>ID:</b> {{kitchen.user}}</li>
+        <li><b>ID:</b> {{kitchen.user.id}}</li>
+        <li><b>Owner:</b> {{kitchen.user.first_name}} {{kitchen.user.last_name}}</li>
+        <li><b>Phone Number:</b> {{kitchen.user.phone_number}}</li>
+        <li><b>Email:</b> {{kitchen.user.email}}</li>
+        <li><b>Address:</b> {{kitchen.user.address}}, {{kitchen.user.city}}, {{kitchen.user.state}} {{kitchen.user.zip_code}}</li>
         <li><b>Featured:</b> {{kitchen.featured ? "Yes" : "No"}}</li>
     </ul>
 

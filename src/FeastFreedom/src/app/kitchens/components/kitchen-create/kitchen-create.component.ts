@@ -66,16 +66,18 @@ export class KitchenCreateComponent implements OnInit {
       (data) => {
         this.kitchens = data;
         this.kitchensService.getKitchens().subscribe(
-          (data) => this.kitchens = data,
+          (data) => {
+            this.kitchens = data;
+            this.router.navigate(['/kitchens']);
+            this.kitchenForm.reset();
+          },
           (error) => this.errorMsg = error
         )
       },
       (error) => this.errorMsg = error
     )
-    this.router.navigate(['/kitchens']);
-    this.kitchenForm.reset();
   }
-
+  
   get name() {
     return this.kitchenForm.get('name');
   }

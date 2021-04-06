@@ -23,6 +23,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("users/", include("users.urls")),
     path("kitchens/", include("kitchens.urls")),
+    path("orders/", include("orders.urls")),
     path(r'login/', TokenObtainPairView.as_view(), name="token"),
     path(r'token/refresh/', TokenRefreshView.as_view(), name="token_refresh"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
