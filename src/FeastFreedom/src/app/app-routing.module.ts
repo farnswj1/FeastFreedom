@@ -9,20 +9,16 @@ import { KitchenUserCreateComponent } from './users/components/kitchen-user-crea
 import { KitchenUserDetailComponent } from './users/components/kitchen-user-detail/kitchen-user-detail.component';
 import { KitchenUserListComponent } from './users/components/kitchen-user-list/kitchen-user-list.component';
 import { KitchenUserUpdateComponent } from './users/components/kitchen-user-update/kitchen-user-update.component';
+import { LoginComponent } from './users/components/login/login.component';
 import { RegularUserCreateComponent } from './users/components/regular-user-create/regular-user-create.component';
 import { RegularUserDetailComponent } from './users/components/regular-user-detail/regular-user-detail.component';
 import { RegularUserListComponent } from './users/components/regular-user-list/regular-user-list.component';
 import { RegularUserUpdateComponent } from './users/components/regular-user-update/regular-user-update.component';
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   pathMatch: 'full',
-  //   redirectTo: 'home',
-  // },
-  //{ path: '', loadChildren: './user/user.module#UserModule' },
-  //{ path: 'interface', loadChildren: './service/service.module#ServiceModule' },
-  { path: '', redirectTo: 'users', pathMatch: 'full' },
+  { path: '', loadChildren: './user/user.module#UserModule' },
+  { path: 'interface', loadChildren: './service/service.module#ServiceModule' },
+  // { path: '', redirectTo: 'users', pathMatch: 'full' },
   { path: 'users/kitchens', component: KitchenUserListComponent },
   { path: 'users/kitchens/register', component: KitchenUserCreateComponent },
   { path: 'users/kitchens/:id', component: KitchenUserDetailComponent },
@@ -36,6 +32,7 @@ const routes: Routes = [
   { path: "kitchens/:id", component: KitchenDetailComponent },
   { path: 'interface', component: InterfaceComponent},
   { path: 'register/:id', component: KitchenRegisterComponent },
+  { path: 'login', component: LoginComponent },
 ];
 
 @NgModule({

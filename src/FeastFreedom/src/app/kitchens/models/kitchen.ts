@@ -3,9 +3,7 @@ export class Kitchen {
     user: any = null;
     name: string = "";
     featured: boolean = false;
-    working_days: string[] = [];
-    time_in: string = "8:00 AM";
-    time_out: string = "10:00 PM";
+    workdays: any = [];
     image: any = "";
     menu: any = [];
 }

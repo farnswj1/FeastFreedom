@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule} from '@angular/forms'
+import { ReactiveFormsModule } from '@angular/forms';
 
 // Router
 import { AppRoutingModule } from './app-routing.module';
@@ -10,8 +10,8 @@ import { AppComponent } from './app.component';
 
 // Modules
 import { UserModule } from './user/user.module';
-//import { ServiceModule } from './service/service.module'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 import { RegularUserListComponent } from './users/components/regular-user-list/regular-user-list.component';
 import { KitchenUserListComponent } from './users/components/kitchen-user-list/kitchen-user-list.component';
 import { RegularUserDetailComponent } from './users/components/regular-user-detail/regular-user-detail.component';
@@ -23,22 +23,26 @@ import { KitchenUserUpdateComponent } from './users/components/kitchen-user-upda
 import { KitchenListComponent } from './kitchens/components/kitchen-list/kitchen-list.component';
 import { KitchenDetailComponent } from './kitchens/components/kitchen-detail/kitchen-detail.component';
 import { KitchenCreateComponent } from './kitchens/components/kitchen-create/kitchen-create.component';
+import { UserLoginComponent } from './users/components/user-login/user-login.component';
+import { JwtModule } from '@auth0/angular-jwt';
+import { LoginComponent } from './users/components/login/login.component';
 import { ServiceModule } from './service/service.module';
 
-
 @NgModule({
-  declarations: 
-  [
-    AppComponent, 
-    RegularUserListComponent, 
-    KitchenUserListComponent, 
-    RegularUserDetailComponent, 
-    KitchenUserDetailComponent, 
-    RegularUserCreateComponent, 
-    KitchenUserCreateComponent, 
-    RegularUserUpdateComponent, 
-    KitchenUserUpdateComponent, KitchenListComponent, KitchenDetailComponent, KitchenCreateComponent,
-
+  declarations: [
+    AppComponent,
+    RegularUserListComponent,
+    KitchenUserListComponent,
+    RegularUserDetailComponent,
+    KitchenUserDetailComponent,
+    RegularUserCreateComponent,
+    KitchenUserCreateComponent,
+    RegularUserUpdateComponent,
+    KitchenUserUpdateComponent,
+    KitchenListComponent,
+    KitchenDetailComponent,
+    KitchenCreateComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +52,12 @@ import { ServiceModule } from './service/service.module';
     NgbModule,
     ServiceModule,
     ReactiveFormsModule,
+    FormsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => localStorage.getItem('access_token'),
+      },
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

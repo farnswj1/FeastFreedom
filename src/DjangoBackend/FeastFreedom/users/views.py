@@ -5,6 +5,7 @@ from rest_framework.generics import (
     UpdateAPIView,
     DestroyAPIView
 )
+from rest_framework.permissions import IsAuthenticated
 from .serializers import UserSerializer
 from .models import User
 
@@ -26,11 +27,13 @@ class UserDetailAPI(RetrieveAPIView):
 
 
 class UserUpdateAPI(UpdateAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = User.objects.get_regular_users()
     serializer_class = UserSerializer
 
 
 class UserDeleteAPI(DestroyAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = User.objects.get_regular_users()
     serializer_class = UserSerializer
 
@@ -51,10 +54,12 @@ class KitchenUserDetailAPI(RetrieveAPIView):
 
 
 class KitchenUserUpdateAPI(UpdateAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = User.objects.get_kitchen_users()
     serializer_class = UserSerializer
 
 
 class KitchenUserDeleteAPI(DestroyAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = User.objects.get_kitchen_users()
     serializer_class = UserSerializer
