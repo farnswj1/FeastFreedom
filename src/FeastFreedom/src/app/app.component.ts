@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  Router,
-  NavigationStart,
-  Event as NavigationEvent,
-} from '@angular/router';
+import { Router } from '@angular/router';
 import { ProvidersService } from './DIservices/providers.service';
 import { AuthenticateService } from './users/services/authenticate.service';
 
@@ -20,18 +16,24 @@ export class AppComponent {
 
   public isLoggedIn = false;
 
-  constructor(private router: Router, private providersService: ProvidersService) {
-    this.providersService.isLoggedIn().subscribe((data) => {
-      this.isLoggedIn = data;
-      this.isLoggedIn
-        ? this.providersService.getUser().subscribe(
-            (user: any) => (this.user = user[0]),
-            (error) => console.log(error)
-          )
-        : (this.user = null);
-    });
+  constructor(
+    private router: Router,
+    private providersService: ProvidersService
+  ) {
+    this.user = localStorage.getItem('access')
+      ? this.providersService.getUser().subscribe(
+          (user: any) => (this.user = user[0]),
+          (error) => console.log(error)
+        )
+      : this.providersService.isLoggedIn().subscribe((data) => {
+          data
+            ? this.providersService.getUser().subscribe(
+                (user: any) => (this.user = user[0]),
+                (error) => console.log(error)
+              )
+            : (this.user = null);
+        });
   }
-  ngOnInit(): void {}
 
   logout(): void {
     this.providersService.logOut();
