@@ -15,11 +15,9 @@ import { IKitchenUser } from 'src/app/DIservices/providers';
 export class InterfaceComponent implements OnInit {
 
   public providersForm: any;
-  public kitchen: any;
-  errorMsg: any;
-  kitchenname: string = 'Default';
-  id_: number = 0;
-  user: any;
+  public email_:any;
+  public id_:any;
+  public name_:any;
 
 
 
@@ -29,10 +27,9 @@ export class InterfaceComponent implements OnInit {
 
   ngOnInit(): void {
     this.providersForm = this.fb.group({
-      name: [this.kitchenname, [Validators.required, Validators.minLength(3)]], //testing validations NOT FINAL YET
-      email: [null, [Validators.required, Validators.email]],
-      id: [this.id_, [Validators.required, Validators.pattern('^[0-9]+$')]],
-
+      name: [''], //testing validations NOT FINAL YET
+      email: [''],
+      id:[null],
       //* PASSWORD REQUIREMENT AND VALIDATION */
       //To check a password between 8 to 15 characters which contain 
       // at least one lowercase letter, 
@@ -40,31 +37,42 @@ export class InterfaceComponent implements OnInit {
       // one numeric digit, 
       // and one special character
 
-      password: [null, [Validators.required, Validators.pattern('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$')]],
-      passwordConfirm: [null, [Validators.required, Validators.pattern('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$')]]
+      password: [''],
+      passwordConfirm: ['']
     });
-  }
-
-  next() {
-
-    this.router.navigate(['/register/']); //edit here child (next) click
-    this.providersForm.reset();
 
   }
+
+  // next() {
+
+  //   this.router.navigate(['/register/']); //edit here child (next) click
+  //   this.providersForm.reset();
+
+  // }
   cancel() {
     this.router.navigate(['/home/']);
   }
 
-  getUserById(identifier: any) {
-    identifier = this.id_;
-    this.user = this.proService.getKitchenUserById(identifier).subscribe(
-      (data) => this.user = data,
-      (error) => this.errorMsg = error
-    )
+  // getUserById(identifier: any) {
+  //   identifier = this.id_;
+  //   this.user = this.proService.getKitchenUserById(identifier).subscribe(
+  //     (data) => this.user = data,
+  //     (error) => this.errorMsg = error
+  //   )
+  // }
+
+  next(formdata:any){
+    this.name_ = this.providersForm.value.name;
+    this.proService.setName(this.name_);
+    this.router.navigate(['/register/',this.providersForm.value.id]);
   }
+
 
   get name() {
     return this.providersForm.get('name');
+  }
+  get id() {
+    return this.providersForm.get('id');
   }
 
   get email() {
@@ -77,10 +85,6 @@ export class InterfaceComponent implements OnInit {
 
   get passwordConfirm() {
     return this.providersForm.get('passwordCornfirm');
-  }
-
-  get id() {
-    return this.providersForm.get('id')
   }
 
 }

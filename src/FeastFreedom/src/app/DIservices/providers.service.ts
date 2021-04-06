@@ -15,6 +15,7 @@ import { Order } from './order';
 export class ProvidersService {
   private _url: string = 'http://localhost:8000/kitchens/';
   private _url1: string = 'http://localhost:8000/users';
+  name_:any;
 
   // json-server url
   private url = 'http://localhost:3000/';
@@ -82,4 +83,13 @@ export class ProvidersService {
   errorHandler(error: HttpErrorResponse) {
     return throwError(error.message || 'Server Error');
   }
+
+  setName(name:any){
+    this.name_ = name;
+  }
+
+  getName(){
+    return this.name_;
+  }
+
 }

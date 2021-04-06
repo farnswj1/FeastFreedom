@@ -4,24 +4,24 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InterfaceComponent } from './interface/interface.component';
-import { routing } from './services.routing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { RegisterComponent } from './interface/register/register.component';
+import { FormsModule } from '@angular/forms';
+import { KitchenRegisterComponent } from './interface/kitchen-register/kitchen-register.component';
 
 
 
 @NgModule({
   declarations: [
     InterfaceComponent, 
-    RegisterComponent],
+    KitchenRegisterComponent],
     
   imports: [
     CommonModule,
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
-    routing,
-    NgbModule
+    NgbModule,
+    FormsModule
   ]
 })
 export class ServiceModule { }
