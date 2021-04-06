@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -24,17 +24,26 @@ export class KitchensService {
   }
 
   createKitchen(kitchen: any): Observable<Kitchen[]> {
-    return this.http.post<IKitchen[]>(this._url + "create/", kitchen)
+    let headers = new HttpHeaders({
+      "Authorization": `Bearer ${localStorage.getItem("access")}`
+    });
+    return this.http.post<IKitchen[]>(this._url + "create/", kitchen, {headers: headers})
     .pipe(catchError(this.errorHandler));
   }
 
   updateKitchen(id: number, kitchen: any): Observable<IKitchen[]> {
-    return this.http.put<IKitchen[]>(this._url + id + "/update/", kitchen)
+    let headers = new HttpHeaders({
+      "Authorization": `Bearer ${localStorage.getItem("access")}`
+    });
+    return this.http.put<IKitchen[]>(this._url + id + "/update/", kitchen, {headers: headers})
     .pipe(catchError(this.errorHandler));
   }
 
   deleteKitchen(id: number): any {
-    return this.http.delete(this._url + id + "/delete/");
+    let headers = new HttpHeaders({
+      "Authorization": `Bearer ${localStorage.getItem("access")}`
+    });
+    return this.http.delete(this._url + id + "/delete/", {headers: headers});
   }
   
   errorHandler(error: HttpErrorResponse){

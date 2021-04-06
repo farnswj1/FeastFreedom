@@ -62,8 +62,8 @@
             <!-- <label>Item Id</label><input class="form-control" type="text" formControlName="id" id="task{{i}}"> -->
             <label>Item Name</label><input class="form-control" type="text" formControlName="itemName" id="task{{i}}">
             <label>Vegan</label><br>
-            <input type="radio" formControlName="vegan" value=True>True<br>
-            <input type="radio" formControlName="vegan" value=False>False<br>
+            <input type="radio" formControlName="vegan" [value]=true>True<br>
+            <input type="radio" formControlName="vegan" [value]=false>False<br>
             <label>Price</label><input class="form-control" type="text" formControlName="price" id="task{{i}}">
         </div>
 
@@ -71,6 +71,13 @@
         <br>
         <br>
     </div>
+
+    <label>Featured? </label> <br>
+
+    <input formControlName="featured" type = "checkbox" id = "true" [value] = true>
+    <br>
+    <br>
+
 
     <!-- IMAGE GOES HERE -->
 

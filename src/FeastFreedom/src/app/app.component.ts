@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  Router,
-  NavigationStart,
-  Event as NavigationEvent,
-} from '@angular/router';
+import { Router } from '@angular/router';
 import { ProvidersService } from './DIservices/providers.service';
 
 @Component({
@@ -37,6 +33,7 @@ export class AppComponent {
             : (this.user = null);
         });
   }
+
   logout(): void {
     this.providersService.logOut();
     this.isCollapsed = true;

@@ -68,7 +68,7 @@ export class KitchenCreateComponent implements OnInit {
           ])
         })
       ]),
-      image: new FormControl(""),
+      image: ["", Validators.required]
     });
   }
 
@@ -124,10 +124,13 @@ export class KitchenCreateComponent implements OnInit {
 
   onFileChange(event: any) {
     if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.kitchenForm.setValue({
-        image: file
-      });
+      const file: File = event.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.kitchenForm.patchValue({image: reader.result});
+      }
+      //this.kitchenForm.controls['image'].setValue(event.target.files[0]);
     }
   }
 
