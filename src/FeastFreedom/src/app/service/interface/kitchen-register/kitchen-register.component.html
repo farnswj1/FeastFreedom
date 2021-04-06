@@ -60,11 +60,11 @@
                 Menu {{i+1}}
             </h4>
             <!-- <label>Item Id</label><input class="form-control" type="text" formControlName="id" id="task{{i}}"> -->
-            <label>Item Name</label><input class="form-control" type="text" formControlName="itemName" id="task{{i}}">
+            <label>Item Name</label><input class="form-control" type="text" formControlName="item_name" id="task{{i}}">
             <label>Vegan</label><br>
             <input type="radio" formControlName="vegan" [value]=true>True<br>
             <input type="radio" formControlName="vegan" [value]=false>False<br>
-            <label>Price</label><input class="form-control" type="text" formControlName="price" id="task{{i}}">
+            <label>Price</label><input class="form-control" type="number" formControlName="price" id="task{{i}}">
         </div>
 
         <button (click)="addNewItem();">Add New Menu +</button>
@@ -77,13 +77,6 @@
     <input formControlName="featured" type = "checkbox" id = "true" [value] = true>
     <br>
     <br>
-
-
-    <!-- IMAGE GOES HERE -->
-
-    <label>Image</label>
-    <input class="form-control" type="file" formControlName="image" [class.is-invalid]="image.invalid && image.touched"
-        #fileInput>
 
     <button class="btn btn-primary" [disabled]="!kitchenForm.valid" type="submit">Submit form</button>
 
