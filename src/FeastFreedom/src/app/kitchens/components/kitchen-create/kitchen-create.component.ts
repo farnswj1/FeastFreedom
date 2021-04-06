@@ -16,8 +16,9 @@ export class KitchenCreateComponent implements OnInit {
   constructor(private fb: FormBuilder, private kitchensService: KitchensService, private router: Router, private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
+    console.log(Number(localStorage.getItem('user_id')));
     this.kitchenForm = this.fb.group({
-      user: new FormControl(0, [
+      user: new FormControl(Number(localStorage.getItem('user_id')), [
         Validators.required, 
         Validators.min(0), 
       ]),
@@ -30,45 +31,8 @@ export class KitchenCreateComponent implements OnInit {
       featured: new FormControl(false, [
         Validators.required, 
       ]),
-      workdays: new FormArray([
-        new FormGroup({
-          day: new FormControl("", [
-            Validators.required,
-            Validators.min(6),
-            Validators.max(9),
-            Validators.pattern("^(Mon|Tues|Wednes|Thurs|Fri|Satur)day$")
-          ]),
-          start_time: new FormControl("", [
-            Validators.required,
-            Validators.min(7),
-            Validators.max(8),
-            Validators.pattern("^(1[012]|[1-9]):[0-5]\d [AP]M$")
-          ]),
-          end_time: new FormControl("", [
-            Validators.required,
-            Validators.min(7),
-            Validators.max(8),
-            Validators.pattern("^(1[012]|[1-9]):[0-5]\d [AP]M$")
-          ])
-        })
-      ]),
-      menu: new FormArray([
-        new FormGroup({
-          name: new FormControl("", [
-            Validators.required,
-            Validators.min(3),
-            Validators.max(50),
-            Validators.pattern("^[A-Za-z0-9 //,'-]{3,50}$")
-          ]),
-          vegan: new FormControl(false, Validators.required),
-          price: new FormControl(0, [
-            Validators.required,
-            Validators.min(0),
-            Validators.max(1000000)
-          ])
-        })
-      ]),
-      image: ["", Validators.required]
+      workdays: new FormArray([]),
+      menu: new FormArray([])
     });
   }
 
@@ -84,13 +48,13 @@ export class KitchenCreateComponent implements OnInit {
         Validators.required,
         Validators.min(7),
         Validators.max(8),
-        Validators.pattern("^(1[012]|[1-9]):[0-5]\d [AP]M$")
+        Validators.pattern("^(1[012]|[1-9]):[0-5][0-9] [AP]M$")
       ]),
       end_time: new FormControl("", [
         Validators.required,
         Validators.min(7),
         Validators.max(8),
-        Validators.pattern("^(1[012]|[1-9]):[0-5]\d [AP]M$")
+        Validators.pattern("^(1[012]|[1-9]):[0-5][0-9] [AP]M$")
       ])
     });
     this.workdays.push(control);
@@ -122,20 +86,25 @@ export class KitchenCreateComponent implements OnInit {
     this.menu.removeAt(index);
   }
 
-  onFileChange(event: any) {
-    if (event.target.files.length > 0) {
-      const file: File = event.target.files[0];
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        this.kitchenForm.patchValue({image: reader.result});
-      }
-      //this.kitchenForm.controls['image'].setValue(event.target.files[0]);
-    }
-  }
-
   onSubmit(kitchenForm: any){
-    this.kitchensService.createKitchen(this.kitchenForm.value).subscribe(
+    console.log(this.kitchenForm.value)
+    let item = {
+      "menu":
+        this.kitchenForm.value.menu
+      ,
+      "name":
+        this.kitchenForm.value.name
+      ,
+      "workdays":
+        this.kitchenForm.value.workdays
+      ,
+      "user":
+        this.kitchenForm.value.user
+      ,
+      "featured":
+        this.kitchenForm.value.featured
+    }
+    this.kitchensService.createKitchen(item).subscribe(
       (data) => {
         this.kitchens = data;
         this.kitchensService.getKitchens().subscribe(
@@ -161,9 +130,5 @@ export class KitchenCreateComponent implements OnInit {
 
   get menu() {
     return this.kitchenForm.get('menu') as FormArray;
-  }
-
-  get image() {
-    return this.kitchenForm.get('image');
   }
 }

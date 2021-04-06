@@ -5,6 +5,7 @@ import {
   Event as NavigationEvent,
 } from '@angular/router';
 import { ProvidersService } from './DIservices/providers.service';
+import { AuthenticateService } from './users/services/authenticate.service';
 
 @Component({
   selector: 'app-root',

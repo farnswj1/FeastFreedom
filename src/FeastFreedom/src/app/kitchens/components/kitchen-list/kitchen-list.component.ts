@@ -24,4 +24,8 @@ export class KitchenListComponent implements OnInit {
   kitchenDetail(kitchen: any) {
     this.router.navigate(['/kitchens/', kitchen.id])
   }
+
+  kitchenCreate() {
+    this.router.navigate(['/kitchens/register/'])
+  }
 }
