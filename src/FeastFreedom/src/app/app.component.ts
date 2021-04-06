@@ -23,15 +23,19 @@ export class AppComponent {
     private router: Router,
     private providersService: ProvidersService
   ) {
-    this.providersService.isLoggedIn().subscribe((data) => {
-      this.isLoggedIn = data;
-      this.isLoggedIn
-        ? this.providersService.getUser().subscribe(
-            (user: any) => (this.user = user[0]),
-            (error) => console.log(error)
-          )
-        : (this.user = null);
-    });
+    this.user = localStorage.getItem('access')
+      ? this.providersService.getUser().subscribe(
+          (user: any) => (this.user = user[0]),
+          (error) => console.log(error)
+        )
+      : this.providersService.isLoggedIn().subscribe((data) => {
+          data
+            ? this.providersService.getUser().subscribe(
+                (user: any) => (this.user = user[0]),
+                (error) => console.log(error)
+              )
+            : (this.user = null);
+        });
   }
   logout(): void {
     this.providersService.logOut();

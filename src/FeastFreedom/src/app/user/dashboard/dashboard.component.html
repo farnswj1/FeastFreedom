@@ -1,4 +1,3 @@
-<h3>Featured Kitchens</h3>
 <ngb-carousel *ngIf="kitchens">
   <ng-template ngbSlide *ngFor="let kitchen of getFeatured()">
     <a [routerLink]="['/detail', kitchen.id]">

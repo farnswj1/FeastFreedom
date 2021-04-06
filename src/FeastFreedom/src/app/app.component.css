@@ -1,10 +1,4 @@
-.home {
-  margin-right: 3rem;
-}
-
-p {
-  padding-right: 0.5rem;
-  padding-left: 0.5rem;
-  display: block;
-  padding: 0.5rem 1rem;
+.dropdown ul {
+  display: flex;
+  justify-content: flex-end;
 }

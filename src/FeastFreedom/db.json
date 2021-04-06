@@ -4,7 +4,13 @@
       "id": 1,
       "name": "Kitchen 1",
       "email": "kitchen1@gmail.com",
-      "working_days": [1, 2, 3, 4, 5, 6, 7],
+      "working_days": [
+        { "day": "monday", "start_time": "9am", "end_time": "9pm" },
+        { "day": "tuesday", "start_time": "9am", "end_time": "9pm" },
+        { "day": "wendnesday", "start_time": "9am", "end_time": "9pm" },
+        { "day": "thursday", "start_time": "9am", "end_time": "9pm" },
+        { "day": "friday", "start_time": "9am", "end_time": "9pm" }
+      ],
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Frbldi.com%2Fwp-content%2Fuploads%2F2016%2F11%2Fioc-cape_restaurant-04.jpg&f=1&nofb=1",
       "featured": true,
       "menu": [
