@@ -8,7 +8,7 @@ import { ProvidersService } from 'src/app/DIservices/providers.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  @Output() newLogin = new EventEmitter<string>();
+  // @Output() newLogin = new EventEmitter<string>();
   public username = '';
   public password = '';
 
@@ -20,14 +20,19 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   login(): void {
-    this.providersService.login(this.username, this.password).subscribe(
-      (token: any) => {
-        localStorage.setItem('access', token.access);
-        localStorage.setItem('refresh', token.refresh);
-        this.newLogin.emit(token.access);
-      },
-      (error) => console.log(error),
-      () => this.router.navigate(['/'])
-    );
+    this.providersService.logIn(this.username, this.password);
+    this.router.navigate(['/']);
   }
+
+  // login(): void {
+  //   this.providersService.login(this.username, this.password).subscribe(
+  //     (token: any) => {
+  //       localStorage.setItem('access', token.access);
+  //       localStorage.setItem('refresh', token.refresh);
+  //       this.newLogin.emit(token.access);
+  //     },
+  //     (error) => console.log(error),
+  //     () => this.router.navigate(['/'])
+  //   );
+  // }
 }

@@ -19,11 +19,13 @@ import { Order } from 'src/app/DIservices/order';
 export class DetailComponent implements OnInit {
   public id: number;
   public kitchen: any;
+  public user: any;
   public error: any;
   public order: Order = {
     id: 0,
     kitchen_id: 0,
     user_id: 0,
+    total: 0,
   };
 
   constructor(
@@ -40,17 +42,15 @@ export class DetailComponent implements OnInit {
       // Defines error
       (error) => (this.error = error),
       () => {
-        // Defines plates and initialices count to 0
-        const orderBody = this.kitchen.menu.map((plate: Plate) => {
-          return { plate_id: plate.id, count: 0 };
-        });
-
         // Defines order
         this.order = {
           id: Date.now(),
           kitchen_id: this.kitchen.id,
-          user_id: this.providersService.getUser(),
-          order: orderBody,
+          user_id: this.providersService.getUserId(),
+          items: this.kitchen.menu.map((plate: Plate) =>
+            Object.create({ plate_id: plate.id, count: 0 })
+          ),
+          total: 0,
         };
       }
     );
@@ -60,24 +60,28 @@ export class DetailComponent implements OnInit {
 
   // Order
   addPlate(id: number): void {
-    if (this.order.order) {
-      this.order.order = this.order.order.map((plate: any) => {
+    if (this.order.items) {
+      this.order.items = this.order.items.map((plate: any) => {
         plate.count = plate.plate_id === id ? plate.count + 1 : plate.count;
         return plate;
       });
-      localStorage.setItem('cart', JSON.stringify(this.order));
+
+      this.changePrice(id, true);
+
+      // localStorage.setItem('cart', JSON.stringify(this.order));
     }
   }
   removePlate(id: number): void {
-    if (this.order.order) {
-      this.order.order = this.order.order.map((plate: any) => {
-        plate.count =
-          plate.plate_id === id && plate.count - 1 >= 0
-            ? plate.count - 1
-            : plate.count;
+    if (this.order.items) {
+      this.order.items = this.order.items.map((plate: any) => {
+        // Decrease price if possible
+        if (plate.plate_id === id && plate.count >= 1) {
+          this.changePrice(id, false);
+          plate.count -= 1;
+        }
+
         return plate;
       });
-      localStorage.setItem('cart', JSON.stringify(this.order));
     }
   }
   placeOrder(): void {
@@ -92,6 +96,17 @@ export class DetailComponent implements OnInit {
   // Modal
   open(content: any): void {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
+  }
+
+  // Modify price
+  private changePrice(id: number, increase: boolean): void {
+    increase
+      ? (this.order.total += this.kitchen.menu.filter(
+          (item: any) => item.id === id
+        )[0].price)
+      : (this.order.total -= this.kitchen.menu.filter(
+          (item: any) => item.id === id
+        )[0].price);
   }
 }
 

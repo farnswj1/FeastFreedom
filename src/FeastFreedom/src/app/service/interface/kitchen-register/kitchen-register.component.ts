@@ -55,6 +55,11 @@ export class KitchenRegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
+    this.actRoute.paramMap.subscribe((params: ParamMap) => {
+      let id = params.get('id');
+      this.userId= Number(id);
+    });
 
     this.kitchenForm = this.fb.group({
       name: [this.proService.getName()],
@@ -63,7 +68,7 @@ export class KitchenRegisterComponent implements OnInit {
       workdays: this.fb.array([
         this.fb.group({
           // day: this.addDaysControls(),
-          day:['', [Validators.required]],
+          day: ['', [Validators.required]],
           start_time: ['', [Validators.required]],
           end_time: ['', [Validators.required]],
         })
@@ -82,10 +87,7 @@ export class KitchenRegisterComponent implements OnInit {
       image: [''],
 
     });
-    this.actRoute.paramMap.subscribe((params: ParamMap) => {
-      let id = params.get('id');
-      this.userId = id;
-    });
+
   }
 
   addDaysControls() {
@@ -151,7 +153,7 @@ export class KitchenRegisterComponent implements OnInit {
       "user": 3
 
     }
-    this.proService.postKitchen(this.kitchenForm.value).subscribe(
+    this.proService.postKitchen(this.kitchenForm.value).subscribe( //change this.kitchenForm.value to item and send to back end.. 
       (data) => {
         this.kitchen = data;
         console.log(this.kitchen);
@@ -183,7 +185,7 @@ export class KitchenRegisterComponent implements OnInit {
   }
 
   get day() {
-    let d= <FormGroup>this.kitchenForm.controls.workdays;
+    let d = <FormGroup>this.kitchenForm.controls.workdays;
     return d.controls.day;
   }
 

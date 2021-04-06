@@ -6,5 +6,6 @@ export interface Order {
   id: number;
   kitchen_id: number;
   user_id: number;
-  order?: OrderBody[];
+  items?: OrderBody[];
+  total: number;
 }

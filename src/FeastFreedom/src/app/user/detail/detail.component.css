@@ -28,6 +28,10 @@ li {
   align-items: center;
 }
 
+.total {
+  margin-top: 3rem;
+}
+
 img {
   width: 1rem;
 }
