@@ -48,6 +48,8 @@ export class RegularUserListComponent implements OnInit {
   isLoggedIn(){
     return this.authService.isAuthenticated();
   }
-
   
+  getLoggedInUserId(){
+    return this.authService.getUserId();
+  }
 }

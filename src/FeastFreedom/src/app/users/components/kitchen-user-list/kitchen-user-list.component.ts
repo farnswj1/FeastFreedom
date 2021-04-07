@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ProvidersService } from 'src/app/DIservices/providers.service';
 import { UsersService } from '../../services/users.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class KitchenUserListComponent implements OnInit {
   public kitchenUsers: any;
   public errorMsg: any;
 
-  constructor(private usersService: UsersService, private router: Router) { }
+  constructor(private usersService: UsersService, private router: Router, private authService: ProvidersService) { }
 
   ngOnInit(): void {
     this.usersService.getKitchenUsers().subscribe(
@@ -42,5 +43,13 @@ export class KitchenUserListComponent implements OnInit {
         )
       })
     }
+  }
+
+  isLoggedIn(){
+    return this.authService.isAuthenticated();
+  }
+
+  getLoggedInUserId(){
+    return this.authService.getUserId();
   }
 }
