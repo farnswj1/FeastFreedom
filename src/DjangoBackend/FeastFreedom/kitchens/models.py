@@ -24,7 +24,7 @@ DAYS = (
 
 # Create your models here.
 class MenuItem(models.Model):
-    name = models.CharField(
+    item_name = models.CharField(
         null=False,
         max_length=50,
         validators=[
@@ -41,7 +41,7 @@ class MenuItem(models.Model):
                 message="Please insert a valid name.",
             ),
             ProhibitNullCharactersValidator(),
-        ],
+        ]
     )
     vegan = models.BooleanField(null=False, default=False)
     price = models.DecimalField(
@@ -81,7 +81,7 @@ class WorkDay(models.Model):
                 message="Please insert a valid name.",
             ),
             ProhibitNullCharactersValidator(),
-        ],
+        ]
     )
     start_time = models.CharField(
         null=False,
@@ -100,7 +100,7 @@ class WorkDay(models.Model):
                 message="Please insert a valid start time.",
             ),
             ProhibitNullCharactersValidator(),
-        ],
+        ]
     )
     end_time = models.CharField(
         null=False,
@@ -119,7 +119,7 @@ class WorkDay(models.Model):
                 message="Please insert a valid end time.",
             ),
             ProhibitNullCharactersValidator(),
-        ],
+        ]
     )
 
     class Meta:
@@ -152,4 +152,3 @@ class Kitchen(models.Model):
     featured = models.BooleanField(null=False, default=False)
     workdays = models.ArrayField(model_container=WorkDay)
     menu = models.ArrayField(model_container=MenuItem)
-

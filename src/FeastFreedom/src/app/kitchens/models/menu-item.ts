@@ -1,5 +1,5 @@
 export class MenuItem {
-    name: string = "";
+    item_name: string = "";
     vegan: boolean = false;
     price: number = 0;
 }

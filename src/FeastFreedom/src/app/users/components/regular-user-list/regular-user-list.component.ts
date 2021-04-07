@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ProvidersService } from 'src/app/DIservices/providers.service';
 import { UsersService } from '../../services/users.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class RegularUserListComponent implements OnInit {
   public regularUsers: any;
   public errorMsg: any;
 
-  constructor(private usersService: UsersService, private router: Router) { }
+  constructor(private usersService: UsersService, private authService: ProvidersService, private router: Router) { }
 
   ngOnInit(): void {
     this.usersService.getRegularUsers().subscribe(
@@ -43,4 +44,10 @@ export class RegularUserListComponent implements OnInit {
       })
     }
   }
+
+  isLoggedIn(){
+    return this.authService.isAuthenticated();
+  }
+
+  
 }

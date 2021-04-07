@@ -5,6 +5,7 @@
     <table class="table">
         <thead>
             <tr>
+                <td><b>ID</b></td>
                 <td><b>Username</b></td>
                 <td><b>First Name</b></td>
                 <td><b>Last Name</b></td>
@@ -14,14 +15,15 @@
         </thead>
         <tbody>
             <tr *ngFor="let user of regularUsers">
+                <td>{{user.id}}</td>
                 <td>{{user.username}}</td>
                 <td>{{user.first_name}}</td>
                 <td>{{user.last_name}}</td>
                 <td>{{user.email}}</td>
                 <td>
                     <button class="btn btn-primary" (click)="regularUserDetail(user)">View</button>
-                    <button class="btn btn-primary" (click)="regularUserUpdate(user)">Update</button>
-                    <button class="btn btn-danger" (click)="regularUserDelete(user)">Delete</button>
+                    <button class="btn btn-primary" *ngIf="isLoggedIn()" (click)="regularUserUpdate(user)">Update</button>
+                    <button class="btn btn-danger" *ngIf="isLoggedIn()" (click)="regularUserDelete(user)">Delete</button>
                 </td>
             </tr>
         </tbody>

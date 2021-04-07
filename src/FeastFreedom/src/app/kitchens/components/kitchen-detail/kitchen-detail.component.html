@@ -1,8 +1,6 @@
 <div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
 <div *ngIf="kitchen">
     <h2>{{kitchen.name}}</h2>
-    <img class="img-fluid img-thumbnail" src={{kitchen.image}}>
-    
     <ul class="py-3">
         <li><b>ID:</b> {{kitchen.user.id}}</li>
         <li><b>Owner:</b> {{kitchen.user.first_name}} {{kitchen.user.last_name}}</li>
@@ -30,7 +28,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let item of kitchen.menu;">
-                <td>{{item.name}}</td>
+                <td>{{item.item_name}}</td>
                 <td>{{item.vegan ? "Yes" : "No"}}</td>
                 <td>{{item.price|currency}}</td>
             </tr>

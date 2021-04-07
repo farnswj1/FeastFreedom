@@ -20,17 +20,17 @@ from django.conf import settings
 
 # Rest framework simpleJWT
 from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
     TokenVerifyView,
     TokenRefreshView,
 )
+from . import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("users/", include("users.urls")),
     path("kitchens/", include("kitchens.urls")),
     path("orders/", include("orders.urls")),
-    path(r"login/", TokenObtainPairView.as_view(), name="token"),
+    path(r"login/", views.MyTokenObtainPairView.as_view(), name="token"),
     path("token/verify/", TokenVerifyView.as_view(), name="token_verify"),
     path(r"token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

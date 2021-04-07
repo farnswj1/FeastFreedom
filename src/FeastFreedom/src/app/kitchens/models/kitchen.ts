@@ -4,6 +4,5 @@ export class Kitchen {
     name: string = "";
     featured: boolean = false;
     workdays: any = [];
-    image: any = "";
     menu: any = [];
 }

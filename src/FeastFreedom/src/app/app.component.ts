@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProvidersService } from './DIservices/providers.service';
+import { AuthenticateService } from './users/services/authenticate.service';
 
 @Component({
   selector: 'app-root',

@@ -1,85 +1,5 @@
 [
 {
-  "model": "contenttypes.contenttype",
-  "pk": 1,
-  "fields": {
-    "app_label": "admin",
-    "model": "logentry"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 2,
-  "fields": {
-    "app_label": "auth",
-    "model": "permission"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 3,
-  "fields": {
-    "app_label": "auth",
-    "model": "group"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 4,
-  "fields": {
-    "app_label": "contenttypes",
-    "model": "contenttype"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 5,
-  "fields": {
-    "app_label": "sessions",
-    "model": "session"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 6,
-  "fields": {
-    "app_label": "authtoken",
-    "model": "token"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 7,
-  "fields": {
-    "app_label": "authtoken",
-    "model": "tokenproxy"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 8,
-  "fields": {
-    "app_label": "users",
-    "model": "user"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 9,
-  "fields": {
-    "app_label": "kitchens",
-    "model": "kitchen"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 10,
-  "fields": {
-    "app_label": "orders",
-    "model": "order"
-  }
-},
-{
   "model": "sessions.session",
   "pk": "keudbqrgshw3fjo13pyldzru5yy9try4",
   "fields": {
@@ -809,22 +729,31 @@
 },
 {
   "model": "kitchens.kitchen",
-  "pk": 1,
+  "pk": 2,
   "fields": {
+<<<<<<< HEAD
     "user": 1,
     "name": "My First Kitchen",
     "featured": true,
     "workdays": "[{\"day\": \"Monday\", \"start_time\": \"8:00 AM\", \"end_time\": \"5:00 PM\"}, {\"day\": \"Thursday\", \"start_time\": \"10:00 AM\", \"end_time\": \"10:00 PM\"}]",
     "menu": "[{\"name\": \"Fries\", \"vegan\": \"True\", \"price\": \"5.00\"}, {\"name\": \"Hot Dog\", \"vegan\": \"False\", \"price\": \"7.00\"}, {\"name\": \"Onion Rings\", \"vegan\": \"False\", \"price\": \"6.50\"}]"
+=======
+    "user": 4,
+    "name": "My Second Kitchen",
+    "featured": false,
+    "workdays": "[{\"day\": \"Wednesday\", \"start_time\": \"9:00 AM\", \"end_time\": \"7:00 PM\"}, {\"day\": \"Friday\", \"start_time\": \"10:00 AM\", \"end_time\": \"6:00 PM\"}, {\"day\": \"Sunday\", \"start_time\": \"8:00 AM\", \"end_time\": \"11:30 AM\"}]",
+    "menu": "[{\"item_name\": \"Golden Cauliflower Buffalo Wings\", \"vegan\": \"True\", \"price\": \"900.00\"}, {\"item_name\": \"Tomahawk Steak\", \"vegan\": \"False\", \"price\": \"70.00\"}]"
+>>>>>>> 56adb7e75d092e69af1f14a59353c8141b305041
   }
 },
 {
   "model": "kitchens.kitchen",
-  "pk": 2,
+  "pk": 3,
   "fields": {
-    "user": 4,
-    "name": "My Second Kitchen",
+    "user": null,
+    "name": "Sample Kitchen",
     "featured": false,
+<<<<<<< HEAD
     "workdays": "[{\"day\": \"Wednesday\", \"start_time\": \"9:00 AM\", \"end_time\": \"7:00 PM\"}, {\"day\": \"Friday\", \"start_time\": \"10:00 AM\", \"end_time\": \"6:00 PM\"}, {\"day\": \"Sunday\", \"start_time\": \"8:00 AM\", \"end_time\": \"11:30 AM\"}]",
     "menu": "[{\"name\": \"Golden Cauliflower Buffalo Wings\", \"vegan\": \"True\", \"price\": \"900.00\"}, {\"name\": \"Tomahawk Steak\", \"vegan\": \"False\", \"price\": \"70.00\"}]"
   }
@@ -836,6 +765,8 @@
     "user": null,
     "name": "Sample Kitchen",
     "featured": false,
+=======
+>>>>>>> 56adb7e75d092e69af1f14a59353c8141b305041
     "workdays": "[]",
     "menu": "[]"
   }

@@ -12,7 +12,7 @@ export interface Kitchen {
 }
 
 export class kitchen {
-  user = new User();
+  user: any = new User();
   name: string = '';
   workingdays = [''];
   menu: any;
