@@ -1,25 +1,22 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { ProvidersService } from 'src/app/DIservices/providers.service';
-import { InterfaceComponent } from '../interface.component'
-
-
+import { InterfaceComponent } from '../interface.component';
 
 @Component({
   selector: 'app-kitchen-register',
   templateUrl: './kitchen-register.component.html',
-  styleUrls: ['./kitchen-register.component.css']
+  styleUrls: ['./kitchen-register.component.css'],
 })
 export class KitchenRegisterComponent implements OnInit {
-
   public ProductHeader = [{ name: 'Hp' }, { name: 'Dell' }, { name: 'Lenovo' }];
   public kitchenForm: any;
   kitchen: any;
   errorMsg: any;
   userId: any;
   name: any;
-
 
   days: Array<String> = [
     'Monday',
@@ -28,7 +25,8 @@ export class KitchenRegisterComponent implements OnInit {
     'Thursday',
     'Friday',
     'Saturday',
-    'Sunday']
+    'Sunday',
+  ];
 
   timein: any = [
     '07:00 AM',
@@ -39,23 +37,26 @@ export class KitchenRegisterComponent implements OnInit {
     '01:00 PM',
     '02:00 PM',
     '03:00 PM',
-  ]
+  ];
 
   timeout: Array<String> = [
-
     '07:00 PM',
     '08:00 PM',
     '09:00 PM',
     '10:00 PM',
     '11:00 PM',
-    '12:00 AM',]
+    '12:00 AM',
+  ];
 
-  constructor(private actRoute: ActivatedRoute, private fb: FormBuilder, private proService: ProvidersService, private router: Router) {
-
-  }
+  constructor(
+    private actRoute: ActivatedRoute,
+    private fb: FormBuilder,
+    private proService: ProvidersService,
+    private router: Router,
+    private jwt: JwtHelperService
+  ) {}
 
   ngOnInit(): void {
-
     this.actRoute.paramMap.subscribe((params: ParamMap) => {
       let id = params.get('id');
       this.userId = Number(id);
@@ -71,29 +72,25 @@ export class KitchenRegisterComponent implements OnInit {
           day: ['', [Validators.required]],
           start_time: ['', [Validators.required]],
           end_time: ['', [Validators.required]],
-        })
-
+        }),
       ]),
 
       menu: this.fb.array([
         this.fb.group({
           name: [''],
           vegan: [null],
-          price: [null]
-
-        })
+          price: [null],
+        }),
       ]),
 
       featured: [null],
 
       image: [''],
-
     });
-
   }
 
   addDaysControls() {
-    const arr = this.days.map(element => {
+    const arr = this.days.map((element) => {
       return this.fb.control(false);
     });
 
@@ -109,7 +106,7 @@ export class KitchenRegisterComponent implements OnInit {
     const newitem = this.fb.group({
       name: [''],
       vegan: [null],
-      price: [null]
+      price: [null],
     });
 
     this.menuArray.push(newitem);
@@ -127,40 +124,28 @@ export class KitchenRegisterComponent implements OnInit {
   }
 
   Save(kitchenForm: any) {
+    const item = {
+      menu: this.kitchenForm.value.menu.map((plate: any) => plate),
+      name: this.kitchenForm.value.name,
+      workdays: this.kitchenForm.value.workdays,
+      user: this.jwt.decodeToken(localStorage.getItem('access') || '').user_id,
+      featured: this.kitchenForm.value.featured,
+    };
+    console.log(item);
 
-    console.log(this.kitchenForm.value);
-    let item = {
-      "menu":
-        this.kitchenForm.value.menu
-      ,
-      "name":
-        this.kitchenForm.name
-      ,
-      "workdays":
-        this.kitchenForm.value.workdays
-      ,
-      "user":
-        this.kitchenForm.value.user
-      ,
-      "featured":
-        this.kitchenForm.value.featured
-
-    }
-
-    this.proService.postKitchen(item).subscribe( //change this.kitchenForm.value to item and send to back end.. 
+    this.proService.postKitchen(item).subscribe(
       (data) => {
         this.kitchen = data;
         console.log(this.kitchen);
         this.proService.getKitchen().subscribe(
-          (data) => this.kitchen = data,
-          (error) => this.errorMsg = error
-        )
+          (data) => (this.kitchen = data),
+          (error) => console.log(error)
+        );
       },
-      (error) => this.errorMsg = error
-    )
+      (error) => (this.errorMsg = error)
+    );
     // this.router.navigate(['home']);
     // this.kitchenForm.reset();
-
   }
 
   get itemName() {
@@ -208,9 +193,4 @@ export class KitchenRegisterComponent implements OnInit {
   get workdaysArray() {
     return <FormArray>this.kitchenForm.get('workdays');
   }
-
-
-
-
-
 }

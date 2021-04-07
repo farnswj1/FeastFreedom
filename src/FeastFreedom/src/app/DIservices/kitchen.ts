@@ -1,11 +1,12 @@
-import { IPlate, Plate } from './plate';
 import { IKitchenUser } from './providers';
 import { User } from '../users/models/user';
 
 export interface Kitchen {
+  id: number;
   user: IKitchenUser;
   name: string;
-  workingdays: any;
+  working_days: any[];
+  image: any;
   menu: any;
   featured: boolean;
 }

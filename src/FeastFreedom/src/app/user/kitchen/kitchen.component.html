@@ -25,7 +25,16 @@
       </div>
       <div [class.flip-card-back]="parent === 'dashboard'">
         <h1>{{ kitchen.name }}</h1>
-        <p></p>
+        <div class="days">
+          <div *ngFor="let day of daysOfTheWeek">
+            <span
+              class="badge"
+              [class.badge-success]="workingDay(day)"
+              [class.badge-secondary]="!workingDay(day)"
+              >{{ day[0] | uppercase }}
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   </a>
