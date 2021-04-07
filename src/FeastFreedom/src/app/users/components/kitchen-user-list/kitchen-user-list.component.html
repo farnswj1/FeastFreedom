@@ -22,8 +22,8 @@
                 <td>{{user.email}}</td>
                 <td>
                     <button class="btn btn-primary" (click)="kitchenUserDetail(user)">View</button>
-                    <button class="btn btn-primary" *ngIf="user.id == getLoggedInUserId()" (click)="kitchenUserUpdate(user)">Update</button>
-                    <button class="btn btn-danger" *ngIf="user.id == getLoggedInUserId()" (click)="kitchenUserDelete(user)">Delete</button>
+                    <button class="btn btn-primary" *ngIf="isLoggedIn && user.id == getLoggedInUserId()" (click)="kitchenUserUpdate(user)">Update</button>
+                    <button class="btn btn-danger" *ngIf="isLoggedIn && user.id == getLoggedInUserId()" (click)="kitchenUserDelete(user)">Delete</button>
                 </td>
             </tr>
         </tbody>
