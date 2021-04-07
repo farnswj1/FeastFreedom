@@ -77,7 +77,7 @@ export class ProvidersService {
   getKitchen(id?: number): Observable<{}> {
     return id
       ? this.http
-          .get<Kitchen>(this.djangoUrl + 'kitchens/' + id)
+          .get<Kitchen>(this.djangoUrl + 'kitchens/' + id + '/')
           .pipe(catchError(this.errorHandler))
       : this.http
           .get<Kitchen[]>(this.djangoUrl + 'kitchens/')
@@ -92,12 +92,12 @@ export class ProvidersService {
 
   postKitchen(KitchenData: any): Observable<kitchen> {
     // console.log('provider', KitchenData);
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${localStorage.getItem('access')}`,
-    });
-    console.log(headers);
+    // const headers = new HttpHeaders({
+    //   Authorization: `Bearer ${localStorage.getItem('access')}`,
+    // });
+    // console.log(headers);
     return this.http
-      .post<kitchen>(this._url + 'create/', KitchenData, { headers })
+      .post<kitchen>(this._url + 'create/', KitchenData)
       .pipe(catchError(this.errorHandler));
   }
 

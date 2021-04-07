@@ -5,6 +5,7 @@ import { KitchenDetailComponent } from './kitchens/components/kitchen-detail/kit
 import { KitchenListComponent } from './kitchens/components/kitchen-list/kitchen-list.component';
 import { InterfaceComponent } from './service/interface/interface.component';
 import { KitchenRegisterComponent } from './service/interface/kitchen-register/kitchen-register.component';
+import { DetailComponent } from './user/detail/detail.component';
 import { KitchenUserCreateComponent } from './users/components/kitchen-user-create/kitchen-user-create.component';
 import { KitchenUserDetailComponent } from './users/components/kitchen-user-detail/kitchen-user-detail.component';
 import { KitchenUserListComponent } from './users/components/kitchen-user-list/kitchen-user-list.component';
@@ -26,13 +27,14 @@ const routes: Routes = [
   { path: 'users/register', component: RegularUserCreateComponent },
   { path: 'users/:id', component: RegularUserDetailComponent },
   { path: 'users/:id/update', component: RegularUserUpdateComponent },
-  { path: "kitchens", component: KitchenListComponent },
+  { path: 'kitchens', component: KitchenListComponent },
   //{ path: "kitchens/register", component: KitchenRegisterComponent },
   { path: 'kitchens/register', component: KitchenRegisterComponent },
-  { path: "kitchens/:id", component: KitchenDetailComponent },
-  { path: 'interface', component: InterfaceComponent},
+  { path: 'kitchens/:id', component: KitchenDetailComponent },
+  { path: 'interface', component: InterfaceComponent },
   { path: 'kitchen/register', component: KitchenRegisterComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'detail/:id', component: DetailComponent },
 ];
 
 @NgModule({

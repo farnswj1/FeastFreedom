@@ -23,7 +23,6 @@ class KitchenFeaturedListAPI(ListAPIView):
 
 
 class KitchenCreateAPI(CreateAPIView):
-    permission_classes = [IsAuthenticated]
     queryset = Kitchen.objects.all()
     serializer_class = KitchenCreateSerializer
 

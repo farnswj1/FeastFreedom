@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
     this.kitchensService.getFeaturedKitchens().subscribe(
       (data) => (this.kitchens = data),
       (error) => (this.error = error),
-      () => console.log('Featured kitchens.')
+      () => console.log('Featured kitchens.', this.kitchens)
     );
   }
 

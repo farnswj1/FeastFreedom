@@ -5,7 +5,7 @@ export interface Kitchen {
   id: number;
   user: IKitchenUser;
   name: string;
-  working_days: any[];
+  workdays: any[];
   image: any;
   menu: any;
   featured: boolean;
