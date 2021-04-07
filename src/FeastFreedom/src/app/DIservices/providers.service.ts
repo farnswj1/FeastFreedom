@@ -25,12 +25,16 @@ export class ProvidersService {
 
   private logger = new Subject<boolean>();
 
-  private loggedIn = false;
+  private loggedIn: boolean = false;
 
   constructor(private http: HttpClient, private jwt: JwtHelperService) {}
 
   isLoggedIn(): Observable<boolean> {
     return this.logger.asObservable();
+  }
+
+  isAuthenticated(): boolean {
+    return this.loggedIn;
   }
 
   logIn(username: string, password: string): void {
@@ -39,6 +43,7 @@ export class ProvidersService {
         console.log(data);
         localStorage.setItem('access', data.access);
         localStorage.setItem('refresh', data.refresh);
+        localStorage.setItem('user_id', data.user_id);
       },
       (error) => console.log(error),
       () => {

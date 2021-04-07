@@ -3,7 +3,10 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ProvidersService } from 'src/app/DIservices/providers.service';
-import { InterfaceComponent } from '../interface.component';
+import { KitchensService } from 'src/app/kitchens/services/kitchens.service';
+import { InterfaceComponent } from '../interface.component'
+
+
 
 @Component({
   selector: 'app-kitchen-register',
@@ -15,8 +18,7 @@ export class KitchenRegisterComponent implements OnInit {
   public kitchenForm: any;
   kitchen: any;
   errorMsg: any;
-  userId: any;
-  name: any;
+  userId: any = 1;
 
   days: Array<String> = [
     'Monday',
@@ -63,7 +65,7 @@ export class KitchenRegisterComponent implements OnInit {
     });
 
     this.kitchenForm = this.fb.group({
-      name: [this.proService.getName()],
+      name: [''],
       user: [this.userId],
       // workdays: this.addDaysControls(), //testing validations NOT FINAL YET
       workdays: this.fb.array([
@@ -77,15 +79,13 @@ export class KitchenRegisterComponent implements OnInit {
 
       menu: this.fb.array([
         this.fb.group({
-          name: [''],
+          item_name: [''],
           vegan: [null],
           price: [null],
         }),
       ]),
 
-      featured: [null],
-
-      image: [''],
+      featured: [null]
     });
   }
 
@@ -104,7 +104,7 @@ export class KitchenRegisterComponent implements OnInit {
   addNewItem() {
     const itemLength = this.menuArray.length;
     const newitem = this.fb.group({
-      name: [''],
+      item_name: [''],
       vegan: [null],
       price: [null],
     });
@@ -147,10 +147,17 @@ export class KitchenRegisterComponent implements OnInit {
     // this.router.navigate(['home']);
     // this.kitchenForm.reset();
   }
+  get user() {
+    return this.kitchenForm.controls.user;
+  }
 
-  get itemName() {
+  get name() {
+    return this.kitchenForm.controls.name;
+  }
+
+  get item_name() {
     let item = <FormGroup>this.kitchenForm.controls.menu;
-    return item.controls.itemName;
+    return item.controls.item_name;
   }
 
   get vegan() {
@@ -160,7 +167,7 @@ export class KitchenRegisterComponent implements OnInit {
 
   get price() {
     let p = <FormGroup>this.kitchenForm.controls.menu;
-    return p.controls.itemName;
+    return p.controls.name;
   }
 
   get day() {
@@ -176,10 +183,6 @@ export class KitchenRegisterComponent implements OnInit {
   get end_time() {
     let e = <FormGroup>this.kitchenForm.controls.workdays;
     return e.controls.end_time;
-  }
-
-  get image() {
-    return this.kitchenForm.get('image');
   }
 
   get featured() {

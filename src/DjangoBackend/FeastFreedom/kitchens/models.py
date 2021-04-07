@@ -24,7 +24,7 @@ DAYS = (
 
 # Create your models here.
 class MenuItem(models.Model):
-    name = models.CharField(
+    item_name = models.CharField(
         null=False,
         max_length=50,
         validators=[
@@ -41,7 +41,7 @@ class MenuItem(models.Model):
                 message="Please insert a valid name.",
             ),
             ProhibitNullCharactersValidator(),
-        ],
+        ]
     )
     vegan = models.BooleanField(null=False, default=False)
     price = models.DecimalField(
@@ -57,7 +57,7 @@ class MenuItem(models.Model):
                 limit_value=1_000_000,
                 message="Price must not exceed $1 million.",
             ),
-        ],
+        ]
     )
 
     class Meta:
@@ -81,7 +81,7 @@ class WorkDay(models.Model):
                 message="Please insert a valid name.",
             ),
             ProhibitNullCharactersValidator(),
-        ],
+        ]
     )
     start_time = models.CharField(
         null=False,
@@ -100,7 +100,7 @@ class WorkDay(models.Model):
                 message="Please insert a valid start time.",
             ),
             ProhibitNullCharactersValidator(),
-        ],
+        ]
     )
     end_time = models.CharField(
         null=False,
@@ -119,7 +119,7 @@ class WorkDay(models.Model):
                 message="Please insert a valid end time.",
             ),
             ProhibitNullCharactersValidator(),
-        ],
+        ]
     )
 
     class Meta:
@@ -147,19 +147,8 @@ class Kitchen(models.Model):
                 message="Please insert a valid name.",
             ),
             ProhibitNullCharactersValidator(),
-        ],
+        ]
     )
     featured = models.BooleanField(null=False, default=False)
     workdays = models.ArrayField(model_container=WorkDay)
     menu = models.ArrayField(model_container=MenuItem)
-    # image = models.ImageField(default="default.jpg", upload_to="kitchen_imgs")
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-
-        # img = Image.open(self.image.path)
-
-        # if img.width != 300 or img.height != 300:
-        #     output_size = (300, 300)
-        #     img.thumbnail(output_size)
-        # img.save(self.image.path)

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Kitchen } from 'src/app/DIservices/kitchen';
 
 @Component({
@@ -21,7 +22,7 @@ export class KitchenComponent implements OnInit {
     'saturday',
   ];
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   workingDay(day: string): boolean {
     if (this.kitchen) {
@@ -40,5 +41,9 @@ export class KitchenComponent implements OnInit {
     }
 
     this.workingDay('monday');
+  }
+
+  kitchenDetail(kitchen: any){
+    this.router.navigate(['/kitchens', kitchen.id])
   }
 }

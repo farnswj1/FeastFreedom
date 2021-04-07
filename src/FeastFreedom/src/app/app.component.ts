@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProvidersService } from './DIservices/providers.service';
+import { AuthenticateService } from './users/services/authenticate.service';
 
 @Component({
   selector: 'app-root',
@@ -21,10 +22,7 @@ export class AppComponent {
   ) {
     this.user = localStorage.getItem('access')
       ? this.providersService.getUser().subscribe(
-          (user: any) => {
-            this.user = user;
-            console.log(user);
-          },
+          (user: any) => (this.user = user),
           (error) => console.log(error)
         )
       : this.providersService.isLoggedIn().subscribe((data) => {
