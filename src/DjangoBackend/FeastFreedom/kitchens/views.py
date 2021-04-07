@@ -28,6 +28,12 @@ class KitchenDetailAPI(RetrieveAPIView):
     serializer_class = KitchenSerializer
 
 
+class KitchenByUserDetailAPI(RetrieveAPIView):
+    lookup_field = "user__id"
+    queryset = Kitchen.objects.all()
+    serializer_class = KitchenSerializer
+
+
 class KitchenUpdateAPI(UpdateAPIView):
     permission_classes = [IsAuthenticated]
     queryset = Kitchen.objects.all()
