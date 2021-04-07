@@ -89,6 +89,7 @@ export class ProvidersService {
   }
 
   postKitchen(KitchenData: any): Observable<kitchen> {
+    console.log('provider', KitchenData);
     return this.http
       .post<kitchen>(this._url + 'create/', KitchenData)
       .pipe(catchError(this.errorHandler));

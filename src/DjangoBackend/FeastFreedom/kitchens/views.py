@@ -3,11 +3,11 @@ from rest_framework.generics import (
     CreateAPIView,
     RetrieveAPIView,
     UpdateAPIView,
-    DestroyAPIView
+    DestroyAPIView,
 )
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import FileUploadParser
-from .serializers import KitchenSerializer
+from .serializers import KitchenSerializer, KitchenCreateSerializer
 from .models import Kitchen
 
 
@@ -20,7 +20,7 @@ class KitchenListAPI(ListAPIView):
 class KitchenCreateAPI(CreateAPIView):
     #permission_classes = [IsAuthenticated]
     queryset = Kitchen.objects.all()
-    serializer_class = KitchenSerializer
+    serializer_class = KitchenCreateSerializer
 
 
 class KitchenDetailAPI(RetrieveAPIView):
@@ -31,7 +31,7 @@ class KitchenDetailAPI(RetrieveAPIView):
 class KitchenUpdateAPI(UpdateAPIView):
     permission_classes = [IsAuthenticated]
     queryset = Kitchen.objects.all()
-    serializer_class = KitchenSerializer
+    serializer_class = KitchenCreateSerializer
 
 
 class KitchenDeleteAPI(DestroyAPIView):
