@@ -17,8 +17,13 @@ class KitchenListAPI(ListAPIView):
     serializer_class = KitchenSerializer
 
 
+class KitchenFeaturedListAPI(ListAPIView):
+    queryset = Kitchen.objects.filter(featured=True)
+    serializer_class = KitchenSerializer
+
+
 class KitchenCreateAPI(CreateAPIView):
-    #permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     queryset = Kitchen.objects.all()
     serializer_class = KitchenCreateSerializer
 
