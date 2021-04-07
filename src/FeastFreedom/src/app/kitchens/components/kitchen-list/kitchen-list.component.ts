@@ -27,6 +27,12 @@ export class KitchenListComponent implements OnInit {
           console.log('Complete!');
         }
       );
+
+    this.providersService.getUser().subscribe(
+      (data) => (this.user = data),
+      (error) => console.log(error),
+      () => console.log(this.user)
+    );
   }
 
   ngOnInit(): void {}
@@ -47,10 +53,5 @@ export class KitchenListComponent implements OnInit {
       (error: any) => console.log(error),
       () => (this.kitchen = null)
     );
-  }
-
-  loggedInUserIsStaff(){
-    let user: any = this.providersService.getUser();
-    return user.is_staff;
   }
 }
