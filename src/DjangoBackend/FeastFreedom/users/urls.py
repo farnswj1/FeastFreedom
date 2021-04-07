@@ -11,7 +11,6 @@ urlpatterns = [
     path("<int:pk>/delete/", views.UserDeleteAPI.as_view(), name="user_delete"),
     path("kitchens/", views.KitchenUserListAPI.as_view(), name="kitchen_user_list"),
     path("kitchens/create/", views.KitchenUserCreateAPI.as_view(), name="kitchen_user_create"),
-    path("kitchens/<int:pk>/", views.KitchenUserDetailAPI.as_view(), name="kitchen_user_detail"),
     path("kitchens/<int:pk>/update/", views.KitchenUserUpdateAPI.as_view(), name="kitchen_user_update"),
     path("kitchens/<int:pk>/delete/", views.KitchenUserDeleteAPI.as_view(), name="kitchen_user_delete"),
 ]

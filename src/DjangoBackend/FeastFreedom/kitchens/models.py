@@ -24,7 +24,7 @@ DAYS = (
 
 # Create your models here.
 class MenuItem(models.Model):
-    item_name = models.CharField(
+    name = models.CharField(
         null=False,
         max_length=50,
         validators=[

@@ -22,7 +22,7 @@ class UserCreateAPI(CreateAPIView):
 
 
 class UserDetailAPI(RetrieveAPIView):
-    queryset = User.objects.get_regular_users()
+    queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
@@ -44,11 +44,6 @@ class KitchenUserListAPI(ListAPIView):
 
 
 class KitchenUserCreateAPI(CreateAPIView):
-    queryset = User.objects.get_kitchen_users()
-    serializer_class = UserSerializer
-
-
-class KitchenUserDetailAPI(RetrieveAPIView):
     queryset = User.objects.get_kitchen_users()
     serializer_class = UserSerializer
 
