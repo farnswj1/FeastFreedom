@@ -1,6 +1,7 @@
 <div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
 <div *ngIf="kitchen">
     <h2>{{kitchen.name}}</h2>
+    <img src="http://localhost:8000/media/yeet-100_fb_7232874.jpg">
     <ul class="py-3">
         <li><b>ID:</b> {{kitchen.user.id}}</li>
         <li><b>Owner:</b> {{kitchen.user.first_name}} {{kitchen.user.last_name}}</li>

@@ -23,6 +23,11 @@ export class KitchensService {
       .pipe(catchError(this.errorHandler));
   }
 
+  getFeaturedKitchens(): Observable<IKitchen[]> {
+    return this.http.get<IKitchen[]>(this._url + "featured/")
+    .pipe(catchError(this.errorHandler));
+  }
+
   getKitchen(id: number): Observable<IKitchen[]> {
     return this.http
       .get<IKitchen[]>(this._url + id + '/')

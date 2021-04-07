@@ -5,6 +5,7 @@ app_name = "kitchens"
 
 urlpatterns = [
     path("", views.KitchenListAPI.as_view(), name="list"),
+    path("featured/", views.KitchenListAPI.as_view(), name="featured"),
     path("create/", views.KitchenCreateAPI.as_view(), name="create"),
     path("<int:pk>/", views.KitchenDetailAPI.as_view(), name="detail"),
     path("<int:pk>/update/", views.KitchenUpdateAPI.as_view(), name="update"),
