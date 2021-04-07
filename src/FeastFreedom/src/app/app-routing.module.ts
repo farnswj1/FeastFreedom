@@ -27,10 +27,10 @@ const routes: Routes = [
   { path: 'users/:id', component: RegularUserDetailComponent },
   { path: 'users/:id/update', component: RegularUserUpdateComponent },
   { path: "kitchens", component: KitchenListComponent },
-  { path: "kitchens/register", component: KitchenCreateComponent },
+  //{ path: "kitchens/register", component: KitchenCreateComponent },
   { path: "kitchens/:id", component: KitchenDetailComponent },
   { path: 'interface', component: InterfaceComponent},
-  { path: 'register/:id', component: KitchenRegisterComponent },
+  { path: 'kitchen/register', component: KitchenRegisterComponent },
   { path: 'login', component: LoginComponent },
 ];
 

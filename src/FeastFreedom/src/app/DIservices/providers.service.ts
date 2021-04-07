@@ -8,6 +8,7 @@ import { catchError } from 'rxjs/operators';
 // Angular-jwt
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Order } from './order';
+import { IUser } from '../users/interfaces/user';
 
 @Injectable({
   providedIn: 'root',
@@ -62,9 +63,8 @@ export class ProvidersService {
   }
 
   getUser(): Observable<{}> {
-    const id = this.jwt.decodeToken(localStorage.getItem('access') || '')
-      .user_id;
-    return this.http.get(this.djangoUrl + 'users/' + '');
+    const id = this.jwt.decodeToken(localStorage.getItem('access') || '').user_id;
+    return this.http.get(this.djangoUrl + 'users/' + id + '/');
   }
 
   getUserId(): number {
