@@ -24,7 +24,10 @@
         <td>{{ kitchen.user.phone_number }}</td>
         <td>{{ kitchen.user.email }}</td>
         <td>
-          <button class="btn btn-primary" (click)="kitchenDetail(kitchen)">
+          <button
+            class="btn btn-primary"
+            [routerLink]="['/detail', kitchen.id]"
+          >
             View
           </button>
           <button

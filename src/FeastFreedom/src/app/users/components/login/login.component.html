@@ -1,22 +1,27 @@
-<label for="username">Username</label>
-<input
-  type="text"
-  class="form-control"
-  id="username"
-  required
-  [(ngModel)]="username"
-/>
-<label for="password">Password</label>
-<input
-  type="password"
-  class="form-control"
-  id="password"
-  required
-  [(ngModel)]="password"
-/>
+<div class="login">
+  <label for="username">Username</label>
+  <input
+    type="text"
+    class="form-control"
+    id="username"
+    required
+    [(ngModel)]="username"
+  />
+  <label for="password">Password</label>
+  <input
+    type="password"
+    class="form-control"
+    id="password"
+    required
+    [(ngModel)]="password"
+  />
 
-<span class="buttons">
-  <button type="button" class="btn btn-success" (click)="login()">
-    Log in
-  </button>
-</span>
+  <div class="buttons">
+    <button type="button" class="btn btn-primary" routerLink="/users/register">
+      Register
+    </button>
+    <button type="button" class="btn btn-success" (click)="login()">
+      Log in
+    </button>
+  </div>
+</div>

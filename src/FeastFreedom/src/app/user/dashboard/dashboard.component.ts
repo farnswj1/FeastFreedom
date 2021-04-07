@@ -11,12 +11,18 @@ import { Kitchen } from '../../DIservices/kitchen';
 export class DashboardComponent implements OnInit {
   public kitchens: any;
   public error = null;
+  public featured: Kitchen[] | undefined;
 
   constructor(private kitchensService: KitchensService) {
     this.kitchensService.getFeaturedKitchens().subscribe(
       (data) => (this.kitchens = data),
       (error) => (this.error = error),
-      () => console.log('Featured kitchens.', this.kitchens)
+      () => {
+        console.log('Featured kitchens.', this.kitchens);
+        this.featured = this.kitchens.filter(
+          (kitchen: any) => kitchen.featured
+        );
+      }
     );
   }
 
