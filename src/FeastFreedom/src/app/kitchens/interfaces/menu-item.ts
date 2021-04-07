@@ -1,5 +1,5 @@
 export interface IMenuItem {
-    item_name: string;
+    name: string;
     vegan: boolean;
     price: number;
 }

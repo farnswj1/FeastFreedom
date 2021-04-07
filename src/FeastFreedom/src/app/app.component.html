@@ -24,10 +24,6 @@
 
 <div class="dropdown" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
   <ul>
-<<<<<<< HEAD
-    <li class="nav-item">
-      <a *ngIf="true" class="nav-link" routerLink="/" (click)="logout()">Logout</a>
-=======
     <li class="nav-item" *ngIf="user">
       <button
         type="button"
@@ -37,7 +33,6 @@
       >
         kitchens
       </button>
->>>>>>> 93353419d3056cf58eba789734a57a7e821a10e5
     </li>
     <li class="nav-item" *ngIf="user">
       <button

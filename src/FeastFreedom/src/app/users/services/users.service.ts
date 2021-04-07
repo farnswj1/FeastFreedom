@@ -49,7 +49,7 @@ export class UsersService {
   }
 
   getKitchenUser(id: number): Observable<IUser[]> {
-    return this.http.get<IUser[]>(`${this._url}kitchens/${id}/`)
+    return this.http.get<IUser[]>(this._url + id + "/")
     .pipe(catchError(this.errorHandler));
   }
 

@@ -36,12 +36,16 @@ export class KitchenRegisterComponent implements OnInit {
     '09:00 AM',
     '10:00 AM',
     '11:00 AM',
+    '12:00 PM',
     '01:00 PM',
     '02:00 PM',
     '03:00 PM',
   ];
 
   timeout: Array<String> = [
+    '04:00 PM',
+    '05:00 PM',
+    '06:00 PM',
     '07:00 PM',
     '08:00 PM',
     '09:00 PM',
@@ -79,7 +83,7 @@ export class KitchenRegisterComponent implements OnInit {
 
       menu: this.fb.array([
         this.fb.group({
-          item_name: [''],
+          name: [''],
           vegan: [null],
           price: [null],
         }),
@@ -104,7 +108,7 @@ export class KitchenRegisterComponent implements OnInit {
   addNewItem() {
     const itemLength = this.menuArray.length;
     const newitem = this.fb.group({
-      item_name: [''],
+      name: [''],
       vegan: [null],
       price: [null],
     });
@@ -116,7 +120,7 @@ export class KitchenRegisterComponent implements OnInit {
     const itemLength = this.workdaysArray.length;
     const newitem = this.fb.group({
       day: ['', [Validators.required]],
-      start_time: ['', [Validators.required]],
+      start_time: ['', [Validators.required, ]],
       end_time: ['', [Validators.required]],
     });
 
@@ -153,11 +157,6 @@ export class KitchenRegisterComponent implements OnInit {
 
   get name() {
     return this.kitchenForm.controls.name;
-  }
-
-  get item_name() {
-    let item = <FormGroup>this.kitchenForm.controls.menu;
-    return item.controls.item_name;
   }
 
   get vegan() {
