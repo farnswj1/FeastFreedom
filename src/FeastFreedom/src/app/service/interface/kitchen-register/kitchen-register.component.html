@@ -1,5 +1,5 @@
 <h2>Add Provider's Service</h2>
-
+<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
 <form [formGroup]="kitchenForm" (ngSubmit)="Save(kitchenForm)">
   <!-- Kitchen Indentifier -->
 
@@ -78,8 +78,9 @@
           </select>
         </span>
       </div>
+      <a class="btn btn-danger" (click)="removeWorkDay(i)">Remove Day</a>
     </div>
-    <a class="btn btn-primary" (click)="addNewDay()">Add day</a>
+    <a class="btn btn-primary" (click)="addNewDay()">Add Day</a>
   </div>
   <!-- MENU ARRAY STARTS HERE -->
 
@@ -118,7 +119,7 @@
             formControlName="vegan"
             [value]="false"
           />
-          <label class="form-check-label" for="not-vegan"> Not vegan </label>
+          <label class="form-check-label" for="not-vegan"> Not Vegan </label>
         </div>
       </div>
       <label>Price</label
@@ -128,9 +129,10 @@
         formControlName="price"
         id="task{{ i }}"
       />
+      <a class="btn btn-danger" (click)="removeMenuItem(i)">Remove Plate</a>
     </div>
 
-    <a class="btn btn-primary" (click)="addNewItem()">Add plate</a>
+    <a class="btn btn-primary" (click)="addNewItem()">Add Plate</a>
   </div>
 
   <!-- IMAGE GOES HERE -->
