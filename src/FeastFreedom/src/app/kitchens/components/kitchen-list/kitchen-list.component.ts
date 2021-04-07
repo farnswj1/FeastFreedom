@@ -9,31 +9,43 @@ import { KitchensService } from '../../services/kitchens.service';
   styleUrls: ['./kitchen-list.component.css'],
 })
 export class KitchenListComponent implements OnInit {
-  public kitchens: any;
+  public kitchen: any;
   public errorMsg: any;
   public user: any;
 
   constructor(
-    private kitchensService: KitchensService,
     private router: Router,
+    private kitchensService: KitchensService,
     private providersService: ProvidersService
   ) {
-    this.kitchensService.getKitchens().subscribe(
-      (data) => (this.kitchens = data),
-      (error) => (this.errorMsg = error),
-      () => console.log('Complete!')
-    );
+    this.kitchensService
+      .getKitchenByUser(this.providersService.getUserId())
+      .subscribe(
+        (data: any) => (this.kitchen = data),
+        (error: any) => (this.errorMsg = error),
+        () => {
+          console.log('Complete!');
+        }
+      );
   }
 
-  ngOnInit(): void {
-    // this.providersService.
-  }
+  ngOnInit(): void {}
 
   kitchenDetail(kitchen: any): void {
     this.router.navigate(['/kitchens/', kitchen.id]);
   }
 
   kitchenCreate(): void {
-    this.router.navigate(['/kitchens/register/']);
+    this.router.navigate(['/kitchen/register/']);
+  }
+
+  kitchenDelete(): void {
+    console.log('delete');
+
+    this.kitchensService.deleteKitchen(this.kitchen.id).subscribe(
+      (data: any) => console.log(data),
+      (error: any) => console.log(error),
+      () => (this.kitchen = null)
+    );
   }
 }

@@ -1,4 +1,8 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Injectable, Provider } from '@angular/core';
 import { Observable, Subject, throwError } from 'rxjs';
 import { IKitchenUser } from './providers';
@@ -73,10 +77,10 @@ export class ProvidersService {
   getKitchen(id?: number): Observable<{}> {
     return id
       ? this.http
-          .get<Kitchen>(this.url + 'kitchens/' + id)
+          .get<Kitchen>(this.djangoUrl + 'kitchens/' + id)
           .pipe(catchError(this.errorHandler))
       : this.http
-          .get<Kitchen[]>(this.url + 'kitchens/')
+          .get<Kitchen[]>(this.djangoUrl + 'kitchens/')
           .pipe(catchError(this.errorHandler));
   }
 
@@ -87,9 +91,13 @@ export class ProvidersService {
   }
 
   postKitchen(KitchenData: any): Observable<kitchen> {
-    console.log('provider', KitchenData);
+    // console.log('provider', KitchenData);
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('access')}`,
+    });
+    console.log(headers);
     return this.http
-      .post<kitchen>(this._url + 'create/', KitchenData)
+      .post<kitchen>(this._url + 'create/', KitchenData, { headers })
       .pipe(catchError(this.errorHandler));
   }
 
