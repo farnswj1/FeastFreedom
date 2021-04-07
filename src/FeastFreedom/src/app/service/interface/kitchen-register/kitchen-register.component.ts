@@ -77,7 +77,7 @@ export class KitchenRegisterComponent implements OnInit {
 
       menu: this.fb.array([
         this.fb.group({
-          itemName: [''],
+          name: [''],
           vegan: [null],
           price: [null]
 
@@ -107,7 +107,7 @@ export class KitchenRegisterComponent implements OnInit {
   addNewItem() {
     const itemLength = this.menuArray.length;
     const newitem = this.fb.group({
-      itemName: [''],
+      name: [''],
       vegan: [null],
       price: [null]
     });
