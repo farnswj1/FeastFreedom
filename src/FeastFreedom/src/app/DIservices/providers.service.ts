@@ -64,14 +64,13 @@ export class ProvidersService {
   }
 
   getUser(): Observable<{}> {
-    const id = this.jwt.decodeToken(localStorage.getItem('access') || '')
-      .user_id;
+    const id = this.jwt.decodeToken(localStorage.getItem('access') || '')?.user_id;
     return this.http.get(this.djangoUrl + 'users/' + id + '/');
   }
 
   getUserId(): number {
     const token = localStorage.getItem('access');
-    return this.jwt.decodeToken(token || '').user_id;
+    return this.jwt.decodeToken(token || '')?.user_id;
   }
 
   getKitchen(id?: number): Observable<{}> {

@@ -1,6 +1,6 @@
 <h2>My Kitchen</h2>
 <!-- <div class="alert alert-danger" *ngIf="errorMsg">{{ errorMsg }}</div> -->
-<button class="btn btn-primary" (click)="kitchenCreate()" *ngIf="!kitchen">
+<button class="btn btn-primary" (click)="kitchenCreate()" *ngIf="!kitchen && loggedInUserIsStaff()">
   Create Kitchen
 </button>
 <div *ngIf="kitchen">
