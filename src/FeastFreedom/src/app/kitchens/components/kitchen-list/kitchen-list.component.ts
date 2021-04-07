@@ -48,4 +48,9 @@ export class KitchenListComponent implements OnInit {
       () => (this.kitchen = null)
     );
   }
+
+  loggedInUserIsStaff(){
+    let user: any = this.providersService.getUser();
+    return user.is_staff;
+  }
 }
