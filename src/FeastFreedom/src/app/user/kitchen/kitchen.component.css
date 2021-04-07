@@ -1,5 +1,15 @@
+a {
+  color: black;
+}
+a:hover {
+  color: black;
+}
 .detail-card {
   display: flex;
+}
+h1 {
+  text-align: center;
+  margin: 2rem 0;
 }
 
 .detail-card > * {
@@ -38,6 +48,9 @@
 }
 
 .flip-card-front {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #bbb;
   color: black;
 }
@@ -64,4 +77,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+img {
+  height: 300px;
 }

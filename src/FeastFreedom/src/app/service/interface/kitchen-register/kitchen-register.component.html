@@ -1,9 +1,9 @@
 <h2>Add Provider's Service</h2>
-<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+<div class="alert alert-danger" *ngIf="errorMsg">{{ errorMsg }}</div>
 <form [formGroup]="kitchenForm" (ngSubmit)="Save(kitchenForm)">
   <!-- Kitchen Indentifier -->
 
-  <h4>Kitchen</h4>
+  <h4>Kitchen {{ kitchenForm.value.name }}</h4>
   <div>
     <label for="addText">Name </label><br />
     <input class="form-control" type="text" formControlName="name" />
@@ -90,7 +90,8 @@
       *ngFor="let item of kitchenForm.controls.menu['controls']; let i = index"
       [formGroupName]="i"
     >
-      <h5>Plate {{ i + 1 }}</h5>
+      <h5 *ngIf="!item.value.name">Plate {{ i + 1 }}</h5>
+      <h5 *ngIf="item.value.name">{{ item.value.name }}</h5>
       <!-- <label>Item Id</label><input class="form-control" type="text" formControlName="id" id="task{{i}}"> -->
       <label>Name</label
       ><input

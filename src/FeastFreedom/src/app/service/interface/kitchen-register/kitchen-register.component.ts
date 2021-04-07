@@ -200,7 +200,7 @@ export class KitchenRegisterComponent implements OnInit {
     return this.kitchenForm.controls.user;
   }
 
-  get name() {
+  getName() {
     return this.kitchenForm.controls.name;
   }
 

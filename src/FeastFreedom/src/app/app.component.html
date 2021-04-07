@@ -2,13 +2,6 @@
   <ul class="navbar-nav">
     <li class="nav-item">
       <a class="navbar-brand" routerLink="/" routerLinkActive="active">Home</a>
-      <a class="navbar-brand" routerLink="/kitchens" routerLinkActive="active"
-        >Kitchens</a
-      >
-      <a class="navbar-brand" routerLink="/users" routerLinkActive="active"
-        >Users</a
-      >
-      <a class="navbar-brand" routerLink="/users/kitchens" routerLinkActive="active">Kitchen Users</a>
     </li>
     <li *ngIf="!user" class="nav-item">
       <a class="nav-link" routerLink="login">Login</a>

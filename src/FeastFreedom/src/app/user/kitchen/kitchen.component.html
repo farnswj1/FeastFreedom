@@ -17,14 +17,11 @@
   <a [routerLink]="['detail', kitchen.id]">
     <div [class.flip-card-inner]="parent === 'dashboard'">
       <div [class.flip-card-front]="parent === 'dashboard'">
-        <img
-          class="card-img-top"
-          style="width: 300px; height: 300px"
-          [src]="kitchen.image"
-        />
+        <img [src]="kitchen.image" />
       </div>
       <div [class.flip-card-back]="parent === 'dashboard'">
-        <h1>{{ kitchen.name }}</h1>
+        <h1 *ngIf="parent === 'dashboard'">{{ kitchen.name }}</h1>
+        <br *ngIf="!(parent === 'dashboard')" />
         <div class="days">
           <div *ngFor="let day of daysOfTheWeek">
             <span

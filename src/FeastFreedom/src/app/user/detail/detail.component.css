@@ -1,8 +1,12 @@
+h1 {
+  text-align: center;
+  margin: 0 0 3rem 0;
+}
+
 .menu {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: flex-end;
   height: 100%;
 }
 .order {
@@ -39,4 +43,9 @@ img {
 .not-vegan {
   width: 0.8rem;
   filter: grayscale(100%);
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
 }
