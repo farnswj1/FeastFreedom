@@ -41,14 +41,11 @@ export class ProvidersService {
   logIn(username: string, password: string): void {
     this.http.post(this.djangoUrl + 'login/', { username, password }).subscribe(
       (data: any) => {
-        console.log(data);
         localStorage.setItem('access', data.access);
         localStorage.setItem('refresh', data.refresh);
-        localStorage.setItem('user_id', data.user_id);
       },
       (error) => console.log(error),
       () => {
-        console.log('logged in');
         this.loggedIn = true;
         this.logger.next(this.loggedIn);
       }
@@ -63,7 +60,8 @@ export class ProvidersService {
   }
 
   getUser(): Observable<{}> {
-    const id = this.jwt.decodeToken(localStorage.getItem('access') || '').user_id;
+    const id = this.jwt.decodeToken(localStorage.getItem('access') || '')
+      .user_id;
     return this.http.get(this.djangoUrl + 'users/' + id + '/');
   }
 

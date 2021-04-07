@@ -17,22 +17,23 @@ export class KitchenListComponent implements OnInit {
     private kitchensService: KitchensService,
     private router: Router,
     private providersService: ProvidersService
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.kitchensService.getKitchens().subscribe(
       (data) => (this.kitchens = data),
       (error) => (this.errorMsg = error),
       () => console.log('Complete!')
     );
+  }
+
+  ngOnInit(): void {
     // this.providersService.
   }
 
-  kitchenDetail(kitchen: any) {
+  kitchenDetail(kitchen: any): void {
     this.router.navigate(['/kitchens/', kitchen.id]);
   }
 
-  kitchenCreate() {
-    this.router.navigate(['/kitchens/register/'])
+  kitchenCreate(): void {
+    this.router.navigate(['/kitchens/register/']);
   }
 }
