@@ -16,7 +16,15 @@
         <div class="mb-4" *ngFor="let workday of workdays.controls; index as index">
             <ng-container [formGroupName]="index">
                 <label>Day</label>
-                <input class="form-control" type="text" formControlName="day">
+                <select class="form-control" formControlName="day">
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
+                </select>
 
                 <label>Start Time</label>
                 <input class="form-control" type="text" formControlName="start_time">
@@ -46,8 +54,7 @@
         </div>
     </ng-container>
     
-    <label>Image</label>
-    <input class="form-control mb-5" type="file" [class.is-invalid]="image.invalid && image.touched" (change)="onFileChange($event)">
+    <br>
 
     <button class="btn btn-primary" [disabled]="kitchenForm.invalid" type="submit">Submit</button>
 </form>
