@@ -5,14 +5,15 @@
       <a class="navbar-brand" routerLink="/kitchens" routerLinkActive="active"
         >Kitchens</a
       >
-      <a class="navbar-brand" routerLink="/users" routerLinkActive="active">Users</a
+      <a class="navbar-brand" routerLink="/users" routerLinkActive="active"
+        >Users</a
       >
       <a class="navbar-brand" routerLink="/users/kitchens" routerLinkActive="active">Kitchen Users</a>
     </li>
-    <li *ngIf="!isLoggedIn" class="nav-item">
+    <li *ngIf="!user" class="nav-item">
       <a class="nav-link" routerLink="login">Login</a>
     </li>
-    <li class="nav-item" *ngIf="isLoggedIn">
+    <li class="nav-item" *ngIf="user">
       <a
         type="button"
         class="nav-link"
@@ -27,7 +28,7 @@
 </nav>
 
 <div class="dropdown" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
-  <ul *nngIf="isLoggedIn">
+  <ul *ngIf="user">
     <li class="nav-item" *ngIf="user">
       <button
         type="button"
@@ -41,7 +42,7 @@
     <li class="nav-item" *ngIf="user">
       <button type="button" class="btn btn-link" (click)="logout()">
         Logout
-    </button>
+      </button>
     </li>
   </ul>
 </div>

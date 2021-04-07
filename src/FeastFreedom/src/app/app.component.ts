@@ -40,5 +40,6 @@ export class AppComponent {
     this.providersService.logOut();
     this.isCollapsed = true;
     this.user = null;
+    this.router.navigate(['/']);
   }
 }

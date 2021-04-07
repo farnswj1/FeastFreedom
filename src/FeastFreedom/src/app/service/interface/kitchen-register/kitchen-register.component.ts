@@ -4,9 +4,7 @@ import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ProvidersService } from 'src/app/DIservices/providers.service';
 import { KitchensService } from 'src/app/kitchens/services/kitchens.service';
-import { InterfaceComponent } from '../interface.component'
-
-
+import { InterfaceComponent } from '../interface.component';
 
 @Component({
   selector: 'app-kitchen-register',
@@ -69,12 +67,15 @@ export class KitchenRegisterComponent implements OnInit {
     });
 
     this.kitchenForm = this.fb.group({
-      name: ['', [
-        Validators.required, 
-        Validators.minLength(2), 
-        Validators.maxLength(50),
-        Validators.pattern("^[A-Za-z0-9: ,'&@-]{2,50}$")
-      ]],
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(50),
+          Validators.pattern("^[A-Za-z0-9: ,'&@-]{2,50}$"),
+        ],
+      ],
       user: [this.userId, Validators.required],
       // workdays: this.addDaysControls(), //testing validations NOT FINAL YET
       workdays: this.fb.array([
@@ -88,24 +89,25 @@ export class KitchenRegisterComponent implements OnInit {
 
       menu: this.fb.array([
         this.fb.group({
-          name: ['', [
-            Validators.required,
-            Validators.min(3),
-            Validators.max(50),
-            Validators.pattern("^[A-Za-z0-9 //,'-]{3,50}$")
-          ]],
+          name: [
+            '',
+            [
+              Validators.required,
+              Validators.min(3),
+              Validators.max(50),
+              Validators.pattern("^[A-Za-z0-9 //,'-]{3,50}$"),
+            ],
+          ],
           vegan: [false, Validators.required],
-          price: [null, [
-            Validators.required,
-            Validators.min(0),
-            Validators.max(1000000)
-          ]],
+          price: [
+            null,
+            [Validators.required, Validators.min(0), Validators.max(1000000)],
+          ],
         }),
       ]),
 
-      featured: [false, [
-        Validators.required, 
-      ]]
+      featured: [false, [Validators.required]],
+      image: '',
     });
   }
 
@@ -124,18 +126,20 @@ export class KitchenRegisterComponent implements OnInit {
   addNewItem() {
     const itemLength = this.menuArray.length;
     const newitem = this.fb.group({
-      name: ['', [
-        Validators.required,
-        Validators.min(3),
-        Validators.max(50),
-        Validators.pattern("^[A-Za-z0-9 //,'-]{3,50}$")
-      ]],
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.min(3),
+          Validators.max(50),
+          Validators.pattern("^[A-Za-z0-9 //,'-]{3,50}$"),
+        ],
+      ],
       vegan: [false, Validators.required],
-      price: [null, [
-        Validators.required,
-        Validators.min(0),
-        Validators.max(1000000)
-      ]]
+      price: [
+        null,
+        [Validators.required, Validators.min(0), Validators.max(1000000)],
+      ],
     });
 
     this.menuArray.push(newitem);
@@ -167,6 +171,7 @@ export class KitchenRegisterComponent implements OnInit {
       workdays: this.kitchenForm.value.workdays,
       user: this.jwt.decodeToken(localStorage.getItem('access') || '').user_id,
       featured: this.kitchenForm.value.featured,
+      image: '',
     };
     console.log(item);
 
@@ -176,10 +181,17 @@ export class KitchenRegisterComponent implements OnInit {
         console.log(this.kitchen);
         this.proService.getKitchen().subscribe(
           (data) => (this.kitchen = data),
-          (error) => {this.errorMsg = error; console.log(error)}
+          (error) => {
+            this.errorMsg = error;
+            console.log(error);
+          },
+          () => this.router.navigate(['kitchens'])
         );
       },
-      (error) => {this.errorMsg = error; console.log(error)}
+      (error) => {
+        this.errorMsg = error;
+        console.log(error);
+      }
     );
     // this.router.navigate(['home']);
     // this.kitchenForm.reset();
