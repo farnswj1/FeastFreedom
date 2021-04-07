@@ -21,7 +21,10 @@ export class AppComponent {
   ) {
     this.user = localStorage.getItem('access')
       ? this.providersService.getUser().subscribe(
-          (user: any) => (this.user = user[0]),
+          (user: any) => {
+            this.user = user;
+            console.log(user);
+          },
           (error) => console.log(error)
         )
       : this.providersService.isLoggedIn().subscribe((data) => {
