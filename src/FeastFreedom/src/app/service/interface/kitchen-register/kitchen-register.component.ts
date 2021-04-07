@@ -4,9 +4,7 @@ import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ProvidersService } from 'src/app/DIservices/providers.service';
 import { KitchensService } from 'src/app/kitchens/services/kitchens.service';
-import { InterfaceComponent } from '../interface.component'
-
-
+import { InterfaceComponent } from '../interface.component';
 
 @Component({
   selector: 'app-kitchen-register',
@@ -89,7 +87,8 @@ export class KitchenRegisterComponent implements OnInit {
         }),
       ]),
 
-      featured: [null]
+      featured: [null],
+      image: '',
     });
   }
 
@@ -120,7 +119,7 @@ export class KitchenRegisterComponent implements OnInit {
     const itemLength = this.workdaysArray.length;
     const newitem = this.fb.group({
       day: ['', [Validators.required]],
-      start_time: ['', [Validators.required, ]],
+      start_time: ['', [Validators.required]],
       end_time: ['', [Validators.required]],
     });
 
@@ -134,6 +133,7 @@ export class KitchenRegisterComponent implements OnInit {
       workdays: this.kitchenForm.value.workdays,
       user: this.jwt.decodeToken(localStorage.getItem('access') || '').user_id,
       featured: this.kitchenForm.value.featured,
+      image: '',
     };
     console.log(item);
 
@@ -142,8 +142,9 @@ export class KitchenRegisterComponent implements OnInit {
         this.kitchen = data;
         console.log(this.kitchen);
         this.proService.getKitchen().subscribe(
-          (data) => (this.kitchen = data),
-          (error) => console.log(error)
+          (kitchen: any) => (this.kitchen = kitchen),
+          (error: any) => console.log(error),
+          () => this.router.navigate(['kitchens'])
         );
       },
       (error) => (this.errorMsg = error)
