@@ -152,4 +152,4 @@ class Kitchen(models.Model):
     featured = models.BooleanField(null=False, default=False)
     workdays = models.ArrayField(model_container=WorkDay)
     menu = models.ArrayField(model_container=MenuItem)
-    image = models.TextField(max_length=200, blank=True, default="")
+    image = models.TextField(max_length=200, blank=True, default="localhost:8000/media/default.jpg")

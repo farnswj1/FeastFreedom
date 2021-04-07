@@ -1,11 +1,11 @@
-<ngb-carousel *ngIf="!kitchens">
+<ngb-carousel *ngIf="kitchens">
   <ng-template ngbSlide *ngFor="let kitchen of kitchens">
-    <a [routerLink]="['/detail', kitchen.id]">
+    <a [routerLink]="['/kitchens', kitchen.id]">
       <div class="picsum-img-wrapper">
         <img [src]="kitchen.image" alt="Kitchen image" />
       </div>
       <div class="carousel-caption">
-        <h3>{{ kitchen.name }}</h3>
+        <h1>{{ kitchen.name }}</h1>
         <p></p>
       </div>
     </a>
