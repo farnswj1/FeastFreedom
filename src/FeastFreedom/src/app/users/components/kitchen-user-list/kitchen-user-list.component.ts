@@ -22,7 +22,7 @@ export class KitchenUserListComponent implements OnInit {
   }
 
   kitchenUserCreate() {
-    this.router.navigate(['users/kitchens/register'])
+    this.router.navigate(['users/kitchen/register'])
   }
 
   kitchenUserDetail(kitchenUser: any) {

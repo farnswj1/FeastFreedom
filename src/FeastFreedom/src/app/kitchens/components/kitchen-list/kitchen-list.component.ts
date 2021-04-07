@@ -33,6 +33,6 @@ export class KitchenListComponent implements OnInit {
   }
 
   kitchenCreate() {
-    this.router.navigate(['/kitchens/register/'])
+    this.router.navigate(['/kitchen/register/'])
   }
 }
