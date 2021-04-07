@@ -64,9 +64,7 @@ export class ProvidersService {
 
   getUser(): Observable<{}> {
     const id = this.jwt.decodeToken(localStorage.getItem('access') || '').user_id;
-    console.log(id);
-    console.log("Does this even work?")
-    return this.http.get(this.djangoUrl + 'users/' + `${id}`);
+    return this.http.get(this.djangoUrl + 'users/' + id + '/');
   }
 
   getUserId(): number {
