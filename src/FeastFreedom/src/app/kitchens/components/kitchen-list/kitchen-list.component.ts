@@ -32,7 +32,7 @@ export class KitchenListComponent implements OnInit {
   ngOnInit(): void {}
 
   kitchenDetail(kitchen: any): void {
-    this.router.navigate(['/detail/', kitchen.id]);
+    this.router.navigate(['/kitchens/', kitchen.id]);
   }
 
   kitchenCreate(): void {
