@@ -21,12 +21,7 @@ export class DetailComponent implements OnInit {
   public kitchen: any;
   public user: any;
   public error: any;
-  public order: Order = {
-    id: 0,
-    kitchen_id: 0,
-    user_id: 0,
-    total: 0,
-  };
+  public order: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -43,13 +38,18 @@ export class DetailComponent implements OnInit {
       (error) => (this.error = error),
       () => {
         // Defines order
+        const items = [];
+        for (const plate in this.kitchen.menu) {
+          if (Object.prototype.hasOwnProperty.call(this.kitchen.menu, plate)) {
+            const element = this.kitchen.menu[plate];
+            items.push({ count: 0, name: element.name });
+          }
+        }
         this.order = {
           id: Date.now(),
           kitchen_id: this.kitchen.id,
           user_id: this.providersService.getUserId(),
-          items: this.kitchen.menu.map((plate: Plate) =>
-            Object.create({ plate_id: plate.id, count: 0 })
-          ),
+          items,
           total: 0,
         };
       }
@@ -59,10 +59,14 @@ export class DetailComponent implements OnInit {
   ngOnInit(): void {}
 
   // Order
-  addPlate(id: number): void {
+  addPlate(id: string): void {
     if (this.order.items) {
       this.order.items = this.order.items.map((plate: any) => {
-        plate.count = plate.plate_id === id ? plate.count + 1 : plate.count;
+        if (plate.name === id) {
+          plate.count += 1;
+        }
+        // plate.count = plate.name === id ? plate.count + 1 : plate.count;
+
         return plate;
       });
 
@@ -71,11 +75,11 @@ export class DetailComponent implements OnInit {
       // localStorage.setItem('cart', JSON.stringify(this.order));
     }
   }
-  removePlate(id: number): void {
+  removePlate(id: string): void {
     if (this.order.items) {
       this.order.items = this.order.items.map((plate: any) => {
         // Decrease price if possible
-        if (plate.plate_id === id && plate.count >= 1) {
+        if (plate.name === id && plate.count >= 1) {
           this.changePrice(id, false);
           plate.count -= 1;
         }
@@ -99,13 +103,13 @@ export class DetailComponent implements OnInit {
   }
 
   // Modify price
-  private changePrice(id: number, increase: boolean): void {
+  private changePrice(id: string, increase: boolean): void {
     increase
       ? (this.order.total += this.kitchen.menu.filter(
-          (item: any) => item.id === id
+          (item: any) => item.name === id
         )[0].price)
       : (this.order.total -= this.kitchen.menu.filter(
-          (item: any) => item.id === id
+          (item: any) => item.name === id
         )[0].price);
   }
 }
@@ -117,7 +121,15 @@ export class DetailComponent implements OnInit {
 export class GetCountPipe implements PipeTransform {
   public constructor() {}
 
-  transform(value: Array<any>, id: number): any {
-    return value.filter((plate: any) => plate.plate_id === id)[0].count;
+  transform(value: Array<any>, id: string): any {
+    for (const plate in value) {
+      if (Object.prototype.hasOwnProperty.call(value, plate)) {
+        const element = value[plate];
+        if (element.name === id) {
+          return element.count;
+        }
+      }
+    }
+    return 0;
   }
 }

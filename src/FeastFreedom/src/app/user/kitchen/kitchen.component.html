@@ -14,7 +14,7 @@
   }"
   *ngIf="kitchen"
 >
-  <a (click)="kitchenDetail(kitchen)">
+  <a [routerLink]="['detail', kitchen.id]">
     <div [class.flip-card-inner]="parent === 'dashboard'">
       <div [class.flip-card-front]="parent === 'dashboard'">
         <img

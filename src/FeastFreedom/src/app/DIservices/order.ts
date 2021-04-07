@@ -1,5 +1,5 @@
 interface OrderBody {
-  plate_id: number;
+  name: string;
   count: number;
 }
 export interface Order {

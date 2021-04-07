@@ -8,7 +8,7 @@
     <li *ngFor="let plate of kitchen.menu">
       <span>
         {{ plate.name }}
-        <img [class.not-vegan]="plate.vegan" src="assets/vegan.svg" alt="" />
+        <img [class.not-vegan]="!plate.vegan" src="assets/vegan.svg" alt="" />
       </span>
       <span>
         <span>
@@ -16,17 +16,17 @@
         </span>
         <span class="order">
           <button
-            (click)="removePlate(plate.id)"
+            (click)="removePlate(plate.name)"
             type="button"
             class="btn btn-link"
           >
             -
           </button>
           <span *ngIf="order.items">
-            {{ order.items | getCount: plate.id }}
+            {{ order.items | getCount: plate.name }}
           </span>
           <button
-            (click)="addPlate(plate.id)"
+            (click)="addPlate(plate.name)"
             type="button"
             class="btn btn-link"
           >

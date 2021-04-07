@@ -16,7 +16,7 @@ export class KitchenComponent implements OnInit {
     'sunday',
     'monday',
     'tuesday',
-    'wendnesday',
+    'wednesday',
     'thursday',
     'friday',
     'saturday',
@@ -26,8 +26,8 @@ export class KitchenComponent implements OnInit {
 
   workingDay(day: string): boolean {
     if (this.kitchen) {
-      const match = this.kitchen.working_days.filter(
-        (workingDay: any) => workingDay.day === day
+      const match = this.kitchen.workdays.filter(
+        (workingDay: any) => workingDay.day.toLowerCase() === day
       );
       return match.length > 0 ? true : false;
     }
@@ -41,9 +41,5 @@ export class KitchenComponent implements OnInit {
     }
 
     this.workingDay('monday');
-  }
-
-  kitchenDetail(kitchen: any){
-    this.router.navigate(['/kitchens', kitchen.id])
   }
 }
