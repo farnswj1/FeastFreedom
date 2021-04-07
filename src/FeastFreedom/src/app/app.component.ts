@@ -25,18 +25,20 @@ export class AppComponent {
           (user: any) => (this.user = user),
           (error) => console.log(error)
         )
-      : this.providersService.isLoggedIn().subscribe((data) => {
-          data
-            ? this.providersService.getUser().subscribe(
-                (user: any) => (this.user = user[0]),
-                (error) => console.log(error)
-              )
-            : (this.user = null);
-        });
+      : null;
+    this.providersService.isLoggedIn().subscribe((data) => {
+      data
+        ? this.providersService.getUser().subscribe(
+            (user: any) => (this.user = user),
+            (error) => console.log(error)
+          )
+        : (this.user = null);
+    });
   }
 
   logout(): void {
     this.providersService.logOut();
     this.isCollapsed = true;
+    this.user = null;
   }
 }

@@ -41,7 +41,7 @@ class MenuItem(models.Model):
                 message="Please insert a valid name.",
             ),
             ProhibitNullCharactersValidator(),
-        ]
+        ],
     )
     vegan = models.BooleanField(null=False, default=False)
     price = models.DecimalField(
@@ -57,7 +57,7 @@ class MenuItem(models.Model):
                 limit_value=1_000_000,
                 message="Price must not exceed $1 million.",
             ),
-        ]
+        ],
     )
 
     class Meta:
@@ -81,7 +81,7 @@ class WorkDay(models.Model):
                 message="Please insert a valid name.",
             ),
             ProhibitNullCharactersValidator(),
-        ]
+        ],
     )
     start_time = models.CharField(
         null=False,
@@ -100,7 +100,7 @@ class WorkDay(models.Model):
                 message="Please insert a valid start time.",
             ),
             ProhibitNullCharactersValidator(),
-        ]
+        ],
     )
     end_time = models.CharField(
         null=False,
@@ -119,7 +119,7 @@ class WorkDay(models.Model):
                 message="Please insert a valid end time.",
             ),
             ProhibitNullCharactersValidator(),
-        ]
+        ],
     )
 
     class Meta:
@@ -147,7 +147,7 @@ class Kitchen(models.Model):
                 message="Please insert a valid name.",
             ),
             ProhibitNullCharactersValidator(),
-        ]
+        ],
     )
     featured = models.BooleanField(null=False, default=False)
     workdays = models.ArrayField(model_container=WorkDay)
