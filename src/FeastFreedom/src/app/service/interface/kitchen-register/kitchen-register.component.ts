@@ -18,7 +18,7 @@ export class KitchenRegisterComponent implements OnInit {
   public kitchenForm: any;
   kitchen: any;
   errorMsg: any;
-  userId: any = 1;
+  userId: any;
 
   days: Array<String> = [
     'Monday',
@@ -69,8 +69,13 @@ export class KitchenRegisterComponent implements OnInit {
     });
 
     this.kitchenForm = this.fb.group({
-      name: [''],
-      user: [this.userId],
+      name: ['', [
+        Validators.required, 
+        Validators.minLength(2), 
+        Validators.maxLength(50),
+        Validators.pattern("^[A-Za-z0-9: ,'&@-]{2,50}$")
+      ]],
+      user: [this.userId, Validators.required],
       // workdays: this.addDaysControls(), //testing validations NOT FINAL YET
       workdays: this.fb.array([
         this.fb.group({
@@ -83,13 +88,24 @@ export class KitchenRegisterComponent implements OnInit {
 
       menu: this.fb.array([
         this.fb.group({
-          name: [''],
-          vegan: [null],
-          price: [null],
+          name: ['', [
+            Validators.required,
+            Validators.min(3),
+            Validators.max(50),
+            Validators.pattern("^[A-Za-z0-9 //,'-]{3,50}$")
+          ]],
+          vegan: [false, Validators.required],
+          price: [null, [
+            Validators.required,
+            Validators.min(0),
+            Validators.max(1000000)
+          ]],
         }),
       ]),
 
-      featured: [null]
+      featured: [false, [
+        Validators.required, 
+      ]]
     });
   }
 
@@ -108,23 +124,40 @@ export class KitchenRegisterComponent implements OnInit {
   addNewItem() {
     const itemLength = this.menuArray.length;
     const newitem = this.fb.group({
-      name: [''],
-      vegan: [null],
-      price: [null],
+      name: ['', [
+        Validators.required,
+        Validators.min(3),
+        Validators.max(50),
+        Validators.pattern("^[A-Za-z0-9 //,'-]{3,50}$")
+      ]],
+      vegan: [false, Validators.required],
+      price: [null, [
+        Validators.required,
+        Validators.min(0),
+        Validators.max(1000000)
+      ]]
     });
 
     this.menuArray.push(newitem);
+  }
+
+  removeMenuItem(index: number) {
+    this.menuArray.removeAt(index);
   }
 
   addNewDay() {
     const itemLength = this.workdaysArray.length;
     const newitem = this.fb.group({
       day: ['', [Validators.required]],
-      start_time: ['', [Validators.required, ]],
+      start_time: ['', [Validators.required]],
       end_time: ['', [Validators.required]],
     });
 
     this.workdaysArray.push(newitem);
+  }
+
+  removeWorkDay(index: number) {
+    this.workdaysArray.removeAt(index);
   }
 
   Save(kitchenForm: any) {
@@ -143,10 +176,10 @@ export class KitchenRegisterComponent implements OnInit {
         console.log(this.kitchen);
         this.proService.getKitchen().subscribe(
           (data) => (this.kitchen = data),
-          (error) => console.log(error)
+          (error) => {this.errorMsg = error; console.log(error)}
         );
       },
-      (error) => (this.errorMsg = error)
+      (error) => {this.errorMsg = error; console.log(error)}
     );
     // this.router.navigate(['home']);
     // this.kitchenForm.reset();
