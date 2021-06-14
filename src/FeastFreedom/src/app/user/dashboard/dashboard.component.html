@@ -10,6 +10,15 @@
     </a>
   </ng-template>
 </ngb-carousel>
+<ul *ngIf="data">
+  <li ngFor="let row of data">
+    <span>{{ row.id }}</span>
+    <span>{{ row.name }}</span>
+    <span>{{ row.age }}</span>
+    <span>{{ row.salary }}</span>
+  </li>
+</ul>
+<ng-container *ngIf="!data"> No result found! </ng-container>
 
 <ng-container *ngIf="kitchens">
   <div class="dashboard-container">

@@ -24,8 +24,9 @@ export class KitchensService {
   }
 
   getFeaturedKitchens(): Observable<IKitchen[]> {
-    return this.http.get<IKitchen[]>(this._url + "featured/")
-    .pipe(catchError(this.errorHandler));
+    return this.http
+      .get<IKitchen[]>(this._url + 'featured/')
+      .pipe(catchError(this.errorHandler));
   }
 
   getKitchen(id: number): Observable<IKitchen[]> {
@@ -42,7 +43,6 @@ export class KitchensService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${localStorage.getItem('access')}`,
     });
-    console.log(headers);
 
     return this.http
       .post<IKitchen[]>(this._url + 'create/', kitchen, { headers })
